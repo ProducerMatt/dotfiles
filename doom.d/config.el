@@ -79,6 +79,10 @@
   (setq olivetti-mode 1)
   (setq olivetti-body-width 86))
 
+(after! bqn-mode
+  (set-input-method "BQN-Z")
+  (setq default-input-method "BQN-Z"))
+
 (setq auto-save-default t
       make-backup-files t)
 
