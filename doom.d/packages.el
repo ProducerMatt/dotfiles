@@ -15,8 +15,14 @@
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
+
+;; the madness begins
 (package! bqn-mode
   :recipe (:host github :repo "museoa/bqn-mode"))
+(package! dyalog-mode)
+(package! gnu-apl-mode
+  :recipe (:host github :repo "lokedhs/gnu-apl-mode"))
+;; See also input mode variables set by default in config.el
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
@@ -53,3 +59,6 @@
 ;(unpin! t)
 
 ;(unpin! clipetty)
+
+(package! leetcode)
+(package! literate-calc-mode)

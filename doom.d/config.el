@@ -82,6 +82,9 @@
 (after! bqn-mode
   (set-input-method "BQN-Z")
   (setq default-input-method "BQN-Z"))
+(after! gnu-apl-mode
+  (set-input-method "APL-Z")
+  (setq default-input-method "APL-Z"))
 
 (setq auto-save-default t
       make-backup-files t)
@@ -137,3 +140,6 @@
             ((looking-at "\\s\)") (forward-char 1) (sp-backward-sexp))
             (t (self-insert-command (or arg 1))))))
   (map! "%" 'zz/goto-match-paren))
+
+(after! geiser-guile
+  (setq geiser-guile-binary "guile3"))
