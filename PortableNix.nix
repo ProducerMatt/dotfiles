@@ -45,7 +45,10 @@
   i18n.defaultLocale = "en_US.utf8";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+    autorun = false;
+  };
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
