@@ -141,8 +141,9 @@
   services.openssh.enable = true;
   programs.mosh.enable = true;
 
+  networking.wireguard.interfaces = import secrets/wg-PortableNix.nix;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ 50000 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
