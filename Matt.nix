@@ -19,9 +19,16 @@
     enable = true;
     enableFishIntegration = true;
   };
-
   programs.nix-index = {
     enableFishIntegration = true;
+  };
+
+  programs.gpg.enable = true;
+
+  home.sessionVariables = {
+    REALNAME = "ProducerMatt";
+    EMAIL = "ProducerMatt42@gmail.com";
+    KEYID = "E6EA80E5CB3E1F9C";
   };
 
   programs.git = {
@@ -50,6 +57,8 @@
     p7zip
     tmux
     bat
+    git-crypt
+    passphrase2pgp
   ];
   services.emacs = {
     enable = true;
