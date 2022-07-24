@@ -39,6 +39,7 @@
         PortableNix = lib.nixosSystem {
           inherit system;
           modules = [
+            (builtins.toPath "${nixpkgs}/nixos/modules/profiles/all-hardware.nix")
             ./PortableNix.nix
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
