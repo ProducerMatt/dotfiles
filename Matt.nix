@@ -57,15 +57,18 @@
     ripgrep-all
     croc
     p7zip
+    psmisc
     tmux
     bat
     git-crypt
     passphrase2pgp
     tig
-    tere
+    unstable.tere # TODO
 
     # mainly for Emacs
     clang
+
+    rnix-lsp
   ];
   services.emacs = {
     enable = true;
