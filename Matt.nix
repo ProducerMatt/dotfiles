@@ -62,6 +62,7 @@
     git-crypt
     passphrase2pgp
     tig
+    tere
 
     # mainly for Emacs
     clang
