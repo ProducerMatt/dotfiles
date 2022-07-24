@@ -61,6 +61,10 @@
     bat
     git-crypt
     passphrase2pgp
+    tig
+
+    # mainly for Emacs
+    clang
   ];
   services.emacs = {
     enable = true;
