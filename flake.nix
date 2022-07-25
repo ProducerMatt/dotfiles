@@ -52,6 +52,7 @@
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
 
             ./PortableNix.nix
+            ./modules/openssh.nix
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
