@@ -63,7 +63,7 @@
     git-crypt
     passphrase2pgp
     tig
-    unstable.tere # TODO
+    unstable.tere
 
     # mainly for Emacs
     clang
