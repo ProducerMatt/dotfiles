@@ -75,11 +75,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1658796836,
-        "narHash": "sha256-sESA2CIrQP4Ho+cveGFb2Cm6fIfT06OKjCO204tbiik=",
+        "lastModified": 1658799060,
+        "narHash": "sha256-OPumLbIi5pu8S2Co9tkDIZKWZ0ecOEOPGHhopfph7ow=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ef7c5352fea233629f6ac1fb4dcd3df7fb5ffa55",
+        "rev": "5ebfc1258985a81b72f1143738f0d1c7ee67ed9c",
         "type": "github"
       },
       "original": {
@@ -101,6 +101,21 @@
         "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nur": {
+      "locked": {
+        "lastModified": 1658766050,
+        "narHash": "sha256-c6iyt3h3crC7NPf6YTD4G+Y3HEwVjuZYOSaMSzMqVXM=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "2599e014153184576a261f3d6634fed4285797c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
         "type": "github"
       }
     },
@@ -130,6 +145,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nur": "nur",
         "rnix-lsp": "rnix-lsp"
       }
     },

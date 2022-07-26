@@ -63,11 +63,12 @@
     git-crypt
     passphrase2pgp
     tig
+    keybase
     unstable.tere
 
     # mainly for Emacs
     clang
-
+    guile
     rnix-lsp
   ];
   services.emacs = {
