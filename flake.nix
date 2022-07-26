@@ -16,11 +16,13 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        config.checkMeta = true;
       };
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
+          config.checkMeta = true;
         };
       };
       rnix-lsp-overlay = final: prev: {
