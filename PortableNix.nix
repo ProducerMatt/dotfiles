@@ -96,6 +96,7 @@
     ];
     shell = pkgs.fish;
   };
+  programs.fish.enable = true; # required for vendor distributions of autocomplete, etc.
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
