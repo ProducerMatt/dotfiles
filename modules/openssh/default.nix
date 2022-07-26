@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  # Enable the OpenSSH daemon.
+  # Mostly cribbed from github.com/k4yt3x/sshd_config
+  # TODO:
+  # - allow only specified users to log in
+  # - allow only specified IPs and ports
+  # - define known hosts
   services.openssh = {
     enable = true;
     macs = [
