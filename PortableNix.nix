@@ -63,6 +63,19 @@
     xkbVariant = "";
   };
 
+  fonts = {
+    fonts = [
+      pkgs.cantarell-fonts
+      pkgs.emacs-all-the-icons-fonts
+      pkgs.font-awesome
+      pkgs.hasklig
+      pkgs.iosevka
+      pkgs.source-code-pro
+      # pkgs.nerdfonts
+    ];
+    fontconfig = { enable = true; };
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
