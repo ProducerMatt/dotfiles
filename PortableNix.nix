@@ -146,7 +146,10 @@
 
   # List services that you want to enable:
 
-  networking.wireguard.interfaces = import secrets/wg-PortableNix.nix;
+  networking = {
+    wireguard.interfaces = import secrets/wg-PortableNix.nix;
+    nameservers = [ "192.168.1.61" "192.168.1.16" ]; # TODO change depending on network
+  };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ 50000 ];
