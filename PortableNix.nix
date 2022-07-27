@@ -1,8 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -31,21 +27,21 @@
   boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".device = "/dev/disk/by-uuid/90dc3598-b566-4723-8c36-ba6110d2bd98";
   boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".keyFile = "/crypto_keyfile.bin";
 
-  networking.hostName = "PortableNix"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "PortableNix";
+    networkmanager.enable = true;
+    nameservers = [ "192.168.1.61" "192.168.1.16" ]; # TODO change depending on network
+    wireguard.interfaces = import secrets/wg-PortableNix.nix;
+    firewall.allowedTCPPorts = [ 8080 ]; # dev servers gotta dev
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -111,20 +107,12 @@
   };
   programs.fish.enable = true; # required for vendor distributions of autocomplete, etc.
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "matt";
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     git
     mosh
+    nano
   ];
 
   nix = {
@@ -148,26 +136,18 @@
       trusted-users = [ "root" "matt" ];
     };
   };
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
-  networking = {
-    wireguard.interfaces = import secrets/wg-PortableNix.nix;
-    nameservers = [ "192.168.1.61" "192.168.1.16" ]; # TODO change depending on network
-  };
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ 50000 ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   virtualisation = {
     podman = {
