@@ -30,6 +30,9 @@
       "diffie-hellman-group14-sha256"
     ];
     moduliFile = ./moduli-shortened;
+    passwordAuthentication = false; # NOTE: make sure you can log in!
+    forwardX11 = false;
+    permitRootLogin = "no";
   };
   programs.mosh.enable = true;
 }
