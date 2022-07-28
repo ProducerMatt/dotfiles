@@ -15,14 +15,14 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  # APE helper (not ape loader)
-  boot.binfmt.registrations = {
-    "APE" = {
-      recognitionType = "magic";
-      magicOrExtension = "MZqFpD";
-      interpreter = "${pkgs.bash}/bin/sh";
-    };
-  };
+  ## APE helper (not ape loader)
+  #boot.binfmt.registrations = {
+  #  "APE" = {
+  #    recognitionType = "magic";
+  #    magicOrExtension = "MZqFpD";
+  #    interpreter = "${pkgs.bash}/bin/sh";
+  #  };
+  #};
 
   # Setup keyfile
   boot.initrd.secrets = {
