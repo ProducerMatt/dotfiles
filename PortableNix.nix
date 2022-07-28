@@ -19,7 +19,7 @@
     "APE" = {
       recognitionType = "magic";
       magicOrExtension = "MZqFpD";
-      interpreter = "/bin/sh";
+      interpreter = "${pkgs.bash}/bin/sh";
     };
   };
 
