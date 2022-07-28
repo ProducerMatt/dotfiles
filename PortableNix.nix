@@ -7,7 +7,8 @@
     ];
 
   # Latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Bootloader.
   boot.loader.grub.enable = true;
