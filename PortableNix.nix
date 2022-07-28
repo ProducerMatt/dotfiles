@@ -7,8 +7,7 @@
     ];
 
   # Latest kernel
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -155,9 +154,6 @@
     enable = true;
     enableSSHSupport = true;
   };
-
-  # List services that you want to enable:
-
 
   virtualisation = {
     podman = {
