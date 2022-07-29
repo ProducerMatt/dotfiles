@@ -19,7 +19,7 @@ in
   };
   config = {
   boot.binfmt.registrations."APE" = mkIf cfg.enable
-    (if mode == "loader" then
+    (if cfg.mode == "loader" then
       {
         recognitionType = "magic";
         magicOrExtension = "MZqFpD";
