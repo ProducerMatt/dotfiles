@@ -46,6 +46,7 @@
   };
 
   home.packages = with pkgs; [
+    vimHugeX
     htop
     emacs28NativeComp
     firefox
@@ -76,6 +77,7 @@
     package = pkgs.emacs28NativeComp;
     defaultEditor = true;
   };
+  programs.vim.package = pkgs.vimHugeX;
   home.shellAliases = {
     l = "exa";
     ll = "exa -la";
