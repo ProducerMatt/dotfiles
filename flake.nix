@@ -4,14 +4,19 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR";
+    mynur = {
+      url = "github:ProducerMatt/my-nur-pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # use stable packages
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, rnix-lsp, home-manager, nur, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, rnix-lsp, home-manager, nur, mynur, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -28,6 +33,9 @@
       };
       rnix-lsp-overlay = final: prev: {
         rnix-lsp = import rnix-lsp;
+      };
+      mynur-overlay = final: prev: {
+        rnix-lsp = import mynur;
       };
 
       lib = nixpkgs.lib;
@@ -56,6 +64,9 @@
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
 
             nur.nixosModules.nur
+
+            # Overlays-module makes "pkgs.mynur" available in configuration.nix
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ mynur-overlay ]; })
 
             ./PortableNix.nix
 

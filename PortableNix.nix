@@ -123,6 +123,7 @@
     git
     mosh
     nano
+    mynur.pledge
   ];
 
   nix = {
