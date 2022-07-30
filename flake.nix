@@ -35,7 +35,7 @@
         rnix-lsp = import rnix-lsp;
       };
       mynur-overlay = final: prev: {
-        rnix-lsp = import mynur;
+        mynur = mynur.packages."${system}";
       };
 
       lib = nixpkgs.lib;

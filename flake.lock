@@ -36,6 +36,26 @@
         "type": "github"
       }
     },
+    "mynur": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1659116531,
+        "narHash": "sha256-m1WX39v/C34SNuJ1t0Q0vjpFfydMUaVuwlmvADnRU1g=",
+        "owner": "ProducerMatt",
+        "repo": "my-nur-pkgs",
+        "rev": "614313730041b0e70821a8d718e7e206226dad13",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ProducerMatt",
+        "repo": "my-nur-pkgs",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -143,6 +163,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "mynur": "mynur",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
