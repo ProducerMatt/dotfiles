@@ -14,6 +14,9 @@
 
   programs.fish = {
     enable = true;
+    shellInit = ''
+      direnv hook fish | source
+    '';
   };
   programs.fzf = {
     enable = true;
@@ -67,6 +70,8 @@
     keybase
     tere
     config.nur.repos.ProducerMatt.pledge
+    direnv
+    nix-direnv
 
     # mainly for Emacs
     clang
