@@ -72,6 +72,7 @@
     config.nur.repos.ProducerMatt.pledge
     direnv
     nix-direnv
+    git-ignore
 
     # mainly for Emacs
     clang
