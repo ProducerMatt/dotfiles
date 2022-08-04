@@ -70,7 +70,7 @@
 
     # mainly for Emacs
     clang
-    guile
+    #guile
     rnix-lsp
   ];
   services.emacs = {
