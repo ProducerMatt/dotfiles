@@ -123,7 +123,8 @@
     git
     mosh
     nano
-    mynur.pledge
+
+    config.nur.repos.ProducerMatt.pledge
   ];
 
   nix = {

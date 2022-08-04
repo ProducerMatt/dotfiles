@@ -65,7 +65,8 @@
     passphrase2pgp
     tig
     keybase
-    unstable.tere
+    tere
+    config.nur.repos.ProducerMatt.pledge
 
     # mainly for Emacs
     clang
