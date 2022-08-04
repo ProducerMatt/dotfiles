@@ -16,7 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, rnix-lsp, home-manager, nur, mynur, ... }:
+  outputs = {
+    self, nixpkgs, nixpkgs-unstable,
+      rnix-lsp, home-manager, nur, mynur, flake-utils, ...
+  }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -39,6 +42,10 @@
       };
 
       lib = nixpkgs.lib;
+      flakeVersion = with self; {
+        inherit lastModified lastModifiedDate narHash;
+        rev = (self.rev or "dirty");
+      };
     in {
       nixosConfigurations = {
         NixVbox = lib.nixosSystem {
@@ -56,8 +63,12 @@
         };
 
         PortableNix = lib.nixosSystem {
-          inherit system;
+          system = flake-utils.lib.system.x86_64-linux;
           modules = [
+            ({ pkgs, ... }: {
+              system.configurationRevision = flakeVersion.rev;
+            })
+
             (builtins.toPath "${nixpkgs}/nixos/modules/profiles/all-hardware.nix")
 
             # Overlays-module makes "pkgs.unstable" available in configuration.nix
