@@ -42,9 +42,14 @@
       };
 
       lib = nixpkgs.lib;
+
+      # NOTE: how do i make this available outside of this file?
       flakeVersion = with self; {
         inherit lastModified lastModifiedDate narHash;
+        # TODO: could clearly be a function mapping
         rev = (self.rev or "dirty");
+        shortRev = (self.shortRev or "dirty");
+        revCount = (self.revCount or "dirty");
       };
     in {
       nixosConfigurations = {
