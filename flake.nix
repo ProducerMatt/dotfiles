@@ -47,6 +47,7 @@
       lib = nixpkgs.lib;
 
       # NOTE: how do i make this available outside of this file?
+      # NOTE: what about the variable sourceInfo?
       flakeVersion = with self; {
         inherit lastModified lastModifiedDate narHash;
         # TODO: could clearly be a function mapping
@@ -74,6 +75,11 @@
           system = flake-utils.lib.system.x86_64-linux;
           modules = [
             ({ pkgs, ... }: {
+              users.motd = ''
+              PortableNix
+              Flake revision #${flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
+              Flake commit is ${flakeVersion.shortRev}
+                '';
               system.configurationRevision = flakeVersion.rev;
             })
 
