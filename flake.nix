@@ -78,7 +78,7 @@
               users.motd = ''
               PortableNix
               Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
-              Flake commit is ${flakeVersion.shortRev}
+              Flake commit ${flakeVersion.shortRev}
                 '';
               system.configurationRevision = flakeVersion.rev;
             })
