@@ -15,6 +15,9 @@
       url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixrepl = {
+      url = "github:schuelermine/nixos-repl-setup";
+    };
   };
   outputs = {
     self, nixpkgs, nixpkgs-unstable,

@@ -124,6 +124,21 @@
         "type": "github"
       }
     },
+    "nixrepl": {
+      "locked": {
+        "lastModified": 1647542729,
+        "narHash": "sha256-yMeYygnz02gtdcipfxpSvig12SIJibrwh0dTOZVXmP4=",
+        "owner": "schuelermine",
+        "repo": "nixos-repl-setup",
+        "rev": "ccebaaaf4858b7b1c005d2ec17806163b3a8d901",
+        "type": "github"
+      },
+      "original": {
+        "owner": "schuelermine",
+        "repo": "nixos-repl-setup",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
         "lastModified": 1659556157,
@@ -166,6 +181,7 @@
         "mynur": "mynur",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixrepl": "nixrepl",
         "nur": "nur",
         "rnix-lsp": "rnix-lsp"
       }
