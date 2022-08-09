@@ -73,6 +73,7 @@
     direnv
     nix-direnv
     git-ignore
+    cachix
 
     # mainly for Emacs
     clang
