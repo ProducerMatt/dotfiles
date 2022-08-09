@@ -83,6 +83,7 @@
     texlive.combined.scheme-medium
     # required by +jupyter
     (python38.withPackages(ps: with ps; [jupyter]))
+    ispell
   ];
   services.emacs = {
     enable = true;
