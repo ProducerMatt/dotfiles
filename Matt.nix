@@ -85,6 +85,7 @@
     # required by +jupyter
     (python38.withPackages(ps: with ps; [jupyter]))
     ispell
+    pandoc
   ];
   services.emacs = {
     enable = true;
