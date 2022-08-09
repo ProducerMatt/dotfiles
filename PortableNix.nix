@@ -146,6 +146,9 @@
     settings = {
       auto-optimise-store = true;
       trusted-users = [ "root" "matt" ];
+      substituters = [ "https://cache.nixos.org" "https://cache.nixos.org/" "https://producermatt-nur.cachix.org" ];
+      trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                              "producermatt-nur.cachix.org-1:vwAYMzXLtFGCQZf9HpyrncxXQ/Qk5yGjt2CeM7/neIs=" ];
     };
   };
   nixpkgs.config.allowUnfree = true;
