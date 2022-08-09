@@ -76,8 +76,13 @@
 
     # mainly for Emacs
     clang
-    #guile
+    guile_3_0
+    guile-cairo
     rnix-lsp
+    # any less than medium isn't guaranteed to work
+    texlive.combined.scheme-medium
+    # required by +jupyter
+    (python38.withPackages(ps: with ps; [jupyter]))
   ];
   services.emacs = {
     enable = true;
