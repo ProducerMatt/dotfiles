@@ -142,4 +142,4 @@
   (map! "%" 'zz/goto-match-paren))
 
 (after! geiser-guile
-  (setq geiser-guile-binary "guile3"))
+  (setq geiser-guile-binary "guile"))
