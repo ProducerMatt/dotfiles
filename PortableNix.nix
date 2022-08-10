@@ -70,6 +70,7 @@
   };
 
   fonts = {
+    enableDefaultFonts = true;
     fonts = [
       pkgs.cantarell-fonts
       pkgs.emacs-all-the-icons-fonts
@@ -79,7 +80,10 @@
       pkgs.source-code-pro
       # pkgs.nerdfonts
     ];
-    fontconfig = { enable = true; };
+    fontDir.enable = true;
+    fontconfig = {
+      enable = true;
+    };
   };
 
   # Enable CUPS to print documents.
