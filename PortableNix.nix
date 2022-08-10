@@ -78,6 +78,7 @@
       pkgs.hasklig
       pkgs.iosevka
       pkgs.source-code-pro
+      pkgs.texlive.combined.scheme-full
       # pkgs.nerdfonts
     ];
     fontDir.enable = true;
