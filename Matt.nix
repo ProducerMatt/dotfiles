@@ -74,6 +74,7 @@
     nix-direnv
     git-ignore
     cachix
+    rlwrap
 
     # mainly for Emacs
     clang
@@ -81,7 +82,7 @@
     guile-cairo
     rnix-lsp
     # any less than medium isn't guaranteed to work
-    texlive.combined.scheme-medium
+    texlive.combined.scheme-full
     # required by +jupyter
     (python38.withPackages(ps: with ps; [jupyter]))
     ispell
