@@ -99,7 +99,11 @@
     ll = "exa -la";
     la = "exa -a";
   };
-  
+
+  fonts = {
+    fonts = import ./modules/fonts.nix pkgs;
+  };
+
   #home.file = {
   #".oh-my-tmux".source = pkgs.fetchFromGitHub {
   #  owner = "gpakosz";
