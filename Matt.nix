@@ -101,7 +101,7 @@
   };
 
   fonts = {
-    fonts = import ./modules/fonts.nix pkgs;
+    fontconfig.enable = true;
   };
 
   #home.file = {
