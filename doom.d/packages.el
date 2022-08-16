@@ -64,3 +64,4 @@
 (package! literate-calc-mode)
 (package! rnix-lsp
   :recipe (:host github :repo "nix-community/rnix-lsp"))
+(package! org-auto-tangle)
