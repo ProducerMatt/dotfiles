@@ -145,3 +145,5 @@
   (setq geiser-guile-binary "guile"))
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
+
+(add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
