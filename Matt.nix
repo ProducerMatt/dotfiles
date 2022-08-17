@@ -75,6 +75,9 @@
     git-ignore
     cachix
     rlwrap
+    httrack
+    libressl
+    hugo
 
     # mainly for Emacs
     clang
@@ -87,6 +90,7 @@
     (python38.withPackages(ps: with ps; [jupyter]))
     ispell
     pandoc
+    tectonic
   ];
   services.emacs = {
     enable = true;
