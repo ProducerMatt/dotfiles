@@ -78,6 +78,7 @@
     httrack
     libressl
     hugo
+    manix # cli package & docs search
 
     # mainly for Emacs
     clang
