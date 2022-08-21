@@ -79,6 +79,7 @@
     libressl
     hugo
     manix # cli package & docs search
+    config.nur.repos.ProducerMatt.ripsecrets
 
     # mainly for Emacs
     clang
@@ -92,6 +93,8 @@
     ispell
     pandoc
     tectonic
+    gnuplot
+    graphviz
   ];
   services.emacs = {
     enable = true;
