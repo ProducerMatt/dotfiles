@@ -112,6 +112,16 @@
     fontconfig.enable = true;
   };
 
+  home.file = {
+    ".guile".text = ''
+      (use-modules
+        (ice-9 readline)
+        (ice-9 format)
+        (ice-9 pretty-print))
+      (activate-readline)
+    '';
+  };
+
   #home.file = {
   #".oh-my-tmux".source = pkgs.fetchFromGitHub {
   #  owner = "gpakosz";
