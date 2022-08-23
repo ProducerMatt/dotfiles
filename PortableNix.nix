@@ -14,7 +14,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  programs.apeloader.enable = true;
+  programs.apeloader.enable = false;
   ## APE helper (not ape loader)
   #boot.binfmt.registrations = {
   #  "APE" = {
