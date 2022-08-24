@@ -118,10 +118,13 @@
     vim
     wget
     git
-    mosh
     nano
 
     config.nur.repos.ProducerMatt.pledge
+
+    mosh
+    xsel
+    xclip
   ];
 
   nix = {

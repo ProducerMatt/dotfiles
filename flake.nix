@@ -73,7 +73,13 @@
 
         PortableNix = lib.nixosSystem {
           system = flake-utils.lib.system.x86_64-linux;
-          modules = [
+          modules =
+            let
+            nur-modules = import nur {
+              nurpkgs = nixpkgs.legacyPackages.${system};
+            };
+          in
+            [
             ({ pkgs, ... }: {
               users.motd = ''
               PortableNix
@@ -92,6 +98,10 @@
 
             # Overlays-module makes "pkgs.mynur" available in configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ mynur-overlay ]; })
+
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [
+                                        nur-modules.repos.ProducerMatt.overlays.mosh-unset-tty
+                                      ]; })
 
             ./PortableNix.nix
 
