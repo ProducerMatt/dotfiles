@@ -90,8 +90,14 @@
     texlive.combined.scheme-full
     # required by +jupyter
     #(python38.withPackages(ps: with ps; [jupyter]))
-    python-language-server
-    (python310.withPackages(ps: with ps; [ ipython pyflakes black pytest nose isort ]))
+
+    # Emacs + Python
+    (python310.withPackages(ps: with ps; [
+      ipython pyflakes black pytest nose isort
+    # Latex source code highlighting
+      pygments
+    ]))
+
     conda
     ispell
     pandoc
