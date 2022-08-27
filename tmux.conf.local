@@ -320,6 +320,7 @@ tmux_conf_theme_clock_style="24"
 #   - false (default)
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel or xclip
+set -g set-clipboard on
 tmux_conf_copy_to_os_clipboard=true
 set -ag terminal-overrides "vte*:XT:Ms=\\E]52;c;%p2%s\\7,xterm*:XT:Ms=\\E]52;c;%p2%s\\7"
 
