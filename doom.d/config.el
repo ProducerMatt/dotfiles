@@ -144,6 +144,47 @@
 (after! geiser-guile
   (setq geiser-guile-binary "guile"))
 
-(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+(after! org
+  (defun yant/getentryhash ()
+    "Get the hash sum of the text in current entry, except :HASH: and :MODIFIED: property texts."
+    (save-excursion
+      (let* ((beg (progn (org-back-to-heading) (point)))
+             (end (progn
+                    (forward-char)
+                    (if (not (re-search-forward "^\*+ " (point-max) t))
+                        (point-max)
+                      (match-beginning 0))))
+             (full-str (buffer-substring beg end))
+             (str-nohash (if (string-match "^ *:HASH:.+\n" full-str)
+                             (replace-match "" nil nil full-str)
+                           full-str))
+             (str-nohash-nomod (if (string-match "^ *:MODIFIED:.+\n" str-nohash)
+                                   (replace-match "" nil nil str-nohash)
+                                 str-nohash))
+             (str-nohash-nomod-nopropbeg (if (string-match "^ *:PROPERTIES:\n" str-nohash-nomod)
+                                             (replace-match "" nil nil str-nohash-nomod)
+                                           str-nohash-nomod))
+             (str-nohash-nomod-nopropbeg-end (if (string-match "^ *:END:\n" str-nohash-nomod-nopropbeg)
+                                                 (replace-match "" nil nil str-nohash-nomod-nopropbeg)
+                                               str-nohash-nomod-nopropbeg)))
+        (sxhash str-nohash-nomod-nopropbeg-end))))
+
+  (defun yant/update-modification-time ()
+    "Set the :MODIFIED: property of the current entry to NOW and update :HASH: property."
+    (org-set-property "HASH" (format "%s" (yant/getentryhash)))
+    (org-set-property "MODIFIED" (format-time-string "%Y-%m-%d %H:%M")))
+  (defun yant/skip-nonmodified ()
+    "Skip org entries, which were not modified according to the :HASH: property"
+    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+      (if (string= (org-entry-get (point) "HASH" nil) (format "%s" (yant/getentryhash)))
+          next-headline
+        nil)))
+
+  (add-hook 'before-save-hook (lambda ()
+                                (when (eq major-mode 'org-mode)
+                                  (if org-update-heading-mod-times
+                                      (org-map-entries #'yant/update-modification-time nil 'file #'yant/skip-nonmodified)))))
+
+  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
