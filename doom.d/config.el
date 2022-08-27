@@ -187,20 +187,20 @@
 
   (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
-(after! org-latex
+;  (setq org-latex-listings 'engraved))
   (setq org-latex-listings 'minted)
   (setq org-export-latex-listings 'minted)
-  (add-to-list 'org-export-latex-packages-alist '("" "minted"))
-  (add-to-list 'org-latex-minted-langs '(ipython "python"))
-  (add-to-list 'org-latex-minted-langs '(scheme "scheme"))
+  (if (boundp 'org-export-latex-packages-alist)
+      (add-to-list 'org-export-latex-packages-alist '("" "minted")))
+  (if (boundp 'org-latex-minted-langs)
+      (begin (add-to-list 'org-latex-minted-langs '(ipython "python"))
+             (add-to-list 'org-latex-minted-langs '(scheme "scheme"))))
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")
-                                   ("frame" "lines")
-                                   ("linenos=true")))
-  (setq org-latex-pdf-process
-      (mapcar
-       (lambda (s)
-         (replace-regexp-in-string "%latex " "%latex -shell-escape " s))
-       org-latex-pdf-process)))
+                                   ("linenos" "true")))
+  (if (boundp 'org-latex-pdf-process)
+      (setq 'org-latex-pdf-process
+        "xelatex -shell-escape -interaction nonstopmode -output-directory=%o %f"))
+
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))

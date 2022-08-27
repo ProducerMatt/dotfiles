@@ -4,7 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((org-use-property-inheritance . t)
+   '((org-update-heading-mod-times . t)
+     (org-use-property-inheritance . t)
      (org-use-property-inheritance "header-args")
      (org-use-property-inheritance "results" "cache" "noweb" "noweb-ref" "exports" "tangle"))))
 (custom-set-faces
