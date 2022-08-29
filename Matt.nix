@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-
+let
+  start_emacs = "emacsclient -c -a 'emacs'";
+in
 {
   home.username = "matt";
   home.homeDirectory = "/home/matt";
@@ -33,8 +35,8 @@
     EMAIL = "ProducerMatt42@gmail.com";
     KEYID = "E6EA80E5CB3E1F9C";
 
-    EDITOR = "emacsclient";
-    VISUAL = "emacsclient";
+    EDITOR = start_emacs;
+    VISUAL = start_emacs;
   };
 
   programs.git = {
@@ -115,6 +117,7 @@
     l = "exa";
     ll = "exa -la";
     la = "exa -a";
+    e = start_emacs;
   };
 
   fonts = {
