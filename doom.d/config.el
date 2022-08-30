@@ -187,20 +187,21 @@
 
   (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
-;  (setq org-latex-listings 'engraved))
+(after! ox-latex
+                                        ;  (setq org-latex-listings 'engraved))
   (setq org-latex-listings 'minted)
   (setq org-export-latex-listings 'minted)
-  (if (boundp 'org-export-latex-packages-alist)
-      (add-to-list 'org-export-latex-packages-alist '("" "minted")))
-  (if (boundp 'org-latex-minted-langs)
-      (begin (add-to-list 'org-latex-minted-langs '(ipython "python"))
-             (add-to-list 'org-latex-minted-langs '(scheme "scheme"))))
+  (when (boundp 'org-export-latex-packages-alist)
+    (add-to-list 'org-export-latex-packages-alist '("" "minted")))
+  (when (boundp 'org-latex-minted-langs)
+    (add-to-list 'org-latex-minted-langs '(ipython "python"))
+    (add-to-list 'org-latex-minted-langs '(scheme "scheme")))
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")
                                    ("linenos" "true")))
-  (if (boundp 'org-latex-pdf-process)
-      (setq 'org-latex-pdf-process
-        "xelatex -shell-escape -interaction nonstopmode -output-directory=%o %f"))
+  (when (boundp 'org-latex-pdf-process)
+    (setq org-latex-pdf-process
+          "xelatex -shell-escape -interaction nonstopmode -output-directory=%o %f")))
 
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
