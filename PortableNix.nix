@@ -1,10 +1,34 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./PortableNix-hw.nix
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
+
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/4a5f9903-bca6-46e6-ae33-56494b15016c";
+      fsType = "ext4";
+    };
+
+  boot.initrd.luks.devices."luks-c05dea80-c718-46cf-85b8-9f3c6aeca86c".device = "/dev/disk/by-uuid/c05dea80-c718-46cf-85b8-9f3c6aeca86c";
+
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/bef52767-f7fc-405f-9423-d7b576e79c86"; }
+    ];
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -53,125 +77,11 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    autorun = false;
-  };
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  fonts = {
-    enableDefaultFonts = true;
-    fonts = import ./modules/fonts.nix pkgs;
-    fontDir.enable = true;
-    fontconfig = {
-      enable = true;
-    };
-  };
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.matt = {
-    isNormalUser = true;
-    description = "Matt";
-    extraGroups = [ "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfK6c9SiwYYRxy10EMVh1sctDgy6JN/fMyzsO1hACnN ProducerMatt login key"
-    ];
-    shell = pkgs.fish;
-  };
-  programs.fish.enable = true; # required for vendor distributions of autocomplete, etc.
 
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    nano
-
-    config.nur.repos.ProducerMatt.pledge
-
-    mosh
     xsel
     xclip
   ];
-
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-    '';
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-    optimise = {
-      automatic = true;
-      dates = [ "weekly" ];
-    };
-    settings = {
-      auto-optimise-store = true;
-      trusted-users = [ "root" "matt" ];
-      substituters = [ "https://cache.nixos.org" "https://cache.nixos.org/"
-                       "https://producermatt-nur.cachix.org"
-                       "https://nix-community.cachix.org" ];
-      trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-                              "producermatt-nur.cachix.org-1:vwAYMzXLtFGCQZf9HpyrncxXQ/Qk5yGjt2CeM7/neIs="
-                               "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
-    };
-  };
-  nixpkgs.config.allowUnfree = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-    };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

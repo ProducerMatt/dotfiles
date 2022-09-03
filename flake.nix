@@ -57,20 +57,6 @@
       };
     in {
       nixosConfigurations = {
-        NixVbox = lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./NixVbox.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.matt = {
-                imports = [ ./Matt.nix ];
-              };
-            }
-          ];
-        };
-
         PortableNix = lib.nixosSystem {
           system = flake-utils.lib.system.x86_64-linux;
           modules =
@@ -103,9 +89,21 @@
                                         nur-modules.repos.ProducerMatt.overlays.mosh-unset-tty
                                       ]; })
 
-            ./PortableNix.nix
+            ./profiles/base.nix
+
+            ./profiles/nix.nix
+
+            ./profiles/graphical.nix
 
             ./modules/openssh
+
+            ./profiles/containers.nix
+
+            ./modules/fonts.nix
+
+            ./profiles/userMatt.nix
+
+            ./PortableNix.nix
 
             ./modules/apeloader
 

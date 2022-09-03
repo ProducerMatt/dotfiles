@@ -34,5 +34,8 @@
     forwardX11 = false;
     permitRootLogin = "no";
   };
+  environment.systemPackages = with pkgs; [
+    mosh
+  ];
   programs.mosh.enable = true;
 }

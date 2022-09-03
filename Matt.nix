@@ -3,6 +3,9 @@ let
   start_emacs = "emacsclient -c -a 'emacs'";
 in
 {
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
   home.username = "matt";
   home.homeDirectory = "/home/matt";
   home.stateVersion = "22.05";
@@ -10,9 +13,8 @@ in
   programs.nix-index = {
     enable = true;
     enableBashIntegration = true;
+    enableFishIntegration = true;
   };
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   programs.fish = {
     enable = true;
@@ -22,9 +24,6 @@ in
   };
   programs.fzf = {
     enable = true;
-    enableFishIntegration = true;
-  };
-  programs.nix-index = {
     enableFishIntegration = true;
   };
 
@@ -133,29 +132,4 @@ in
       (activate-readline)
     '';
   };
-
-  #home.file = {
-  #".oh-my-tmux".source = pkgs.fetchFromGitHub {
-  #  owner = "gpakosz";
-  #  repo = ".tmux";
-  #  rev = "e865a8a";
-  #  sha256 = "IuEiaZozSFmGTRYbpUSyXFynqcP6qwcCBk9XmupN2nA=";
-  #  stripRoot = true;
-  #};
-  #".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "~/.oh-my-tmux/.tmux.conf";
-
-  #".tmux.conf.local".source = ./config/tmux.conf.local;
-  #".doom.d" = {
-  #  source = ./config/doom.d;
-  #  recursive = true;
-  #  onChange = "scripts/doomsync.sh";
-  #};
-
-  #"dotfiles".source = pkgs.fetchFromGitHub {
-  #  owner = "ProducerMatt";
-  #  repo = "dotfiles";
-  #  rev = "79c9043";
-  #  sha256 = "xxEjmughDJ87p+6nCl5t9ynUlzidmhqPl7IiH+XWe+k=";
-  #};
-  #};
 }
