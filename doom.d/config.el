@@ -197,7 +197,10 @@
                                   (if org-update-heading-mod-times
                                       (org-map-entries #'yant/update-modification-time nil 'file #'yant/skip-nonmodified)))))
 
-  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
+  (add-hook 'org-mode-hook 'org-auto-tangle-mode)
+  (require 'ox-extra)                     ; add :ignore: to heading so it doesn't
+  (ox-extras-activate '(ignore-headlines)); get a header in export
+  ) ; (after! org)
 
 (after! ox-latex
                                         ;  (setq org-latex-listings 'engraved))
