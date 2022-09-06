@@ -66,4 +66,5 @@
   :recipe (:host github :repo "nix-community/rnix-lsp"))
 (package! org-auto-tangle)
 
-(package! engrave-faces)
+(use-package! engrave-faces-latex
+  :after ox-latex)

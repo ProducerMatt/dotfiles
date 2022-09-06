@@ -200,23 +200,44 @@
   (add-hook 'org-mode-hook 'org-auto-tangle-mode)
   (require 'ox-extra)                     ; add :ignore: to heading so it doesn't
   (ox-extras-activate '(ignore-headlines)); get a header in export
+
+  ;; Only do fontlock once
+  (defun +org-mode--fontlock-only-mode ()
+    "Just apply org-mode's font-lock once."
+    (let (org-mode-hook
+          org-hide-leading-stars
+          org-hide-emphasis-markers)
+      (org-set-font-lock-defaults)
+      (font-lock-ensure))
+    (setq-local major-mode #'fundamental-mode))
+
+  (defun +org-export-babel-mask-org-config (_backend)
+    "Use `+org-mode--fontlock-only-mode' instead of `org-mode'."
+    (setq-local org-src-lang-modes
+                (append org-src-lang-modes
+                        (list (cons "org" #'+org-mode--fontlock-only)))))
+
+  (add-hook 'org-export-before-processing-hook #'+org-export-babel-mask-org-config)
+
+  ;; org-latex-compilers = ("pdflatex" "xelatex" "lualatex"), which are the possible values for %latex
+  (setq org-latex-pdf-process '("LC_ALL=en_US.UTF-8 latexmk -f -pdf -%latex -shell-escape -interaction=nonstopmode -output-directory=%o %f"))
+
+  (defun +org-export-latex-fancy-item-checkboxes (text backend info)
+    (when (org-export-derived-backend-p backend 'latex)
+      (replace-regexp-in-string
+       "\\\\item\\[{$\\\\\\(\\w+\\)$}\\]"
+       (lambda (fullmatch)
+         (concat "\\\\item[" (pcase (substring fullmatch 9 -3) ; content of capture group
+                               ("square"   "\\\\checkboxUnchecked")
+                               ("boxminus" "\\\\checkboxTransitive")
+                               ("boxtimes" "\\\\checkboxChecked")
+                               (_ (substring fullmatch 9 -3))) "]"))
+       text)))
+
+  (add-to-list 'org-export-filter-item-functions
+               '+org-export-latex-fancy-item-checkboxes)
   ) ; (after! org)
 
-(after! ox-latex
-                                        ;  (setq org-latex-listings 'engraved))
-  (setq org-latex-listings 'minted)
-  (setq org-export-latex-listings 'minted)
-  (when (boundp 'org-export-latex-packages-alist)
-    (add-to-list 'org-export-latex-packages-alist '("" "minted")))
-  (when (boundp 'org-latex-minted-langs)
-    (add-to-list 'org-latex-minted-langs '(ipython "python"))
-    (add-to-list 'org-latex-minted-langs '(scheme "scheme")))
-  (setq org-latex-minted-options '(("breaklines" "true")
-                                   ("breakanywhere" "true")
-                                   ("linenos" "true")))
-  (when (boundp 'org-latex-pdf-process)
-    (setq org-latex-pdf-process
-          "xelatex -shell-escape -interaction nonstopmode -output-directory=%o %f")))
 
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
