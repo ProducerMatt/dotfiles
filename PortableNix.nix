@@ -81,6 +81,7 @@
   environment.systemPackages = with pkgs; [
     xsel
     xclip
+    config.nur.repos.ProducerMatt.pledge
   ];
 
   # This value determines the NixOS release from which the default
