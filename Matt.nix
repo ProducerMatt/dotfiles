@@ -105,6 +105,11 @@ in
     tectonic
     gnuplot
     graphviz
+    cmake
+    shellcheck
+    editorconfig-core-c
+    nodejs
+    nixfmt
   ];
   services.emacs = {
     enable = true;
