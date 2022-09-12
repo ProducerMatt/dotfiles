@@ -84,7 +84,7 @@
     xsel
     xclip
     config.nur.repos.ProducerMatt.pledge
-    nvtop
+    #nvtop
   ];
 
   # This value determines the NixOS release from which the default
