@@ -15,6 +15,7 @@
       profiles.graphical
       profiles.fonts
       profiles.containers
+      profiles.ML_Nvidia
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
