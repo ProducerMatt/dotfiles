@@ -7,7 +7,7 @@
     git
     nano
 
-    config.nur.repos.ProducerMatt.pledge
+    nur.repos.ProducerMatt.pledge
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

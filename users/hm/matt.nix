@@ -70,7 +70,7 @@ in
     tig
     keybase
     tere
-    config.nur.repos.ProducerMatt.pledge
+    nur.repos.ProducerMatt.pledge
     direnv
     nix-direnv
     git-ignore
@@ -80,7 +80,7 @@ in
     libressl
     hugo
     manix # cli package & docs search
-    config.nur.repos.ProducerMatt.ripsecrets
+    nur.repos.ProducerMatt.ripsecrets
 
     # mainly for Emacs
     clang
@@ -93,9 +93,14 @@ in
     #(python38.withPackages(ps: with ps; [jupyter]))
 
     # Emacs + Python
-    (python310.withPackages(ps: with ps; [
-      ipython pyflakes black pytest nose isort
-    # Latex source code highlighting
+    (python310.withPackages (ps: with ps; [
+      ipython
+      pyflakes
+      black
+      pytest
+      nose
+      isort
+      # Latex source code highlighting
       pygments
     ]))
 

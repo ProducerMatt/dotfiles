@@ -1,8 +1,20 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ config, pkgs, lib, modulesPath, profiles, suites, age, ... }:
 
 {
+  age.secrets."wg-PortableNix.key".file =
+    ../../secrets/wg-PortableNix.key.age;
+  age.secrets."wg-apu4VPN-preshared.key".file =
+    ../../secrets/wg-apu4VPN-preshared.key.age;
+
+  users.mutableUsers = true;
+
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    suites.base ++
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+      profiles.graphical
+      profiles.fonts
+      profiles.containers
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
@@ -13,15 +25,15 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4a5f9903-bca6-46e6-ae33-56494b15016c";
+    {
+      device = "/dev/disk/by-uuid/4a5f9903-bca6-46e6-ae33-56494b15016c";
       fsType = "ext4";
     };
 
   boot.initrd.luks.devices."luks-c05dea80-c718-46cf-85b8-9f3c6aeca86c".device = "/dev/disk/by-uuid/c05dea80-c718-46cf-85b8-9f3c6aeca86c";
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/bef52767-f7fc-405f-9423-d7b576e79c86"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/bef52767-f7fc-405f-9423-d7b576e79c86"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -40,7 +52,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  programs.apeloader.enable = false;
+  #programs.apeloader.enable = true;
   ## APE helper (not ape loader)
   #boot.binfmt.registrations = {
   #  "APE" = {
@@ -56,7 +68,7 @@
   };
 
   # Enable grub cryptodisk
-  boot.loader.grub.enableCryptodisk=true;
+  boot.loader.grub.enableCryptodisk = true;
 
   boot.initrd.luks.devices."luks-c05dea80-c718-46cf-85b8-9f3c6aeca86c".keyFile = "/crypto_keyfile.bin";
   # Enable swap on luks
@@ -67,7 +79,13 @@
     hostName = "PortableNix";
     networkmanager.enable = true;
     nameservers = [ "192.168.1.61" "192.168.1.16" ]; # TODO change depending on network
-    wireguard.interfaces = import secrets/wg-PortableNix.nix;
+    wireguard.interfaces =
+      import ../../secrets/wg-PortableNix.nix {
+        privateKeyPath =
+          config.age.secrets."wg-PortableNix.key".path;
+        apuKeyPath =
+          config.age.secrets."wg-apu4VPN-preshared.key".path;
+      };
     firewall.allowedTCPPorts = [ 8080 ]; # dev servers gotta dev
   };
 
@@ -83,7 +101,6 @@
   environment.systemPackages = with pkgs; [
     xsel
     xclip
-    config.nur.repos.ProducerMatt.pledge
     #nvtop
   ];
 

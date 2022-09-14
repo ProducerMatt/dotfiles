@@ -1,51 +1,80 @@
 {
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
-    rnix-lsp.url = "github:nix-community/rnix-lsp";
-    nur.url = "github:nix-community/NUR";
-    mynur = {
-      url = "github:ProducerMatt/my-nur-pkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # use stable packages
+  description = "A highly structured configuration database.";
+
+  nixConfig.extra-experimental-features = "nix-command flakes";
+  nixConfig.extra-substituters = "https://nrdxp.cachix.org https://nix-community.cachix.org";
+  nixConfig.extra-trusted-public-keys = "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+
+  inputs =
+    {
+      # Track channels with commits tested and built by hydra
+      nixos.url = "github:nixos/nixpkgs/nixos-22.05";
+      latest.url = "github:nixos/nixpkgs/nixos-unstable";
+      # For darwin hosts: it can be helpful to track this darwin-specific stable
+      # channel equivalent to the `nixos-*` channels for NixOS. For one, these
+      # channels are more likely to provide cached binaries for darwin systems.
+      # But, perhaps even more usefully, it provides a place for adding
+      # darwin-specific overlays and packages which could otherwise cause build
+      # failures on Linux systems.
+      nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
+
+      digga.url = "github:divnix/digga";
+      digga.inputs.nixpkgs.follows = "nixos";
+      digga.inputs.nixlib.follows = "nixos";
+      digga.inputs.home-manager.follows = "home";
+      digga.inputs.deploy.follows = "deploy";
+
+      home.url = "github:nix-community/home-manager/release-22.05";
+      home.inputs.nixpkgs.follows = "nixos";
+
+      darwin.url = "github:LnL7/nix-darwin";
+      darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
+
+      deploy.url = "github:serokell/deploy-rs";
+      deploy.inputs.nixpkgs.follows = "nixos";
+
+      agenix.url = "github:ryantm/agenix";
+      agenix.inputs.nixpkgs.follows = "nixos";
+
+      nvfetcher.url = "github:berberman/nvfetcher";
+      nvfetcher.inputs.nixpkgs.follows = "nixos";
+
+      naersk.url = "github:nmattia/naersk";
+      naersk.inputs.nixpkgs.follows = "nixos";
+
+      nixos-hardware.url = "github:nixos/nixos-hardware";
+
+      nixos-generators.url = "github:nix-community/nixos-generators";
+
+      rnix-lsp = {
+        url = "github:nix-community/rnix-lsp";
+        inputs.nixpkgs.follows = "nixos";
+      };
+
+      nixrepl = {
+        url = "github:schuelermine/nixos-repl-setup";
+      };
+      mynur = {
+        url = "github:ProducerMatt/my-nur-pkgs";
+        inputs.nixpkgs.follows = "nixos";
+        # use stable packages
+      };
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixrepl = {
-      url = "github:schuelermine/nixos-repl-setup";
-    };
-  };
-  outputs = {
-    self, nixpkgs, nixpkgs-unstable,
-      rnix-lsp, home-manager, nur, mynur, flake-utils, ...
-  }:
+  outputs =
+    { self
+    , digga
+    , nixos
+    , home
+    , nixos-hardware
+    , nur
+    , agenix
+    , nvfetcher
+    , deploy
+    , nixpkgs
+    , ...
+    } @ inputs:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        config.checkMeta = true;
-      };
-      overlay-unstable = final: prev: {
-        unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-          config.checkMeta = true;
-        };
-      };
-      rnix-lsp-overlay = final: prev: {
-        rnix-lsp = import rnix-lsp;
-      };
-      mynur-overlay = final: prev: {
-        mynur = mynur.packages."${system}";
-      };
-
-      lib = nixpkgs.lib;
-
       # NOTE: how do i make this available outside of this file?
       # NOTE: what about the variable sourceInfo?
       flakeVersion = with self; {
@@ -55,67 +84,147 @@
         shortRev = (self.shortRev or "dirty");
         revCount = (self.revCount or "dirty");
       };
-    in {
-      nixosConfigurations = {
-        PortableNix = lib.nixosSystem {
-          system = flake-utils.lib.system.x86_64-linux;
-          modules =
-            let
-            nur-modules = import nur {
-              nurpkgs = nixpkgs.legacyPackages.${system};
-            };
-          in
-            [
-            ({ pkgs, ... }: {
-              users.motd = ''
-              PortableNix
-              Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
-              Flake commit ${flakeVersion.shortRev}
-                '';
-              system.configurationRevision = flakeVersion.rev;
-            })
+    in
+    digga.lib.mkFlake
+      {
+        inherit self inputs;
 
-            (builtins.toPath "${nixpkgs}/nixos/modules/profiles/all-hardware.nix")
-
-            # Overlays-module makes "pkgs.unstable" available in configuration.nix
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-
-            nur.nixosModules.nur
-
-            # Overlays-module makes "pkgs.mynur" available in configuration.nix
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ mynur-overlay ]; })
-
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [
-                                        nur-modules.repos.ProducerMatt.overlays.mosh-unset-tty
-                                      ]; })
-
-            ./profiles/base.nix
-
-            ./profiles/nix.nix
-
-            ./profiles/graphical.nix
-
-            ./modules/openssh
-
-            ./profiles/containers.nix
-
-            ./modules/fonts.nix
-
-            ./profiles/userMatt.nix
-
-            ./PortableNix.nix
-
-            ./modules/apeloader
-
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.matt = {
-                imports = [ ./Matt.nix nur.nixosModules.nur ];
-              };
-            }
-          ];
+        channelsConfig = {
+          allowUnfree = true;
+          checkMeta = true;
         };
-      };
-    };
+
+        channels = {
+          nixos = {
+            imports = [ (digga.lib.importOverlays ./overlays) ];
+            overlays =
+              let
+                nur-modules = import nur {
+                  nurpkgs = nixos.legacyPackages.x86_64-linux;
+                };
+              in
+              [
+                nur-modules.repos.ProducerMatt.overlays.mosh-unset-tty
+              ];
+          };
+          nixpkgs-darwin-stable = {
+            imports = [ (digga.lib.importOverlays ./overlays) ];
+            overlays = [
+              # TODO: restructure overlays directory for per-channel overrides
+              # `importOverlays` will import everything under the path given
+              (channels: final: prev: {
+                inherit (channels.latest) mas;
+              } // prev.lib.optionalAttrs true { })
+            ];
+          };
+          latest = { };
+        };
+
+        lib = import ./lib { lib = digga.lib // nixos.lib; };
+
+        sharedOverlays = [
+          (final: prev: {
+            __dontExport = true;
+            lib = prev.lib.extend (lfinal: lprev: {
+              our = self.lib;
+            });
+          })
+
+          nur.overlay
+          agenix.overlay
+          nvfetcher.overlay
+
+          (import ./pkgs)
+        ];
+
+        nixos = {
+          hostDefaults = {
+            system = "x86_64-linux";
+            channelName = "nixos";
+            imports = [ (digga.lib.importExportableModules ./modules) ];
+            modules = [
+              { lib.our = self.lib; }
+              digga.nixosModules.bootstrapIso
+              digga.nixosModules.nixConfig
+              home.nixosModules.home-manager
+              agenix.nixosModules.age
+              ({ pkgs, config, ... }: {
+                users.motd = ''
+                  ${config.networking.hostName}
+                  Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
+                  Flake commit ${flakeVersion.shortRev}
+                '';
+                system.configurationRevision = flakeVersion.rev;
+              })
+            ];
+          };
+
+          imports = [ (digga.lib.importHosts ./hosts/nixos) ];
+          hosts = {
+            /* set host-specific properties here */
+            #NixOS = { };
+          };
+          importables = rec {
+            profiles = digga.lib.rakeLeaves ./profiles // {
+              users = digga.lib.rakeLeaves ./users;
+            };
+            suites = with profiles; rec {
+              base = [ core nixsettings users.matt openssh ];
+            };
+          };
+        };
+
+        darwin = {
+          hostDefaults = {
+            system = "x86_64-darwin";
+            channelName = "nixpkgs-darwin-stable";
+            imports = [ (digga.lib.importExportableModules ./modules) ];
+            modules = [
+              { lib.our = self.lib; }
+              digga.darwinModules.nixConfig
+              home.darwinModules.home-manager
+              agenix.nixosModules.age
+            ];
+          };
+
+          imports = [ (digga.lib.importHosts ./hosts/darwin) ];
+          hosts = {
+            /* set host-specific properties here */
+            Mac = { };
+          };
+          importables = rec {
+            profiles = digga.lib.rakeLeaves ./profiles // {
+              users = digga.lib.rakeLeaves ./users;
+            };
+            suites = with profiles; rec {
+              base = [ core.darwin users.darwin ];
+            };
+          };
+        };
+
+        home = {
+          #imports = [ (digga.lib.importExportableModules ./users/modules) ];
+          modules = [ ];
+          importables = rec {
+            profiles = digga.lib.rakeLeaves ./users/profiles;
+            suites = with profiles; rec {
+              base = [ direnv git ];
+            };
+          };
+          users = digga.lib.rakeLeaves ./users/hm;
+        };
+
+        devshell = ./shell;
+
+        # TODO: similar to the above note: does it make sense to make all of
+        # these users available on all systems?
+        homeConfigurations = digga.lib.mergeAny
+          (digga.lib.mkHomeConfigurations self.darwinConfigurations)
+          (digga.lib.mkHomeConfigurations self.nixosConfigurations)
+        ;
+
+        deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
+
+      }
+  ;
 }
