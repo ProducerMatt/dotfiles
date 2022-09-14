@@ -9,6 +9,7 @@ let
     nixUnstable
     nixpkgs-fmt
     nvfetcher-bin
+    ripsecrets
     ;
 
   hooks = import ./hooks;
