@@ -67,3 +67,6 @@
 (package! org-auto-tangle)
 
 (package! engrave-faces)
+
+(unpin! geiser-guile)
+(unpin! geiser)
