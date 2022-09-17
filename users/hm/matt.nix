@@ -115,6 +115,7 @@ in
     editorconfig-core-c
     nodejs
     nixfmt
+    nodePackages.mermaid-cli
   ];
   services.emacs = {
     enable = true;
