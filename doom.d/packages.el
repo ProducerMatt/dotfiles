@@ -70,3 +70,5 @@
 
 (unpin! geiser-guile)
 (unpin! geiser)
+
+(package! ob-mermaid)
