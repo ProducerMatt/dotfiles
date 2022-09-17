@@ -205,3 +205,7 @@
 
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
+
+(after! org-auto-tangle
+  (setq org-auto-tangle-babel-safelist '(
+                                         "~/SICP-group/1/Answers.org")))
