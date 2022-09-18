@@ -82,6 +82,7 @@ in
     manix # cli package & docs search
     nur.repos.ProducerMatt.ripsecrets
     nodePackages.pnpm
+    ttfautohint
 
     # mainly for Emacs
     clang
