@@ -81,6 +81,7 @@ in
     hugo
     manix # cli package & docs search
     nur.repos.ProducerMatt.ripsecrets
+    nodePackages.pnpm
 
     # mainly for Emacs
     clang
