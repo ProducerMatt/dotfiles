@@ -118,6 +118,7 @@ in
     nodejs
     nixfmt
     nodePackages.mermaid-cli
+    micromamba
   ];
   services.emacs = {
     enable = true;
