@@ -18,6 +18,25 @@
         },
         "version": "4ff1f565b5773aadba028051f432984def921762"
     },
+    "fzf": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "fzf",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "PatrickF1",
+            "repo": "fzf.fish",
+            "rev": "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7",
+            "sha256": "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=",
+            "type": "github"
+        },
+        "version": "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7"
+    },
     "manix": {
         "cargoLocks": null,
         "extract": null,

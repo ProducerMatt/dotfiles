@@ -6,3 +6,7 @@ fetch.github = "mlvzk/manix"
 [fish-abbreviation-tips]
 src.git = "https://github.com/gazorby/fish-abbreviation-tips"
 fetch.github = "gazorby/fish-abbreviation-tips"
+
+[fzf.fish]
+src.git = "https://github.com/PatrickF1/fzf.fish"
+fetch.github = "PatrickF1/fzf.fish"

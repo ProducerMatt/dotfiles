@@ -12,6 +12,17 @@
       sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
     });
   };
+  fzf = {
+    pname = "fzf";
+    version = "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7";
+    src = fetchFromGitHub ({
+      owner = "PatrickF1";
+      repo = "fzf.fish";
+      rev = "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7";
+      fetchSubmodules = false;
+      sha256 = "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=";
+    });
+  };
   manix = {
     pname = "manix";
     version = "d08e7ca185445b929f097f8bfb1243a8ef3e10e4";

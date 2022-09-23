@@ -18,15 +18,25 @@ in
 
   programs.fish = {
     enable = true;
-    plugins = [
+    plugins = with pkgs; [
       {
         name = "fish-abbreviation-tips";
-        src = pkgs.fetchFromGitHub ({
+        src = fetchFromGitHub ({
           owner = "gazorby";
           repo = "fish-abbreviation-tips";
           rev = "4ff1f565b5773aadba028051f432984def921762";
           fetchSubmodules = false;
           sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
+        });
+      }
+      {
+        name = "fzf";
+        src = fetchFromGitHub ({
+          owner = "PatrickF1";
+          repo = "fzf.fish";
+          rev = "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7";
+          fetchSubmodules = false;
+          sha256 = "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=";
         });
       }
     ];
