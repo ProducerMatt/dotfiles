@@ -18,9 +18,10 @@ in
 
   programs.fish = {
     enable = true;
-    shellInit = ''
-      direnv hook fish | source
-    '';
+  };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
   programs.fzf = {
     enable = true;
