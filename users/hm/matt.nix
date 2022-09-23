@@ -18,6 +18,18 @@ in
 
   programs.fish = {
     enable = true;
+    plugins = [
+      {
+        name = "fish-abbreviation-tips";
+        src = pkgs.fetchFromGitHub ({
+          owner = "gazorby";
+          repo = "fish-abbreviation-tips";
+          rev = "4ff1f565b5773aadba028051f432984def921762";
+          fetchSubmodules = false;
+          sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
+        });
+      }
+    ];
   };
   programs.direnv = {
     enable = true;

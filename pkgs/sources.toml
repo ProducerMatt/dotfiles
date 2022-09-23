@@ -2,3 +2,7 @@
 [manix]
 src.git = "https://github.com/mlvzk/manix"
 fetch.github = "mlvzk/manix"
+
+[fish-abbreviation-tips]
+src.git = "https://github.com/gazorby/fish-abbreviation-tips"
+fetch.github = "gazorby/fish-abbreviation-tips"

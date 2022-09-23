@@ -1,4 +1,23 @@
 {
+    "fish-abbreviation-tips": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "fish-abbreviation-tips",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "gazorby",
+            "repo": "fish-abbreviation-tips",
+            "rev": "4ff1f565b5773aadba028051f432984def921762",
+            "sha256": "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=",
+            "type": "github"
+        },
+        "version": "4ff1f565b5773aadba028051f432984def921762"
+    },
     "manix": {
         "cargoLocks": null,
         "extract": null,
