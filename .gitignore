@@ -75,3 +75,5 @@ tags
 
 # NOTE: Nix result file. Can this be bound to the root of the directory?
 result
+
+.direnv

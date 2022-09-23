@@ -23,6 +23,17 @@
       sha256 = "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=";
     });
   };
+  jethrokuan-z = {
+    pname = "jethrokuan-z";
+    version = "85f863f20f24faf675827fb00f3a4e15c7838d76";
+    src = fetchFromGitHub ({
+      owner = "jethrokuan";
+      repo = "z";
+      rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
+      fetchSubmodules = false;
+      sha256 = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
+    });
+  };
   manix = {
     pname = "manix";
     version = "d08e7ca185445b929f097f8bfb1243a8ef3e10e4";
@@ -32,6 +43,28 @@
       rev = "d08e7ca185445b929f097f8bfb1243a8ef3e10e4";
       fetchSubmodules = false;
       sha256 = "sha256-GqPuYscLhkR5E2HnSFV4R48hCWvtM3C++3zlJhiK/aw=";
+    });
+  };
+  nvmfish = {
+    pname = "nvmfish";
+    version = "9db8eaf6e3064a962bca398edd42162f65058ae8";
+    src = fetchFromGitHub ({
+      owner = "jorgebucaran";
+      repo = "nvm.fish";
+      rev = "9db8eaf6e3064a962bca398edd42162f65058ae8";
+      fetchSubmodules = false;
+      sha256 = "sha256-LkCpij6i5XEkZGYLx9naO/cnbkUCuemypHwTjvfDzuk=";
+    });
+  };
+  replayfish = {
+    pname = "replayfish";
+    version = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
+    src = fetchFromGitHub ({
+      owner = "jorgebucaran";
+      repo = "replay.fish";
+      rev = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
+      fetchSubmodules = false;
+      sha256 = "sha256-bM6+oAd/HXaVgpJMut8bwqO54Le33hwO9qet9paK1kY=";
     });
   };
 }

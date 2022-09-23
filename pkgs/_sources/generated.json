@@ -37,6 +37,25 @@
         },
         "version": "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7"
     },
+    "jethrokuan-z": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "jethrokuan-z",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "jethrokuan",
+            "repo": "z",
+            "rev": "85f863f20f24faf675827fb00f3a4e15c7838d76",
+            "sha256": "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=",
+            "type": "github"
+        },
+        "version": "85f863f20f24faf675827fb00f3a4e15c7838d76"
+    },
     "manix": {
         "cargoLocks": null,
         "extract": null,
@@ -55,5 +74,43 @@
             "type": "github"
         },
         "version": "d08e7ca185445b929f097f8bfb1243a8ef3e10e4"
+    },
+    "nvmfish": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "nvmfish",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "jorgebucaran",
+            "repo": "nvm.fish",
+            "rev": "9db8eaf6e3064a962bca398edd42162f65058ae8",
+            "sha256": "sha256-LkCpij6i5XEkZGYLx9naO/cnbkUCuemypHwTjvfDzuk=",
+            "type": "github"
+        },
+        "version": "9db8eaf6e3064a962bca398edd42162f65058ae8"
+    },
+    "replayfish": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "replayfish",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "jorgebucaran",
+            "repo": "replay.fish",
+            "rev": "bd8e5b89ec78313538e747f0292fcaf631e87bd2",
+            "sha256": "sha256-bM6+oAd/HXaVgpJMut8bwqO54Le33hwO9qet9paK1kY=",
+            "type": "github"
+        },
+        "version": "bd8e5b89ec78313538e747f0292fcaf631e87bd2"
     }
 }
