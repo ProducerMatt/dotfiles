@@ -136,6 +136,7 @@ in
     nur.repos.ProducerMatt.ripsecrets
     nodePackages.pnpm
     ttfautohint
+    bind.dnsutils
 
     # mainly for Emacs
     clang

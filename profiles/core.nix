@@ -6,6 +6,9 @@
     wget
     git
     nano
+    bind.dnsutils
+    fd
+    ripgrep
 
     nur.repos.ProducerMatt.pledge
   ];
