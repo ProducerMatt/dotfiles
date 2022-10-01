@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, profiles, suites, age, ... }:
+{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, ... }:
 
 {
   age.secrets."wg-PortableNix.key".file =
@@ -16,7 +16,10 @@
       profiles.fonts
       profiles.containers
       profiles.ML_Nvidia
+      #modules.hardenedUnbound
     ];
+
+  services.hardenedUnbound.enable = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
