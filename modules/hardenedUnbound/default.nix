@@ -14,7 +14,7 @@ in
       enable = true;
       localControlSocketPath = "/run/unbound/unbound.ctl";
       settings = {
-        # Where are we serving?
+        #  # Where are we serving?
         server = {
           interface = "0.0.0.0@53";
           access-control = [
@@ -39,7 +39,7 @@ in
           log-replies = false;
           log-servfail = false;
           log-local-actions = false;
-          logfile = "";
+          #logfile = "";
           num-threads = 1; # More than 1 screwed up logging on OpenBSD
           # IIRC ncreasing threads multiplies cache sizes as well
 
@@ -58,7 +58,7 @@ in
           hide-identity = true;
           hide-version = true;
           ipsecmod-enabled = false;
-          module-config = "validator iterator";
+          #module-config = "validator iterator";
           prefetch = true;
           prefetch-key = true;
           qname-minimisation = true;
