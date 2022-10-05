@@ -8,6 +8,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [ 53 ];
+    networking.firewall.allowedUDPPorts = [ 53 ];
     services.unbound = {
       package = pkgs.unbound-full;
       resolveLocalQueries = false; # DEBUG
