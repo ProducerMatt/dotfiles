@@ -10,20 +10,10 @@ in
       type = types.port;
       default = 53;
     };
-    shareAll = mkOption {
-      description = "Share on all interfaces (0.0.0.0)";
-      type = types.bool;
-      default = true;
-    };
-    sharePrivate = mkOption {
-      description = "Local network address to share unbound on, or null.";
-      type = with types; nullOr (listOf str);
-      default = null;
-    };
-    sharePublic = mkOption {
-      description = "Public network address to share unbound on, or null.";
-      type = with types; nullOr (listOf str);
-      default = null;
+    addresses = mkOption {
+      description = "IP addresses to listen on.";
+      type = types.listOf types.str;
+      default = [ "0.0.0.0@53" ];
     };
   };
 
@@ -38,12 +28,7 @@ in
       settings = {
         # Where are we serving?
         server = {
-          interface =
-            (if cfg.shareAll then "0.0.0.0@53" else
-            (if (! cfg.shareAll || (length
-              (concatLists cfg.sharePrivate cfg.sharePublic)
-            > 0)) then (abort "hardenedUnbound: need shareAll, or addresses in sharePrivate/sharePublic")
-            else (concatLists cfg.sharePrivate cfg.sharePublic)));
+          interface = cfg.addresses;
           access-control = [
             "192.168.0.0/16 allow"
             "127.0.0.0/8 allow"
