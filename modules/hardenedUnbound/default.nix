@@ -3,11 +3,31 @@ let
   cfg = config.services.hardenedUnbound;
 in
 {
-  options.services.hardenedUnbound = {
-    enable = lib.mkEnableOption "Matt's hardened Unbound DNS server";
+  options.services.hardenedUnbound = with lib; {
+    enable = mkEnableOption "Matt's hardened Unbound DNS server";
+    port = mkOption {
+      description = "Port to listen on.";
+      type = types.port;
+      default = 53;
+    };
+    shareAll = mkOption {
+      description = "Share on all interfaces (0.0.0.0)";
+      type = types.bool;
+      default = true;
+    };
+    sharePrivate = mkOption {
+      description = "Local network address to share unbound on, or null.";
+      type = with types; nullOr (listOf str);
+      default = null;
+    };
+    sharePublic = mkOption {
+      description = "Public network address to share unbound on, or null.";
+      type = with types; nullOr (listOf str);
+      default = null;
+    };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = with lib; mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 53 ];
     networking.firewall.allowedUDPPorts = [ 53 ];
     services.unbound = {
@@ -16,9 +36,14 @@ in
       enable = true;
       localControlSocketPath = "/run/unbound/unbound.ctl";
       settings = {
-        #  # Where are we serving?
+        # Where are we serving?
         server = {
-          interface = "0.0.0.0@53";
+          interface =
+            (if cfg.shareAll then "0.0.0.0@53" else
+            (if (! cfg.shareAll || (length
+              (concatLists cfg.sharePrivate cfg.sharePublic)
+            > 0)) then (abort "hardenedUnbound: need shareAll, or addresses in sharePrivate/sharePublic")
+            else (concatLists cfg.sharePrivate cfg.sharePublic)));
           access-control = [
             "192.168.0.0/16 allow"
             "127.0.0.0/8 allow"
