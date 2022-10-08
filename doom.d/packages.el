@@ -68,7 +68,7 @@
 
 (package! engrave-faces)
 
-(unpin! geiser-guile)
-(unpin! geiser)
+;(unpin! geiser-guile)
+;(unpin! geiser)
 
 (package! ob-mermaid)
