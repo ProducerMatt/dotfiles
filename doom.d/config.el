@@ -188,20 +188,26 @@
   (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
 (after! ox-latex
-                                        ;  (setq org-latex-listings 'engraved))
+                                        ;;  (setq org-latex-listings 'engraved))
   (setq org-latex-listings 'minted)
+  (setq org-latex-src-block-backend 'minted)
   (setq org-export-latex-listings 'minted)
   (when (boundp 'org-export-latex-packages-alist)
     (add-to-list 'org-export-latex-packages-alist '("" "minted")))
+  ;(when (boundp 'org-latex-compilers)
+    ;(add-to-list 'org-latex-compilers "latexmk"))
+  ;(when (boundp 'org-latex-pdf-process)
+    ;(setq org-latex-compiler "latexmk"))
   (when (boundp 'org-latex-minted-langs)
     (add-to-list 'org-latex-minted-langs '(ipython "python"))
     (add-to-list 'org-latex-minted-langs '(scheme "scheme")))
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")
                                    ("linenos" "true")))
-  (when (boundp 'org-latex-pdf-process)
-    (setq org-latex-pdf-process
-          "xelatex -shell-escape -interaction nonstopmode -output-directory=%o %f")))
+  ;(when (boundp 'org-latex-pdf-process)
+    ;(setq org-latex-pdf-process
+          ;"latexmk -shell-escape -interaction nonstopmode -output-directory=%o %f"))
+  )
 
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
@@ -209,3 +215,5 @@
 (after! org-auto-tangle
   (setq org-auto-tangle-babel-safelist '(
                                          "~/SICP-group/1/Answers.org")))
+
+(defalias 'run-geiser 'geiser)
