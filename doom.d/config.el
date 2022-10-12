@@ -204,9 +204,9 @@
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")
                                    ("linenos" "true")))
-  ;(when (boundp 'org-latex-pdf-process)
-    ;(setq org-latex-pdf-process
-          ;"latexmk -shell-escape -interaction nonstopmode -output-directory=%o %f"))
+  (when (boundp 'org-latex-pdf-process)
+    (setq org-latex-pdf-process
+          '("latexmk -f -pdf -%latex -shell-escape -interaction=nonstopmode -output-directory=%o %f")))
   )
 
 
