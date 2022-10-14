@@ -197,6 +197,7 @@ in
     nodePackages.pnpm
     ttfautohint
     bind.dnsutils
+    metadata-cleaner
 
     # mainly for Emacs
     clang
