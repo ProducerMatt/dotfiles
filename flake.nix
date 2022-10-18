@@ -19,28 +19,28 @@
       nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
 
       digga.url = "github:divnix/digga";
-      digga.inputs.nixpkgs.follows = "nixos";
-      digga.inputs.nixlib.follows = "nixos";
+      digga.inputs.nixpkgs.follows = "latest";
+      digga.inputs.nixlib.follows = "latest";
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
 
       home.url = "github:nix-community/home-manager/release-22.05";
-      home.inputs.nixpkgs.follows = "nixos";
+      home.inputs.nixpkgs.follows = "latest";
 
       darwin.url = "github:LnL7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
 
       deploy.url = "github:serokell/deploy-rs";
-      deploy.inputs.nixpkgs.follows = "nixos";
+      deploy.inputs.nixpkgs.follows = "latest";
 
       agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "nixos";
+      agenix.inputs.nixpkgs.follows = "latest";
 
       nvfetcher.url = "github:berberman/nvfetcher";
-      nvfetcher.inputs.nixpkgs.follows = "nixos";
+      nvfetcher.inputs.nixpkgs.follows = "latest";
 
       naersk.url = "github:nmattia/naersk";
-      naersk.inputs.nixpkgs.follows = "nixos";
+      naersk.inputs.nixpkgs.follows = "latest";
 
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -48,7 +48,7 @@
 
       rnix-lsp = {
         url = "github:nix-community/rnix-lsp";
-        inputs.nixpkgs.follows = "nixos";
+        inputs.nixpkgs.follows = "latest";
       };
 
       nixrepl = {
@@ -56,7 +56,7 @@
       };
       mynur = {
         url = "github:ProducerMatt/my-nur-pkgs";
-        inputs.nixpkgs.follows = "nixos";
+        inputs.nixpkgs.follows = "latest";
         # use stable packages
       };
     };
@@ -140,7 +140,7 @@
         nixos = {
           hostDefaults = {
             system = "x86_64-linux";
-            channelName = "nixos";
+            channelName = "latest";
             imports = [ (digga.lib.importExportableModules ./modules) ];
             modules = [
               { lib.our = self.lib; }

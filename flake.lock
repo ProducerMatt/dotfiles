@@ -3,7 +3,7 @@
     "agenix": {
       "inputs": {
         "nixpkgs": [
-          "nixos"
+          "latest"
         ]
       },
       "locked": {
@@ -80,7 +80,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "nixpkgs": [
-          "nixos"
+          "latest"
         ],
         "utils": "utils"
       },
@@ -135,10 +135,10 @@
         ],
         "latest": "latest",
         "nixlib": [
-          "nixos"
+          "latest"
         ],
         "nixpkgs": [
-          "nixos"
+          "latest"
         ],
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
@@ -271,7 +271,7 @@
     "home": {
       "inputs": {
         "nixpkgs": [
-          "nixos"
+          "latest"
         ]
       },
       "locked": {
@@ -324,7 +324,7 @@
     "mynur": {
       "inputs": {
         "nixpkgs": [
-          "nixos"
+          "latest"
         ]
       },
       "locked": {
@@ -344,7 +344,7 @@
     "naersk": {
       "inputs": {
         "nixpkgs": [
-          "nixos"
+          "latest"
         ]
       },
       "locked": {
@@ -539,7 +539,7 @@
         "flake-compat": "flake-compat_3",
         "flake-utils": "flake-utils_3",
         "nixpkgs": [
-          "nixos"
+          "latest"
         ]
       },
       "locked": {
@@ -560,7 +560,7 @@
       "inputs": {
         "naersk": "naersk_2",
         "nixpkgs": [
-          "nixos"
+          "latest"
         ],
         "utils": "utils_2"
       },
