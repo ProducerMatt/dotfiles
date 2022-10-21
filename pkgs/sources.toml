@@ -22,3 +22,7 @@ fetch.github = "jorgebucaran/nvm.fish"
 [replayfish]
 src.git = "https://github.com/jorgebucaran/replay.fish"
 fetch.github = "jorgebucaran/replay.fish"
+
+[rsync-bpc]
+src.git = "https://github.com/backuppc/rsync-bpc"
+fetch.github = "backuppc/rsync-bpc"

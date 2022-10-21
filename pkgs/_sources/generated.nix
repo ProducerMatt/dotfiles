@@ -11,17 +11,19 @@
       fetchSubmodules = false;
       sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
     });
+    date = "2022-08-15";
   };
   fzf = {
     pname = "fzf";
-    version = "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7";
+    version = "353755911f33a4176d932c7bb05ad2b81b19f638";
     src = fetchFromGitHub ({
       owner = "PatrickF1";
       repo = "fzf.fish";
-      rev = "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7";
+      rev = "353755911f33a4176d932c7bb05ad2b81b19f638";
       fetchSubmodules = false;
-      sha256 = "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=";
+      sha256 = "sha256-Zw9y6tVGC6oWc27ZHq3z2Tcm/O7y1Yq0DXqs3AJlV4o=";
     });
+    date = "2022-10-20";
   };
   jethrokuan-z = {
     pname = "jethrokuan-z";
@@ -33,6 +35,7 @@
       fetchSubmodules = false;
       sha256 = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
     });
+    date = "2022-04-08";
   };
   manix = {
     pname = "manix";
@@ -44,6 +47,7 @@
       fetchSubmodules = false;
       sha256 = "sha256-GqPuYscLhkR5E2HnSFV4R48hCWvtM3C++3zlJhiK/aw=";
     });
+    date = "2021-04-20";
   };
   nvmfish = {
     pname = "nvmfish";
@@ -55,6 +59,7 @@
       fetchSubmodules = false;
       sha256 = "sha256-LkCpij6i5XEkZGYLx9naO/cnbkUCuemypHwTjvfDzuk=";
     });
+    date = "2022-06-22";
   };
   replayfish = {
     pname = "replayfish";
@@ -66,5 +71,18 @@
       fetchSubmodules = false;
       sha256 = "sha256-bM6+oAd/HXaVgpJMut8bwqO54Le33hwO9qet9paK1kY=";
     });
+    date = "2022-06-19";
+  };
+  rsync-bpc = {
+    pname = "rsync-bpc";
+    version = "7215af4f16b729098193d7dde5a8c3c8c4ae80de";
+    src = fetchFromGitHub ({
+      owner = "backuppc";
+      repo = "rsync-bpc";
+      rev = "7215af4f16b729098193d7dde5a8c3c8c4ae80de";
+      fetchSubmodules = false;
+      sha256 = "sha256-CXGeSWZF0OOhwo+yndkd0ppYILHELBiZIDhHN7BqVYc=";
+    });
+    date = "2021-07-24";
   };
 }
