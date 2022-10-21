@@ -17,6 +17,7 @@
       profiles.containers
       profiles.ML_Nvidia
       #modules.hardenedUnbound
+      profiles.backuppc
     ];
 
   services.hardenedUnbound.enable = true;
