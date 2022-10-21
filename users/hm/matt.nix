@@ -6,6 +6,9 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  manual.manpages.enable = false;
+
   home.username = "matt";
   home.homeDirectory = "/home/matt";
   home.stateVersion = "22.05";
