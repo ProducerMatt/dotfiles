@@ -14,7 +14,10 @@
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       devices = {
         # Is this considered a secret?
-        "Matt-Win10" = { id = "IK73VQ4-G4R4JUP-UGHWAVA-L2FEBIZ-LISJOFH-QECOXUI-TZYQ5GB-GXK67AD"; };
+        "Matt-Win10" = {
+          id = "IK73VQ4-G4R4JUP-UGHWAVA-L2FEBIZ-LISJOFH-QECOXUI-TZYQ5GB-GXK67AD";
+          addresses = [ "192.168.1.2:51820" ];
+        };
       };
       folders = {
         "iak23-enrgo" = {
