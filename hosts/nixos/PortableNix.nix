@@ -16,8 +16,8 @@
       profiles.fonts
       profiles.containers
       profiles.ML_Nvidia
-      #modules.hardenedUnbound
       profiles.backuppc
+      profiles.mysyncthing
     ];
 
   services.hardenedUnbound.enable = true;
