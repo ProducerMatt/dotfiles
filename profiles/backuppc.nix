@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [ pkgs.rsync-bpc pkgs.rrsync ];
+  environment.systemPackages = [ pkgs.rsync-bpc pkgs.rrsync-bpc ];
 }

@@ -13,7 +13,7 @@ stdenv.mkDerivation {
   dontConfigure = true;
   dontBuild = true;
 
-  inherit (rsync) patches;
+  patches = rsync.patches ++ [ ./bpc.patch ];
 
   postPatch = ''
     substituteInPlace support/rrsync --replace /usr/bin/rsync ${rsync}/bin/rsync
