@@ -18,6 +18,7 @@
       profiles.ML_Nvidia
       profiles.backuppc
       profiles.mysyncthing
+      profiles.guix
     ];
 
   services.hardenedUnbound.enable = true;

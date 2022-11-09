@@ -59,6 +59,9 @@
         inputs.nixpkgs.follows = "latest";
         # use stable packages
       };
+      guix-overlay = {
+        url = "github:foo-dogsquared/nix-overlay-guix?rev=ab1f301df1bb9ad80ac3ef9805c1e41cc3b5595f";
+      };
     };
 
   outputs =
@@ -72,6 +75,7 @@
     , nvfetcher
     , deploy
     , nixpkgs
+    , guix-overlay
     , ...
     } @ inputs:
     let
@@ -105,6 +109,7 @@
               in
               [
                 nur-modules.repos.ProducerMatt.overlays.mosh-unset-tty
+                guix-overlay.overlays.default
               ];
           };
           nixpkgs-darwin-stable = {
@@ -133,6 +138,7 @@
           nur.overlay
           agenix.overlay
           nvfetcher.overlay
+          guix-overlay.overlays.default
 
           (import ./pkgs)
         ];
