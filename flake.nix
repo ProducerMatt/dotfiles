@@ -61,6 +61,7 @@
       };
       guix-overlay = {
         url = "github:foo-dogsquared/nix-overlay-guix?rev=ab1f301df1bb9ad80ac3ef9805c1e41cc3b5595f";
+        inputs.nixpkgs.follows = "nixos";
       };
     };
 
