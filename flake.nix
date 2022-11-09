@@ -56,11 +56,9 @@
       };
       mynur = {
         url = "github:ProducerMatt/my-nur-pkgs";
-        inputs.nixpkgs.follows = "latest";
-        # use stable packages
       };
       guix-overlay = {
-        url = "github:foo-dogsquared/nix-overlay-guix?rev=ab1f301df1bb9ad80ac3ef9805c1e41cc3b5595f";
+        url = "github:foo-dogsquared/nix-overlay-guix?rev=82b88f9b183ca42174c194072d9d12965e22f4f7";
         inputs.nixpkgs.follows = "nixos";
       };
     };
