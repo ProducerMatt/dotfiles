@@ -9,6 +9,11 @@
     bind.dnsutils
     fd
     ripgrep
+    ethtool
+    smartmontools
+    aria2
+    libressl
+    nixos-generators
 
     nur.repos.ProducerMatt.pledge
   ];

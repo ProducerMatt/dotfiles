@@ -132,6 +132,10 @@ in
       up = "s systemctl start";
       dn = "s systemctl stop";
       jtl = "journalctl";
+
+      # git
+      gs = "git status";
+      gcm = "git commit -m";
     };
   };
   programs.direnv = {
@@ -204,8 +208,6 @@ in
 
     # mainly for Emacs
     clang
-    guile_3_0
-    guile-cairo
     rnix-lsp
     # any less than medium isn't guaranteed to work
     texlive.combined.scheme-full

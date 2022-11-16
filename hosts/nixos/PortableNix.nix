@@ -19,6 +19,7 @@
       profiles.backuppc
       profiles.mysyncthing
       profiles.guix
+      profiles.sicp
     ];
 
   services.hardenedUnbound.enable = true;
