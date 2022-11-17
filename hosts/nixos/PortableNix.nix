@@ -20,6 +20,7 @@
       profiles.mysyncthing
       profiles.guix
       profiles.sicp
+      profiles.kernelpain
     ];
 
   services.hardenedUnbound.enable = true;
