@@ -21,6 +21,7 @@
       profiles.guix
       profiles.sicp
       profiles.kernelpain
+      profiles.homeNetwork
     ];
 
   services.hardenedUnbound.enable = true;
@@ -86,7 +87,6 @@
   networking = {
     hostName = "PortableNix";
     networkmanager.enable = true;
-    nameservers = [ "192.168.1.61" "192.168.1.16" ]; # TODO change depending on network
     wireguard.interfaces =
       import ../../secrets/wg-PortableNix.nix {
         privateKeyPath =
@@ -108,13 +108,6 @@
   i18n.defaultLocale = "en_US.utf8";
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-
-
-  environment.systemPackages = with pkgs; [
-    xsel
-    xclip
-    #nvtop
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
