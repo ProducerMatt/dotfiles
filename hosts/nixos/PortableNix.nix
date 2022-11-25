@@ -20,8 +20,8 @@
       profiles.mysyncthing
       profiles.guix
       profiles.sicp
-      profiles.kernelpain
       profiles.homeNetwork
+      profiles.earlyOOM
     ];
 
   services.hardenedUnbound.enable = true;

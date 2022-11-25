@@ -174,7 +174,14 @@
               users = digga.lib.rakeLeaves ./users;
             };
             suites = with profiles; rec {
-              base = [ core nixsettings cachix users.matt openssh ];
+              base = [
+                core
+                nixsettings
+                cachix
+                users.matt
+                openssh
+                earlyOOM
+              ];
             };
           };
         };
