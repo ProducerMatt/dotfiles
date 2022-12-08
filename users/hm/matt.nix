@@ -1,4 +1,4 @@
-{ pkgs, self, nur, ... }:
+{ pkgs, self, ... }:
 let
   start_emacs = "emacsclient -c -a 'emacs'";
 in
@@ -207,7 +207,7 @@ in
     metadata-cleaner
     stdenv
     gnumake
-    nur.repos.ProducerMatt.yaml2nix
+    #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
     lsof # list files and sockets in use
     nodePackages.node2nix # node packages to nix packages
     nodePackages.browser-sync # live-reloading dev server
