@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ pkgs, self, nur, ... }:
 let
   start_emacs = "emacsclient -c -a 'emacs'";
 in
@@ -205,6 +205,15 @@ in
     ttfautohint
     bind.dnsutils
     metadata-cleaner
+    stdenv
+    gnumake
+    nur.repos.ProducerMatt.yaml2nix
+    lsof # list files and sockets in use
+    nodePackages.node2nix # node packages to nix packages
+    nodePackages.browser-sync # live-reloading dev server
+    bc # cli calculators
+    imagemagickBig
+    remarshal # convert between config file formats
 
     # mainly for Emacs
     clang

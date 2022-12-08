@@ -21,7 +21,7 @@
     },
     "fzf": {
         "cargoLocks": null,
-        "date": "2022-10-20",
+        "date": "2022-12-03",
         "extract": null,
         "name": "fzf",
         "passthru": null,
@@ -33,11 +33,11 @@
             "name": null,
             "owner": "PatrickF1",
             "repo": "fzf.fish",
-            "rev": "353755911f33a4176d932c7bb05ad2b81b19f638",
-            "sha256": "sha256-Zw9y6tVGC6oWc27ZHq3z2Tcm/O7y1Yq0DXqs3AJlV4o=",
+            "rev": "3666395bc10752c7afd21210fe5c3458d0f502bf",
+            "sha256": "sha256-B3yONRy30kwuCQNjVTX+QdeLzDy4GQIOf31hAfjY+vs=",
             "type": "github"
         },
-        "version": "353755911f33a4176d932c7bb05ad2b81b19f638"
+        "version": "3666395bc10752c7afd21210fe5c3458d0f502bf"
     },
     "jethrokuan-z": {
         "cargoLocks": null,
