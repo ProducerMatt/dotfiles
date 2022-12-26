@@ -165,7 +165,7 @@ in
     userName = "Producer Matt";
     extraConfig = {
       init = { defaultBranch = "main"; };
-      #pull = { rebase = true; }; # NEVER DO THIS AGAIN
+      pull = { rebase = false; }; # setting to true was a mistake
     };
   };
 
