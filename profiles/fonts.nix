@@ -33,6 +33,7 @@
         '';
         set = "matt";
       })
+      atkinson-hyperlegible
     ];
     fontDir.enable = true;
     fontconfig = {
