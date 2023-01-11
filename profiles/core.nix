@@ -14,6 +14,7 @@
     aria2
     libressl
     nixos-generators
+    #nox
 
     nur.repos.ProducerMatt.pledge
   ];
