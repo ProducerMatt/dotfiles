@@ -8,7 +8,7 @@
   inputs =
     {
       # Track channels with commits tested and built by hydra
-      nixos.url = "github:nixos/nixpkgs/nixos-22.05";
+      nixos.url = "github:nixos/nixpkgs/nixos-22.11";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
       # For darwin hosts: it can be helpful to track this darwin-specific stable
       # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -16,28 +16,28 @@
       # But, perhaps even more usefully, it provides a place for adding
       # darwin-specific overlays and packages which could otherwise cause build
       # failures on Linux systems.
-      nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
+      nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
 
       digga.url = "github:divnix/digga";
-      digga.inputs.nixpkgs.follows = "latest";
-      digga.inputs.nixlib.follows = "latest";
+      digga.inputs.nixpkgs.follows = "nixos";
+      digga.inputs.nixlib.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
 
-      home.url = "github:nix-community/home-manager/release-22.05";
-      home.inputs.nixpkgs.follows = "latest";
+      home.url = "github:nix-community/home-manager/release-22.11";
+      home.inputs.nixpkgs.follows = "nixos";
 
       darwin.url = "github:LnL7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
 
       deploy.url = "github:serokell/deploy-rs";
-      deploy.inputs.nixpkgs.follows = "latest";
+      deploy.inputs.nixpkgs.follows = "nixos";
 
       agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "latest";
+      agenix.inputs.nixpkgs.follows = "nixos";
 
       nvfetcher.url = "github:berberman/nvfetcher";
-      nvfetcher.inputs.nixpkgs.follows = "latest";
+      nvfetcher.inputs.nixpkgs.follows = "nixos";
 
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "latest";
@@ -145,7 +145,7 @@
         nixos = {
           hostDefaults = {
             system = "x86_64-linux";
-            channelName = "latest";
+            channelName = "nixos";
             imports = [ (digga.lib.importExportableModules ./modules) ];
             modules = [
               { lib.our = self.lib; }
