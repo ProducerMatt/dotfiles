@@ -258,21 +258,20 @@
     "guix-overlay": {
       "inputs": {
         "nixpkgs": [
-          "nixos"
+          "nixos-22-05"
         ]
       },
       "locked": {
-        "lastModified": 1667878135,
-        "narHash": "sha256-NEfvSZg+MAS4UWZ4oWL35SVWjogef8sPc+bVuBOpZf0=",
+        "lastModified": 1671581861,
+        "narHash": "sha256-tj6mhEHpvVXz38DtnYytq9IzWm0qX/ie0IuPyLkQUe4=",
         "owner": "foo-dogsquared",
         "repo": "nix-overlay-guix",
-        "rev": "82b88f9b183ca42174c194072d9d12965e22f4f7",
+        "rev": "6ea748a541fa994058de94903fd1adaa3e1f6a8a",
         "type": "github"
       },
       "original": {
         "owner": "foo-dogsquared",
         "repo": "nix-overlay-guix",
-        "rev": "82b88f9b183ca42174c194072d9d12965e22f4f7",
         "type": "github"
       }
     },
@@ -404,6 +403,22 @@
         "type": "github"
       }
     },
+    "nixos-22-05": {
+      "locked": {
+        "lastModified": 1672580127,
+        "narHash": "sha256-3lW3xZslREhJogoOkjeZtlBtvFMyxHku7I/9IVehhT8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "0874168639713f547c05947c76124f78441ea46c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
@@ -456,11 +471,11 @@
     },
     "nixpkgs-darwin-stable": {
       "locked": {
-        "lastModified": 1673354416,
-        "narHash": "sha256-9W2JjncAM8Zj/09UgyPsIOIqzSKLzjBwDxUuRNfNMYM=",
+        "lastModified": 1673446578,
+        "narHash": "sha256-ep5AmyWEvjTRVWi0fTepp9S09R6QhnlFBRS7375LIBY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "09b46f2c1d8a9bd274cf324fa73691335e2d3087",
+        "rev": "7505db1471ac429afb2848240c865ac7fe185966",
         "type": "github"
       },
       "original": {
@@ -597,6 +612,7 @@
         "mynur": "mynur",
         "naersk": "naersk",
         "nixos": "nixos",
+        "nixos-22-05": "nixos-22-05",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
