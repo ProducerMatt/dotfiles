@@ -195,6 +195,7 @@ in
     nix-direnv
     git-ignore
     cachix
+    nixpkgs-review
     rlwrap
     httrack
     libressl

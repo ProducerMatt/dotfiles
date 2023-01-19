@@ -15,6 +15,7 @@
     libressl
     nixos-generators
     #nox
+    niv
 
     nur.repos.ProducerMatt.pledge
   ];
