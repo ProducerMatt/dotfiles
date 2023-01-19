@@ -22,6 +22,7 @@
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
+      modules.remote-access
     ];
 
   services.hardenedUnbound.enable = true;
@@ -32,6 +33,10 @@
   boot.extraModulePackages = [ ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  services.mattsRemoteAccess = {
+    enable = true;
+  };
 
   fileSystems."/" =
     {
