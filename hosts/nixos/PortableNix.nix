@@ -22,7 +22,6 @@
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
-      modules.remote-access
     ];
 
   services.hardenedUnbound.enable = true;

@@ -14,20 +14,24 @@ in
     defaultWindowManager = mkOption {
       description = "How to start the Window Manager";
       type = with types; str;
-      default = "startplasma-x11";
+      default = "${pkgs.libsForQt5.plasma-workspace.out}/bin/startplasma-x11";
     };
     port = mkOption {
       description = "Port to listen on.";
       type = with types; uniq port;
-      default = 3388;
+      default = 3389;
     };
   };
   config = with lib; mkIf
-    (cfg.enable and
+    (cfg.enable &&
       (cfg.defaultWindowManager == "RDP"))
     {
-      services.xrdp.enable = true;
-      services.xrdp.defaultWindowManager = cfg.defaultWindowManager;
+      services.xrdp = {
+        enable = true;
+        openFirewall = true;
+        port = cfg.port;
+        defaultWindowManager = cfg.defaultWindowManager;
+      };
       networking.firewall.allowedTCPPorts = [ cfg.port ];
     };
 }

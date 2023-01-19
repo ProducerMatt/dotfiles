@@ -203,7 +203,7 @@
           imports = [ (digga.lib.importHosts ./hosts/darwin) ];
           hosts = {
             /* set host-specific properties here */
-            Mac = { };
+            #Mac = { };
           };
           importables = rec {
             profiles = digga.lib.rakeLeaves ./profiles // {
