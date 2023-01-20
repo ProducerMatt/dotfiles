@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    comma # get any arbitrary program
     vim
     wget
     git
