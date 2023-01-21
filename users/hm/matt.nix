@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ pkgs, self, lib, ... }:
 let
   start_emacs = "emacsclient -c -a 'emacs'";
 in
@@ -22,16 +22,16 @@ in
   programs.fish = {
     enable = true;
     plugins = with pkgs; [
-      {
-        name = "fish-abbreviation-tips";
-        src = fetchFromGitHub ({
-          owner = "gazorby";
-          repo = "fish-abbreviation-tips";
-          rev = "4ff1f565b5773aadba028051f432984def921762";
-          fetchSubmodules = false;
-          sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
-        });
-      }
+      (lib.cleanForFish sources.fish-abbreviation-tips)
+      #  name = "fish-abbreviation-tips";
+      #  src = fetchFromGitHub ({
+      #    owner = "gazorby";
+      #    repo = "fish-abbreviation-tips";
+      #    rev = "4ff1f565b5773aadba028051f432984def921762";
+      #    fetchSubmodules = false;
+      #    sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
+      #  });
+      #}
       {
         name = "fzf";
         src = fetchFromGitHub ({
@@ -215,6 +215,7 @@ in
     bc # cli calculators
     imagemagickBig
     remarshal # convert between config file formats
+    nix-update
 
     # mainly for Emacs
     clang

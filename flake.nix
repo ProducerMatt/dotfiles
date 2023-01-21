@@ -76,6 +76,7 @@
     , deploy
     , nixpkgs
     , guix-overlay
+    , mynur
     , ...
     } @ inputs:
     let
@@ -136,6 +137,7 @@
           })
 
           nur.overlay
+          mynur.overlay
           agenix.overlay
           nvfetcher.overlays.default
           guix-overlay.overlays.default
