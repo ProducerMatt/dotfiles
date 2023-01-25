@@ -22,59 +22,14 @@ in
   programs.fish = {
     enable = true;
     plugins = with pkgs; with lib;
-      #forEach (plugin: (lib.our.cleanForFish pkgs.sources."${plugin}"))
-      [
-        (our.cleanForFish pkgs.sources."fish-abbreviation-tips")
-        #  name = "fish-abbreviation-tips";
-        #  src = fetchFromGitHub ({
-        #    owner = "gazorby";
-        #    repo = "fish-abbreviation-tips";
-        #    rev = "4ff1f565b5773aadba028051f432984def921762";
-        #    fetchSubmodules = false;
-        #    sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
-        #  });
-        #}
-        {
-          name = "fzf";
-          src = fetchFromGitHub ({
-            owner = "PatrickF1";
-            repo = "fzf.fish";
-            rev = "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7";
-            fetchSubmodules = false;
-            sha256 = "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=";
-          });
-        }
-        {
-          name = "jethrokuan-z";
-          src = fetchFromGitHub ({
-            owner = "jethrokuan";
-            repo = "z";
-            rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
-            fetchSubmodules = false;
-            sha256 = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
-          });
-        }
-        {
-          name = "nvmfish";
-          src = fetchFromGitHub ({
-            owner = "jorgebucaran";
-            repo = "nvm.fish";
-            rev = "9db8eaf6e3064a962bca398edd42162f65058ae8";
-            fetchSubmodules = false;
-            sha256 = "sha256-LkCpij6i5XEkZGYLx9naO/cnbkUCuemypHwTjvfDzuk=";
-          });
-        }
-        {
-          name = "replayfish";
-          src = fetchFromGitHub ({
-            owner = "jorgebucaran";
-            repo = "replay.fish";
-            rev = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
-            fetchSubmodules = false;
-            sha256 = "sha256-bM6+oAd/HXaVgpJMut8bwqO54Le33hwO9qet9paK1kY=";
-          });
-        }
-      ];
+      map (plugin: (lib.our.cleanForFish pkgs.sources."${plugin}"))
+        [
+          "fish-abbreviation-tips"
+          "fzf"
+          "jethrokuan-z"
+          "nvmfish"
+          "replayfish"
+        ];
     shellAliases = {
       l = "exa";
       ll = "exa -la";
