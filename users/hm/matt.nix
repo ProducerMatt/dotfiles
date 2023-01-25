@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ pkgs, self, lib, ... }:
 let
   start_emacs = "emacsclient -c -a 'emacs'";
 in
@@ -22,26 +22,9 @@ in
   programs.fish = {
     enable = true;
     plugins = with pkgs; with lib;
-      let
-        descendOne = f: mapAttrs (n: v: f v);
-        pnameToName = L:
-          (mapAttrs' (name: value:
-            nameValuePair
-              (if name == "pname" then "name" else name)
-              value))
-            L;
-        removeUnwanted = listOfUnwanted: L: (filterAttrsRecursive
-          (name: value: all (item: name != item) listOfUnwanted)
-          L);
-        cleanForFish =
-          S: pipe S
-            [
-              (pnameToName)
-              (x: removeAttrs x [ "date" "version" ])
-            ];
-      in
+      #forEach (plugin: (lib.our.cleanForFish pkgs.sources."${plugin}"))
       [
-        (cleanForFish pkgs.sources."fish-abbreviation-tips")
+        (our.cleanForFish pkgs.sources."fish-abbreviation-tips")
         #  name = "fish-abbreviation-tips";
         #  src = fetchFromGitHub ({
         #    owner = "gazorby";
