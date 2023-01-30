@@ -136,7 +136,7 @@
           })
 
           nur.overlay
-          agenix.overlay
+          agenix.overlays.default
           nvfetcher.overlays.default
           guix-overlay.overlays.default
 
