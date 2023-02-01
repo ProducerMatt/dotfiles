@@ -22,6 +22,7 @@
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
+      profiles.crosscompile
     ];
 
   services.hardenedUnbound.enable = true;
