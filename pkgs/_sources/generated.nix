@@ -3,27 +3,27 @@
 {
   fish-abbreviation-tips = {
     pname = "fish-abbreviation-tips";
-    version = "4ff1f565b5773aadba028051f432984def921762";
+    version = "8ed76a62bb044ba4ad8e3e6832640178880df485";
     src = fetchFromGitHub ({
       owner = "gazorby";
       repo = "fish-abbreviation-tips";
-      rev = "4ff1f565b5773aadba028051f432984def921762";
+      rev = "8ed76a62bb044ba4ad8e3e6832640178880df485";
       fetchSubmodules = false;
-      sha256 = "sha256-fveTvR+T6IiX8Zk5m6zToo1OtZc1VyrCHfOG63e9b64=";
+      sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
     });
-    date = "2022-08-15";
+    date = "2023-01-23";
   };
   fzf = {
     pname = "fzf";
-    version = "3666395bc10752c7afd21210fe5c3458d0f502bf";
+    version = "63c8f8e65761295da51029c5b6c9e601571837a1";
     src = fetchFromGitHub ({
       owner = "PatrickF1";
       repo = "fzf.fish";
-      rev = "3666395bc10752c7afd21210fe5c3458d0f502bf";
+      rev = "63c8f8e65761295da51029c5b6c9e601571837a1";
       fetchSubmodules = false;
-      sha256 = "sha256-B3yONRy30kwuCQNjVTX+QdeLzDy4GQIOf31hAfjY+vs=";
+      sha256 = "sha256-i9FcuQdmNlJnMWQp7myF3N0tMD/2I0CaMs/PlD8o1gw=";
     });
-    date = "2022-12-03";
+    date = "2023-01-25";
   };
   jethrokuan-z = {
     pname = "jethrokuan-z";
