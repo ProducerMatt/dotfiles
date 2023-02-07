@@ -13,6 +13,7 @@
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       profiles.graphical
+      profiles.touchscreen
       profiles.fonts
       profiles.containers
       profiles.ML_Nvidia
