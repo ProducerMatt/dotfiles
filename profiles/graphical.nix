@@ -17,7 +17,13 @@
     xkbVariant = "";
   };
 
-
+  environment.systemPackages = with pkgs; [
+    # graphics debug tools
+    xorg.xdpyinfo
+    glxinfo
+    vulkan-tools
+    libsForQt512.qt5.qttools.bin # qdbus
+  ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

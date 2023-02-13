@@ -1,11 +1,11 @@
 { config, lib, pkgs, overlays, ... }:
 
 {
-  #boot.extraModulePackages = with config.boot.kernelPackages; [
-  #  evdi
-  #];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    evdi
+  ];
   services.xserver.videoDrivers = [ "modesetting" "displaylink" ];
-  #environment.systemPackages = with pkgs; [
-  #  displaylink;
-  #];
+  environment.systemPackages = with pkgs; [
+    displaylink
+  ];
 }
