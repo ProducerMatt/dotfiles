@@ -4,7 +4,7 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    autorun = false;
+    autorun = true;
   };
 
   # Enable the KDE Plasma Desktop Environment.
