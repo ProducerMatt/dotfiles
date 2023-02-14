@@ -12,8 +12,6 @@
     suites.base ++
     [
       (modulesPath + "/installer/scan/not-detected.nix")
-      profiles.graphical
-      profiles.touchscreen
       profiles.fonts
       profiles.containers
       profiles.ML_Nvidia
@@ -25,6 +23,15 @@
       profiles.earlyOOM
       profiles.crosscompile
     ];
+
+  services.mattsDesktop = {
+    enable = true;
+    sound = true;
+    printing = true;
+    displayLink = true;
+    desktop = "plasma";
+    autoLogin = true;
+  };
 
   services.hardenedUnbound.enable = true;
 
