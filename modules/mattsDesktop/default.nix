@@ -11,14 +11,14 @@ in
     displayLink = mkEnableOption "Enable DisplayLink support";
     desktop = mkOption {
       description = "Which type of desktop to set up.";
-      type = with types; nullOr strMatching [ "plasma" ];
+      type = with types; nullOr (enum [ "plasma" ]);
       default = "plasma";
     };
     autoLogin = mkEnableOption "Autologin to the Desktop";
   };
-  config = (lib.mkIf cfg.enable
+  config = lib.mkIf cfg.enable (lib.mkMerge [
     (lib.mkIf (cfg.desktop == "plasma")
-      ({
+      {
         # Enable the X11 windowing system.
         services.xserver = {
           enable = true;
@@ -44,7 +44,8 @@ in
         ];
         # Enable touchpad support (enabled default in most desktopManager).
         services.xserver.libinput.enable = true;
-      } // (lib.mkIf cfg.displayLink
+      }
+      (lib.mkIf cfg.displayLink
         {
           boot.extraModulePackages = with config.boot.kernelPackages; [
             evdi
@@ -59,30 +60,29 @@ in
           environment.systemPackages = with pkgs; [
             displaylink
           ];
-        })))
-  //
-  (lib.mkIf cfg.sound
-    {
-      sound.enable = true;
-      hardware.pulseaudio.enable = false;
-      security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        #jack.enable = true;
+        }))
+    (lib.mkIf cfg.sound
+      {
+        sound.enable = true;
+        hardware.pulseaudio.enable = false;
+        security.rtkit.enable = true;
+        services.pipewire = {
+          enable = true;
+          alsa.enable = true;
+          alsa.support32Bit = true;
+          pulse.enable = true;
+          # If you want to use JACK applications, uncomment this
+          #jack.enable = true;
 
-        # use the example session manager (no others are packaged yet so this is enabled by default,
-        # no need to redefine it in your config for now)
-        #media-session.enable = true;
-      };
-    })
-  //
-  (lib.mkIf cfg.printing
-    {
-      # Enable CUPS to print documents.
-      services.printing.enable = true;
-    }));
+          # use the example session manager (no others are packaged yet so this is enabled by default,
+          # no need to redefine it in your config for now)
+          #media-session.enable = true;
+        };
+      })
+    (lib.mkIf cfg.printing
+      {
+        # Enable CUPS to print documents.
+        services.printing.enable = true;
+      })
+  ]);
 }
