@@ -29,7 +29,7 @@
     sound = true;
     printing = true;
     displayLink = true;
-    desktop = "sway";
+    desktop = "gnome";
     autoLogin = true;
   };
 
@@ -40,7 +40,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  services.xserver.videoDrivers = [ "nouveau" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   services.mattsRemoteAccess = {
     enable = true;
