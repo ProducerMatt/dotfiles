@@ -11,7 +11,7 @@ in
     displayLink = mkEnableOption "Enable DisplayLink support";
     desktop = mkOption {
       description = "Which type of desktop to set up.";
-      type = with types; nullOr (enum [ "plasma" ]);
+      type = with types; nullOr (enum [ "plasma" "sway" ]);
       default = "plasma";
     };
     autoLogin = mkEnableOption "Autologin to the Desktop";
@@ -35,6 +35,8 @@ in
       };
 
       environment.systemPackages = with pkgs; [
+        kdeplasma-addons
+
         # graphics debug tools
         xorg.xdpyinfo
         glxinfo
@@ -55,6 +57,28 @@ in
       ];
       services.xserver.displayManager.setupCommands =
         "${pkgs.displaylink}/bin/DisplayLinkManager &";
+      environment.systemPackages = with pkgs; [
+        displaylink
+      ];
+    })
+    (mkIf (cfg.desktop == "sway") {
+      programs.sway = {
+        enable = true;
+        wrapperFeatures.gtk = true;
+      };
+    })
+    (mkIf ((cfg.desktop == "sway") && cfg.displayLink) {
+      boot.extraModulePackages = with config.boot.kernelPackages; [
+        evdi
+      ];
+      #services.xserver.videoDrivers = [
+      #  "modesetting"
+      #  "displaylink"
+      #  "evdi"
+      #];
+      programs.sway.extraSessionCommands = ''
+        ${pkgs.displaylink}/bin/DisplayLinkManager &
+      '';
       environment.systemPackages = with pkgs; [
         displaylink
       ];

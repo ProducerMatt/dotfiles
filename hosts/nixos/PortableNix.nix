@@ -29,7 +29,7 @@
     sound = true;
     printing = true;
     displayLink = true;
-    desktop = "plasma";
+    desktop = "sway";
     autoLogin = true;
   };
 
@@ -40,7 +40,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nouveau" ];
 
   services.mattsRemoteAccess = {
     enable = true;
