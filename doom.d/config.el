@@ -141,9 +141,12 @@
             (t (self-insert-command (or arg 1))))))
   (map! "%" 'zz/goto-match-paren))
 
+;; workaround for some errors
 (after! geiser-guile
   (setq geiser-guile-binary "guile"))
+(defalias 'run-geiser 'geiser)
 
+;; optional: per-section modification times in org-mode
 (after! org
   (defun yant/getentryhash ()
     "Get the hash sum of the text in current entry, except :HASH: and :MODIFIED: property texts."
@@ -187,6 +190,7 @@
 
   (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
+;; latex export
 (after! ox-latex
                                         ;;  (setq org-latex-listings 'engraved))
   (setq org-latex-listings 'minted)
@@ -215,5 +219,3 @@
 (after! org-auto-tangle
   (setq org-auto-tangle-babel-safelist '(
                                          "~/SICP-group/1/Answers.org")))
-
-(defalias 'run-geiser 'geiser)
