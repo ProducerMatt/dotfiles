@@ -130,7 +130,7 @@ in
     vimHugeX
     htop
     emacs28NativeComp
-    firefox
+    #firefox
     kitty
     fish
     exa

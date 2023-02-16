@@ -139,6 +139,9 @@
           agenix.overlays.default
           nvfetcher.overlays.default
           guix-overlay.overlays.default
+          (final: prev: {
+            latest = nixpkgs;
+          })
 
           (import ./pkgs)
         ];
@@ -168,7 +171,7 @@
           imports = [ (digga.lib.importHosts ./hosts/nixos) ];
           hosts = {
             /* set host-specific properties here */
-            #NixOS = { };
+            #PortableNix = { channelName = "latest"; };
           };
           importables = rec {
             profiles = digga.lib.rakeLeaves ./profiles // {

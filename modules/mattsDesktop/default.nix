@@ -41,7 +41,7 @@ in
         xorg.xdpyinfo
         glxinfo
         vulkan-tools
-        libsForQt512.qt5.qttools.bin # qdbus
+        libsForQt5.qt5.qttools.bin # qdbus
       ];
       # Enable touchpad support (enabled default in most desktopManager).
       services.xserver.libinput.enable = true;
@@ -69,7 +69,9 @@ in
         desktopManager.gnome.enable = true;
         autorun = cfg.autoLogin;
       };
-
+      environment.gnome.excludePackages = with pkgs; [
+        firefox
+      ];
       # Configure keymap in X11
       services.xserver = {
         layout = "us";
@@ -81,7 +83,7 @@ in
         xorg.xdpyinfo
         glxinfo
         vulkan-tools
-        libsForQt512.qt5.qttools.bin # qdbus
+        libsForQt5.qt5.qttools.bin # qdbus
       ];
       # Enable touchpad support (enabled default in most desktopManager).
       services.xserver.libinput.enable = true;
