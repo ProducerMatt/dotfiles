@@ -6,4 +6,6 @@
     enableWebService = true;
     enableExtensionPack = true;
   };
+  networking.firewall.allowedTCPPorts = [ 18083 ];
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 }
