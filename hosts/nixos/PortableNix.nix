@@ -22,6 +22,7 @@
       profiles.homeNetwork
       profiles.earlyOOM
       profiles.crosscompile
+      profiles.virtualbox
     ];
 
   services.mattsDesktop = {
