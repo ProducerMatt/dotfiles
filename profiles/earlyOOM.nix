@@ -5,6 +5,6 @@
   # OOM-killer kicks in. But this can take a _long_ time. Let's get aggressive.
   services.earlyoom = {
     enable = true;
-    freeMemThreshold = 5; # <%5 free
+    freeMemThreshold = 10; # <%10 free
   };
 }
