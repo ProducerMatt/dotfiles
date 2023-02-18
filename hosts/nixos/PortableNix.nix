@@ -30,7 +30,7 @@
     sound = true;
     printing = true;
     displayLink = true;
-    desktop = "pantheon";
+    desktop = "gnome";
     autoStart = true;
     autoLogin = true;
   };
