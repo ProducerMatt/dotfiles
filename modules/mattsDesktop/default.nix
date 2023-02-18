@@ -11,9 +11,10 @@ in
     displayLink = mkEnableOption "Enable DisplayLink support";
     desktop = mkOption {
       description = "Which type of desktop to set up.";
-      type = with types; nullOr (enum [ "plasma" "sway" "gnome" ]);
+      type = with types; nullOr (enum [ "plasma" "sway" "gnome" "pantheon" ]);
       default = "plasma";
     };
+    autoStart = mkEnableOption "Start the GUI on boot";
     autoLogin = mkEnableOption "Autologin to the Desktop";
   };
   config = with lib; mkIf cfg.enable (mkMerge [
@@ -21,7 +22,11 @@ in
       # Enable the X11 windowing system.
       services.xserver = {
         enable = true;
-        autorun = cfg.autoLogin;
+        autorun = cfg.autoStart;
+        displayManager.autoLogin = (if cfg.autoLogin then {
+          enable = true;
+          user = "matt";
+        } else { enable = false; });
       };
 
       # Enable the KDE Plasma Desktop Environment.
@@ -67,7 +72,11 @@ in
         enable = true;
         displayManager.gdm.enable = true;
         desktopManager.gnome.enable = true;
-        autorun = cfg.autoLogin;
+        autorun = cfg.autoStart;
+        displayManager.autoLogin = (if cfg.autoLogin then {
+          enable = true;
+          user = "matt";
+        } else { enable = false; });
       };
       environment.gnome.excludePackages = with pkgs; [
         firefox
@@ -125,6 +134,51 @@ in
         displaylink
       ];
     })
+
+    (mkIf (cfg.desktop == "pantheon") {
+      # Enable the X11 windowing system.
+      services.xserver = {
+        enable = true;
+        displayManager.lightdm.enable = true;
+        desktopManager.pantheon.enable = true;
+        autorun = cfg.autoStart;
+        displayManager.autoLogin = (if cfg.autoLogin then {
+          enable = true;
+          user = "matt";
+        } else { enable = false; });
+      };
+      # Configure keymap in X11
+      services.xserver = {
+        layout = "us";
+        xkbVariant = "";
+      };
+
+      environment.systemPackages = with pkgs; [
+        # graphics debug tools
+        xorg.xdpyinfo
+        glxinfo
+        vulkan-tools
+        libsForQt5.qt5.qttools.bin # qdbus
+      ];
+      # Enable touchpad support (enabled default in most desktopManager).
+      services.xserver.libinput.enable = true;
+    })
+    (mkIf ((cfg.desktop == "pantheon") && cfg.displayLink) {
+      boot.extraModulePackages = with config.boot.kernelPackages; [
+        evdi
+      ];
+      services.xserver.videoDrivers = [
+        "modesetting"
+        "displaylink"
+        "evdi"
+      ];
+      services.xserver.displayManager.setupCommands =
+        "${pkgs.displaylink}/bin/DisplayLinkManager &";
+      environment.systemPackages = with pkgs; [
+        displaylink
+      ];
+    })
+
     (mkIf cfg.sound {
       sound.enable = true;
       hardware.pulseaudio.enable = false;
