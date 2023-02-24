@@ -113,6 +113,7 @@
       8080
       7860
       7861 # dev servers gotta dev
+      3389
     ];
   };
 
