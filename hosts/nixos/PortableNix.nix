@@ -35,6 +35,12 @@
     autoLogin = true;
   };
 
+  services.mattsRemoteAccess = {
+    enable = true;
+  };
+
+  programs.apeLoader.enable = true;
+
   services.hardenedUnbound.enable = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
@@ -43,10 +49,6 @@
   boot.extraModulePackages = [ ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  services.mattsRemoteAccess = {
-    enable = true;
-  };
 
   fileSystems."/" =
     {

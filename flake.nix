@@ -151,21 +151,28 @@
             system = "x86_64-linux";
             channelName = "nixos";
             imports = [ (digga.lib.importExportableModules ./modules) ];
-            modules = [
-              { lib.our = self.lib; }
-              digga.nixosModules.bootstrapIso
-              digga.nixosModules.nixConfig
-              home.nixosModules.home-manager
-              agenix.nixosModules.age
-              ({ pkgs, config, ... }: {
-                users.motd = ''
-                  ${config.networking.hostName}
-                  Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
-                  Flake commit ${flakeVersion.shortRev}
-                '';
-                system.configurationRevision = flakeVersion.rev;
-              })
-            ];
+            modules =
+              let
+                nur-modules = import nur {
+                  nurpkgs = nixos.legacyPackages.x86_64-linux;
+                };
+              in
+              [
+                { lib.our = self.lib; }
+                digga.nixosModules.bootstrapIso
+                digga.nixosModules.nixConfig
+                home.nixosModules.home-manager
+                agenix.nixosModules.age
+                ({ pkgs, config, ... }: {
+                  users.motd = ''
+                    ${config.networking.hostName}
+                    Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
+                    Flake commit ${flakeVersion.shortRev}
+                  '';
+                  system.configurationRevision = flakeVersion.rev;
+                })
+                nur-modules.repos.ProducerMatt.modules.apeLoader
+              ];
           };
 
           imports = [ (digga.lib.importHosts ./hosts/nixos) ];
