@@ -19,6 +19,8 @@
       # failures on Linux systems.
       nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
 
+      nur.url = "github:nix-community/nur";
+
       digga.url = "github:divnix/digga";
       digga.inputs.nixpkgs.follows = "nixos";
       digga.inputs.nixlib.follows = "nixos";
