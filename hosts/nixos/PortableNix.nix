@@ -39,7 +39,10 @@
     enable = true;
   };
 
-  programs.apeLoader.enable = true;
+  programs.apeLoader = {
+    enable = false;
+    mode = "workaround";
+  };
 
   services.hardenedUnbound.enable = true;
 
