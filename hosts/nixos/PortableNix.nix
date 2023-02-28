@@ -25,6 +25,14 @@
       profiles.virtualbox
     ];
 
+  # My Nix desktop is becoming unresponsive, only breaking free once the
+  # OOM-killer kicks in. But this can take a _long_ time. Let's get aggressive.
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 15; # <%15 free ram
+    freeSwapThreshold = 50; # <%50 free swap
+  };
+
   services.mattsDesktop = {
     enable = true;
     sound = true;
