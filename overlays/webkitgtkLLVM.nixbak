@@ -1,6 +1,9 @@
 final: prev: {
   webkitgtk =
     prev.webkitgtk.override {
-      stdenv = prev.llvmPackages_15.stdenv;
+      stdenv = prev.stdenv.override {
+        enableParallelBuilding = false;
+      };
+      #stdenv = prev.llvmPackages_15.stdenv;
     };
 }
