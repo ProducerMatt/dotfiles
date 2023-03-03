@@ -2,7 +2,7 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
+(setq gc-cons-threshold (* 100 1024 1024))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
