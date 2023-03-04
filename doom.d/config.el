@@ -219,3 +219,37 @@
 (after! org-auto-tangle
   (setq org-auto-tangle-babel-safelist '(
                                          "~/SICP-group/1/Answers.org")))
+
+(require 'org-id)
+
+
+(defun replace-all-header-links-with-id-links ()
+  "Replace all header links with id links and add ID properties when needed."
+  (interactive)
+  (save-excursion
+    (point-min)
+    (while (re-search-forward "\\[\\[\\*\\(.*?\\)\\]\\[\\(.*?\\)\\]\\]")
+      (let* ((link-text (match-string 2))
+             (header-title (match-string 1))
+             (header (org-find-exact-headline-in-buffer header-title)))
+        (when header
+	  ;(org-goto-marker-or-bmk header)
+          (let ((id (org-id-get header t)))
+            (replace-match (format "[[id:%s][%s]]" id link-text))
+            (org-entry-put (org-element-property :begin header) "ID" id)))))))
+;;; Chat GPT's first suggestion
+;
+;(defun replace-all-header-links-with-id-links ()
+;  "Replace all header links with id links and add ID properties when needed."
+;  (interactive)
+;  (save-excursion
+;    (goto-char (point-min))
+;    (while (re-search-forward "\\[\\[*\\]\\[\\(.*?\\)\\]\\]" nil t)
+;      (let* ((link-text (match-string 0))
+;             (header-title (match-string 1))
+;             (header (org-find-exact-headline-in-buffer header-title)))
+;        (when header
+;          (let ((id (org-id-get-create (org-id-find-id-in-file
+;                                        (org-element-property :begin header)))))
+;            (replace-match (format "[[id:%s][%s]]" id header-title))
+;            (org-entry-put (org-element-property :begin header) "ID" id)))))))
