@@ -6,9 +6,9 @@ final: prev: {
           lpprev.evdi.overrideAttrs (efinal: eprev: {
             version = "unstable-2022-02-23";
             src = prev.fetchFromGitHub {
-              owner = "DisplayLink";
+              owner = "listout";
               repo = "evdi";
-              rev = "64559211ec33390dbf4372e1029455ff58e0e739";
+              rev = "a90ecd5f0f09e976e4b8784fa16b92804138b1bd";
               sha256 = "0000000000000000000000000000000000000000000000000000";
             };
           });
