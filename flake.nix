@@ -144,6 +144,7 @@
           (final: prev: {
             latest = nixpkgs;
           })
+          (import ./overlays/displaylinkFix.nix)
 
           (import ./pkgs)
         ];

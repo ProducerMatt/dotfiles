@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, ... }:
+{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, overlays, ... }:
 
 {
   age.secrets."wg-PortableNix.key".file =
@@ -21,9 +21,7 @@
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
-      profiles.crosscompile
       profiles.virtualbox
-      modules.displaylinkFix
     ];
 
   # My Nix desktop is becoming unresponsive, only breaking free once the

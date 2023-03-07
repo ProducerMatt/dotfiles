@@ -9,7 +9,7 @@ final: prev: {
               owner = "listout";
               repo = "evdi";
               rev = "a90ecd5f0f09e976e4b8784fa16b92804138b1bd";
-              sha256 = "0000000000000000000000000000000000000000000000000000";
+              sha256 = "sha256-nrk5ISlQQ37V+WvLctdvkt0+/qR0F9VIp8Qy1BQwcIg=";
             };
           });
       });
