@@ -23,6 +23,7 @@
       profiles.earlyOOM
       profiles.crosscompile
       profiles.virtualbox
+      modules.displaylinkFix
     ];
 
   # My Nix desktop is becoming unresponsive, only breaking free once the
