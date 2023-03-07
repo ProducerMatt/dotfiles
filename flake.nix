@@ -180,7 +180,7 @@
           imports = [ (digga.lib.importHosts ./hosts/nixos) ];
           hosts = {
             /* set host-specific properties here */
-            #PortableNix = { channelName = "latest"; };
+            PortableNix = { channelName = "latest"; };
           };
           importables = rec {
             profiles = digga.lib.rakeLeaves ./profiles // {
