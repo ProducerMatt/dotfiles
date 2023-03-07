@@ -4,7 +4,7 @@ final: prev: {
       (lpfinal: lpprev: {
         evdi =
           lpprev.evdi.overrideAttrs (efinal: eprev: {
-            version = "unstable-2022-02-23";
+            version = "unstable-2023-02-23";
             src = prev.fetchFromGitHub {
               owner = "listout";
               repo = "evdi";
