@@ -145,6 +145,7 @@
             latest = nixpkgs;
           })
           (import ./overlays/displaylinkFix.nix)
+          (import ./overlays/webkitgtk.nix)
 
           (import ./pkgs)
         ];
