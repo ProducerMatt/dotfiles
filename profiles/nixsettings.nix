@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./cachix ];
+  imports = [ ./cachix ./nix-doc.nix ];
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
