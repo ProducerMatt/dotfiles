@@ -3,9 +3,9 @@
 {
   virtualisation.virtualbox.host = {
     enable = true;
-    enableWebService = false;
+    #  enableWebService = true;
     enableExtensionPack = true;
   };
   #networking.firewall.allowedTCPPorts = [ 18083 ];
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  users.extraGroups.vboxusers.members = [ "matt" ];
 }

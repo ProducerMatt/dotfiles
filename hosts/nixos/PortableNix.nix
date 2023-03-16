@@ -21,7 +21,7 @@
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
-      profiles.virtualbox
+      #profiles.virtualbox
     ];
 
   # My Nix desktop is becoming unresponsive, only breaking free once the
