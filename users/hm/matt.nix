@@ -175,6 +175,7 @@ in
 
     # mainly for Emacs
     clang
+    ccls
     rnix-lsp
     # any less than medium isn't guaranteed to work
     texlive.combined.scheme-full
