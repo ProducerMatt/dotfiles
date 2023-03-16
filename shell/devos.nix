@@ -6,7 +6,7 @@ let
     cachix
     editorconfig-checker
     mdbook
-    nixUnstable
+    nix
     nixpkgs-fmt
     nvfetcher-bin
     ripsecrets
@@ -42,7 +42,7 @@ in
   '');
 
   commands = [
-    (devos nixUnstable)
+    (devos nix)
     (devos agenix)
 
     {

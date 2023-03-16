@@ -153,7 +153,8 @@
         nixos = {
           hostDefaults = {
             system = "x86_64-linux";
-            channelName = "nixos";
+            channelName = "latest";
+            # NOTE: channelName determines what nixpkgs the shell uses
             imports = [ (digga.lib.importExportableModules ./modules) ];
             modules =
               let
@@ -182,7 +183,7 @@
           imports = [ (digga.lib.importHosts ./hosts/nixos) ];
           hosts = {
             /* set host-specific properties here */
-            PortableNix = { channelName = "latest"; };
+            #PortableNix = { channelName = "latest"; };
           };
           importables = rec {
             profiles = digga.lib.rakeLeaves ./profiles // {
