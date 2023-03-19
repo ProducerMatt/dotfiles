@@ -221,7 +221,8 @@
                                          "~/SICP-group/1/Answers.org")))
 
 (require 'org-id)
-
+(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+;; when interactively getting links, create random id if none found
 
 (defun replace-all-header-links-with-id-links ()
   "Replace all header links with id links and add ID properties when needed."
