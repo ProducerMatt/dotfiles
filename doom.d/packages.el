@@ -82,3 +82,6 @@
 (package! with-editor
 	  :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab"
 	  :recipe (:host github :repo "magit/with-editor"))
+
+(package! nix-update
+          :recipe (:host github :repo "jwiegley/nix-update-el"))

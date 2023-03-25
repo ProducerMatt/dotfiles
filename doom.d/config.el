@@ -254,3 +254,26 @@
 ;                                        (org-element-property :begin header)))))
 ;            (replace-match (format "[[id:%s][%s]]" id header-title))
 ;            (org-entry-put (org-element-property :begin header) "ID" id)))))))
+
+(defun replace-header-links-with-org-id ()
+  "Replace all header links in the current org-mode buffer with org-id links."
+  (interactive)
+  (save-excursion ; Save the current position of point
+    (goto-char (point-min)) ; Go to the beginning of the buffer
+    (while (re-search-forward "\\[\\[\\*\\(.*?\\)\\]\\[\\(.*?\\)\\]\\]") ; Search for header links
+      (message "found: %S" (match-string-no-properties 0))
+      (let* ((header-title (match-string-no-properties 1))
+             (link-text (match-string-no-properties 2))
+             (header-id (org-id-get (org-find-exact-headline-in-buffer header-title)))) ; Get the ID for the header
+        (replace-match (concat "[[id:" header-id "][" link-text "]]")))))) ; Replace the link with an org-id link
+
+(defun org-id-get-create-all-ids ()
+  "Generate IDs for all headers in the buffer that do not already have an ID."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "^\\*+ " nil t)
+      (let ((id (org-entry-get (point) "ID")))
+        (unless id
+          (let ((new-id (org-id-new)))
+            (org-entry-put (point) "ID" new-id)))))))
