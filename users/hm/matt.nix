@@ -95,6 +95,9 @@ in
       gcm = "git commit -m";
     };
   };
+  programs.bash = {
+    promptInit = builtins.toString ./bash_prompt.sh;
+  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
