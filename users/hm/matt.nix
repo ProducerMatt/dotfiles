@@ -96,7 +96,8 @@ in
     };
   };
   programs.bash = {
-    promptInit = builtins.toString ./bash_prompt.sh;
+    enable = true;
+    initExtra = builtins.readFile ./bash_prompt.sh;
   };
   programs.direnv = {
     enable = true;
