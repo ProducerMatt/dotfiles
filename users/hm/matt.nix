@@ -130,87 +130,90 @@ in
     };
   };
 
-  home.packages = with pkgs; [
-    vimHugeX
-    htop
-    emacs28NativeComp
-    #firefox
-    kitty
-    fish
-    exa
-    fd
-    ripgrep
-    ripgrep-all
-    croc
-    p7zip
-    psmisc
-    tmux
-    bat
-    git-crypt
-    passphrase2pgp
-    tig
-    keybase
-    tere
-    nur.repos.ProducerMatt.pledge
-    direnv
-    nix-direnv
-    git-ignore
-    cachix
-    nixpkgs-review
-    rlwrap
-    httrack
-    libressl
-    hugo
-    manix # cli package & docs search
-    nur.repos.ProducerMatt.ripsecrets
-    nodePackages.pnpm
-    ttfautohint
-    bind.dnsutils
-    metadata-cleaner
-    stdenv
-    gnumake
-    #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
-    lsof # list files and sockets in use
-    nodePackages.node2nix # node packages to nix packages
-    nodePackages.browser-sync # live-reloading dev server
-    bc # cli calculators
-    imagemagickBig
-    remarshal # convert between config file formats
+  home.packages = with pkgs; builtins.concatLists [
+    [
+      vimHugeX
+      htop
+      emacs28NativeComp
+      #firefox
+      kitty
+      fish
+      exa
+      fd
+      ripgrep
+      ripgrep-all
+      croc
+      p7zip
+      psmisc
+      tmux
+      bat
+      git-crypt
+      passphrase2pgp
+      tig
+      keybase
+      tere
+      nur.repos.ProducerMatt.pledge
+      direnv
+      nix-direnv
+      git-ignore
+      cachix
+      nixpkgs-review
+      rlwrap
+      httrack
+      libressl
+      hugo
+      manix # cli package & docs search
+      nur.repos.ProducerMatt.ripsecrets
+      nodePackages.pnpm
+      ttfautohint
+      bind.dnsutils
+      metadata-cleaner
+      stdenv
+      gnumake
+      #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
+      lsof # list files and sockets in use
+      nodePackages.node2nix # node packages to nix packages
+      nodePackages.browser-sync # live-reloading dev server
+      bc # cli calculators
+      imagemagickBig
+      remarshal # convert between config file formats
 
-    # mainly for Emacs
-    clang
-    ccls
-    rnix-lsp
-    # any less than medium isn't guaranteed to work
-    texlive.combined.scheme-full
-    # required by +jupyter
-    #(python38.withPackages(ps: with ps; [jupyter]))
+      # mainly for Emacs
+      clang
+      ccls
+      rnix-lsp
+      # any less than medium isn't guaranteed to work
+      texlive.combined.scheme-full
+      # required by +jupyter
+      #(python38.withPackages(ps: with ps; [jupyter]))
 
-    # Emacs + Python
-    (python310.withPackages (ps: with ps; [
-      ipython
-      pyflakes
-      black
-      pytest
-      nose
-      isort
-      # Latex source code highlighting
-      pygments
-    ]))
+      # Emacs + Python
+      (python310.withPackages (ps: with ps; [
+        ipython
+        pyflakes
+        black
+        pytest
+        nose
+        isort
+        # Latex source code highlighting
+        pygments
+      ]))
 
-    conda
-    ispell
-    pandoc
-    tectonic
-    gnuplot
-    graphviz
-    cmake
-    shellcheck
-    editorconfig-core-c
-    nodejs
-    nixfmt
-    nodePackages.mermaid-cli
-    micromamba
+      conda
+      ispell
+      pandoc
+      tectonic
+      gnuplot
+      graphviz
+      cmake
+      shellcheck
+      editorconfig-core-c
+      nodejs
+      nixfmt
+      nodePackages.mermaid-cli
+      micromamba
+    ]
+    (import ../../profiles/font-list.nix pkgs)
   ];
   services.emacs = {
     enable = true;
