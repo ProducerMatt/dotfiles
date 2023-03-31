@@ -14,7 +14,7 @@
       (modulesPath + "/installer/scan/not-detected.nix")
       profiles.fonts
       profiles.containers
-      #profiles.ML_Nvidia
+      profiles.ML_Nvidia
       profiles.backuppc
       profiles.mysyncthing
       profiles.guix
