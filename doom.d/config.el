@@ -198,19 +198,20 @@
   (setq org-export-latex-listings 'minted)
   (when (boundp 'org-export-latex-packages-alist)
     (add-to-list 'org-export-latex-packages-alist '("" "minted")))
-  ;(when (boundp 'org-latex-compilers)
-    ;(add-to-list 'org-latex-compilers "latexmk"))
-  ;(when (boundp 'org-latex-pdf-process)
-    ;(setq org-latex-compiler "latexmk"))
+    (setq org-latex-compiler "xelatex")
+    (when (boundp 'org-latex-default-packages-alist)
+      (add-to-list 'org-latex-default-packages-alist
+                   '("" "titletoc" t)))
   (when (boundp 'org-latex-minted-langs)
     (add-to-list 'org-latex-minted-langs '(ipython "python"))
     (add-to-list 'org-latex-minted-langs '(scheme "scheme")))
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")
                                    ("linenos" "true")))
-  (when (boundp 'org-latex-pdf-process)
     (setq org-latex-pdf-process
-          '("latexmk -f -pdf -%latex -shell-escape -interaction=nonstopmode -output-directory=%o %f")))
+          ;'("latexmk -xelatex -pdfxe -verbose -gg -shell-escape -interaction=nonstopmode -output-directory=%o %f")) ; debugging
+          '("latexmk -xelatex -pdfxe -verbose -f -shell-escape -interaction=nonstopmode -output-directory=%o %f"))
+    (setq org-export-latex-hyperref-format "\\ref{%s}")
   )
 
 
@@ -273,7 +274,11 @@
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward "^\\*+ " nil t)
-      (let ((id (org-entry-get (point) "ID")))
-        (unless id
+      (let ((id (org-entry-get (point) "ID"))
+            (custom-id (org-entry-get (point) "CUSTOM-ID")))
+        (if id
+            (unless custom-id
+              (org-entry-put (point) "CUSTOM-ID" id))
           (let ((new-id (org-id-new)))
-            (org-entry-put (point) "ID" new-id)))))))
+            (org-entry-put (point) "ID" new-id)
+            (org-entry-put (point) "CUSTOM-ID" new-id)))))))
