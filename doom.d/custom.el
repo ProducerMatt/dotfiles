@@ -9,9 +9,9 @@
      (org-publish-project-alist
       ("SICP-Answers" :base-directory "~/SICP-group" :publishing-function org-latex-export-to-pdf :makeindex t))
      (org-publish-project-alist quote
-                                (("SICP-Answers" :base-directory "~/SICP-group" :publishing-function org-latex-export-to-pdf :makeindex t)))
+      (("SICP-Answers" :base-directory "~/SICP-group" :publishing-function org-latex-export-to-pdf :makeindex t)))
      (org-publish-project-alist quote
-                                (("SICP-Answers" :base-directory "~/SICP-group" :publishing-function ox-latex-export :makeindex t)))
+      (("SICP-Answers" :base-directory "~/SICP-group" :publishing-function ox-latex-export :makeindex t)))
      (org-update-heading-mod-times . t)
      (org-use-property-inheritance . t)
      (org-use-property-inheritance "header-args")
