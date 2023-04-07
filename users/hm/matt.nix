@@ -110,6 +110,8 @@ in
     REALNAME = "ProducerMatt";
     EMAIL = "ProducerMatt42@gmail.com";
     KEYID = "E6EA80E5CB3E1F9C";
+    TERM = "xterm-direct";
+    COLORTERM = "truecolor";
 
     EDITOR = start_emacs;
     VISUAL = start_emacs;
@@ -231,5 +233,18 @@ in
         (ice-9 pretty-print))
       (activate-readline)
     '';
+    #"xterm-24bit.terminfo" = {
+    #  text = ''
+    #    xterm-emacs|xterm with 24-bit direct color mode for Emacs,
+    #    use=xterm-256color,
+    #    setb24=\E[48\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&\
+    #      %d\:%p1%{255}%&%dm,
+    #    setf24=\E[38\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&\
+    #      %d\:%p1%{255}%&%dm,
+    #  '';
+    #  onChange = ''
+    #    tic -x -o ~/.terminfo xterm-24bit.terminfo
+    #  '';
+    #};
   };
 }
