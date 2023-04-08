@@ -63,6 +63,8 @@ tmux_conf_theme_colour_14="#080808"   # dark gray
 tmux_conf_theme_colour_15="#080808"   # dark gray
 tmux_conf_theme_colour_16="#d70000"   # red
 tmux_conf_theme_colour_17="#e4e4e4"   # white
+tmux_conf_theme_colour_18="#af0000"   # dark red
+tmux_conf_theme_colour_19="#00875f"   # dark green
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -82,6 +84,8 @@ tmux_conf_theme_colour_17="#e4e4e4"   # white
 #tmux_conf_theme_colour_15="colour0"
 #tmux_conf_theme_colour_16="colour1"
 #tmux_conf_theme_colour_17="colour15"
+#tmux_conf_theme_colour_18="colour1"
+#tmux_conf_theme_colour_19="colour10"
 
 # window style
 tmux_conf_theme_window_fg="default"
@@ -190,14 +194,14 @@ tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub="|"
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub="|"
-#tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-#tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
-#tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-#tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+#tmux_conf_theme_left_separator_main=""
+#tmux_conf_theme_left_separator_sub="|"
+#tmux_conf_theme_right_separator_main=""
+#tmux_conf_theme_right_separator_sub="|"
+tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
+tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
+tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
+tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
 
 # status left/right content:
 #   - separate main sections with "|"
@@ -227,7 +231,7 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{username}#{root} | #{hostname} "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b , #{sysstat_cpu} #{sysstat_mem} #{sysstat_swap} , #{username}#{root} , #{hostname} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
@@ -235,8 +239,8 @@ tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colou
 tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_1,$tmux_conf_theme_colour_15"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
 # pairing indicator
@@ -390,6 +394,16 @@ tmux_conf_uninstall_plugins_on_reload=true
 #set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @continuum-restore 'on'
 set -g @plugin 'samoshkin/tmux-plugin-sysstat'
+set -g @sysstat_cpu_view_tmpl '#[fg=#{cpu.color3}]CPU:#[default] #[fg=#{cpu.color},bg=#{cpu.color2}]#{cpu.pused}#[default]'
+set -g @sysstat_cpu_color_low "$tmux_conf_theme_colour_19 default default"
+set -g @sysstat_cpu_color_medium "$tmux_conf_theme_colour_5 default default"
+set -g @sysstat_cpu_color_stress "$tmux_conf_theme_colour_7,bold $tmux_conf_theme_colour_16 $tmux_conf_theme_colour_16"
+set -g @sysstat_mem_color_low "$tmux_conf_theme_colour_19 default default"
+set -g @sysstat_mem_color_medium "$tmux_conf_theme_colour_5 default default"
+set -g @sysstat_mem_color_stress "$tmux_conf_theme_colour_7,bold $tmux_conf_theme_colour_16 $tmux_conf_theme_colour_16"
+set -g @sysstat_swap_color_low "$tmux_conf_theme_colour_19 default default"
+set -g @sysstat_swap_color_medium "$tmux_conf_theme_colour_5 default default"
+set -g @sysstat_swap_color_stress "$tmux_conf_theme_colour_7,bold $tmux_conf_theme_colour_16 $tmux_conf_theme_colour_16"
 
 # -- custom variables ----------------------------------------------------------
 
