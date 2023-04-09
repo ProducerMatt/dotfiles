@@ -119,6 +119,7 @@ in
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     package = pkgs.gitAndTools.gitFull;
     userEmail = "58014742+ProducerMatt@users.noreply.github.com";
     userName = "Producer Matt";
