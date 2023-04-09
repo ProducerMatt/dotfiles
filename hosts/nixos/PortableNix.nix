@@ -21,6 +21,7 @@
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
+      profiles.gitRepos.nixpkgs
       #profiles.virtualbox
     ];
 
