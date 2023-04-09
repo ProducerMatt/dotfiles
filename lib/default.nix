@@ -20,4 +20,12 @@ rec {
         (pnameToName)
         (x: removeAttrs x [ "date" "version" ])
       ];
+  filterAllButDefaultNix = key: value: value == "regular" && lib.hasSuffix ".nix" key && key != "default.nix";
+  rakeThisProfileFolder = folder:
+    let
+      toImport = name: value: folder + ("/" + name);
+    in
+    lib.mapAttrsToList toImport
+      (lib.filterAttrs filterAllButDefaultNix
+        (builtins.readDir folder));
 })
