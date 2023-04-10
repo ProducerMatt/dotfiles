@@ -228,11 +228,16 @@ in
 
   home.file = {
     ".guile".text = ''
+      ;; managed by flake
       (use-modules
         (ice-9 readline)
         (ice-9 format)
         (ice-9 pretty-print))
       (activate-readline)
+    '';
+    ".gdbinit".text = ''
+      // managed by flake
+      set debug-file-directory ~/.nix-profile/lib/debug
     '';
     #"xterm-24bit.terminfo" = {
     #  text = ''
