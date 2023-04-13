@@ -177,6 +177,8 @@ in
       bc # cli calculators
       imagemagickBig
       remarshal # convert between config file formats
+      nix-init
+      sd # sed alternative
 
       # mainly for Emacs
       clang
@@ -236,7 +238,7 @@ in
       (activate-readline)
     '';
     ".gdbinit".text = ''
-      // managed by flake
+      # managed by flake
       set debug-file-directory ~/.nix-profile/lib/debug
     '';
     #"xterm-24bit.terminfo" = {
