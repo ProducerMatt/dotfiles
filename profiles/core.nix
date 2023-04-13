@@ -18,7 +18,7 @@
     #nox
     niv
 
-    nur.repos.ProducerMatt.pledge
+    nur.repos.ProducerMatt.cosmo.pledge
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

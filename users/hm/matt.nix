@@ -152,7 +152,7 @@ in
       tig
       keybase
       tere
-      nur.repos.ProducerMatt.pledge
+      nur.repos.ProducerMatt.cosmo
       direnv
       nix-direnv
       git-ignore
