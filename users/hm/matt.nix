@@ -179,6 +179,7 @@ in
       remarshal # convert between config file formats
       nix-init
       sd # sed alternative
+      resolve-march-native # find appropriate compiler flags for your cpu
 
       # mainly for Emacs
       clang
