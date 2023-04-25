@@ -20,23 +20,22 @@ let
 
     # nix
     n = "nix";
-    np = "n profile";
-    ni = "np install";
-    nr = "np remove";
-    ns = "n search --no-update-lock-file";
-    nf = "n flake";
-    nepl = "n repl '<nixpkgs>'";
-    srch = "ns nixos";
-    orch = "ns override";
+    #np = "n profile";
+    #ni = "np install";
+    #nr = "np remove";
+    #ns = "n search --no-update-lock-file";
+    #nf = "n flake";
+    #nepl = "n repl '<nixpkgs>'";
+    #srch = "ns nixos";
+    #orch = "ns override";
     mn = ''
       manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix
     '';
-    top = "btm";
 
-    # sudo
-    s = "sudo -E ";
-    si = "sudo -i";
-    se = "sudoedit";
+    ## sudo
+    #s = "sudo -E ";
+    #si = "sudo -i";
+    #se = "sudoedit";
 
     # nix
     nrb = "sudo nixos-rebuild";
@@ -44,15 +43,15 @@ let
     # fix nixos-option for flake compat
     nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
 
-    # systemd
-    ctl = "systemctl";
-    stl = "s systemctl";
-    utl = "systemctl --user";
-    ut = "systemctl --user start";
-    un = "systemctl --user stop";
-    up = "s systemctl start";
-    dn = "s systemctl stop";
-    jtl = "journalctl";
+    ## systemd
+    #ctl = "systemctl";
+    #stl = "s systemctl";
+    #utl = "systemctl --user";
+    #ut = "systemctl --user start";
+    #un = "systemctl --user stop";
+    #up = "s systemctl start";
+    #dn = "s systemctl stop";
+    #jtl = "journalctl";
 
     # git
     gs = "git status";
@@ -107,6 +106,7 @@ in
   programs.gpg.enable = true;
 
   home.sessionVariables = {
+    FLAKE = ../..;
     REALNAME = "ProducerMatt";
     EMAIL = "ProducerMatt42@gmail.com";
     KEYID = "E6EA80E5CB3E1F9C";
@@ -242,18 +242,5 @@ in
       # managed by flake
       set debug-file-directory ~/.nix-profile/lib/debug
     '';
-    #"xterm-24bit.terminfo" = {
-    #  text = ''
-    #    xterm-emacs|xterm with 24-bit direct color mode for Emacs,
-    #    use=xterm-256color,
-    #    setb24=\E[48\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&\
-    #      %d\:%p1%{255}%&%dm,
-    #    setf24=\E[38\:2\:\:%p1%{65536}%/%d\:%p1%{256}%/%{255}%&\
-    #      %d\:%p1%{255}%&%dm,
-    #  '';
-    #  onChange = ''
-    #    tic -x -o ~/.terminfo xterm-24bit.terminfo
-    #  '';
-    #};
   };
 }
