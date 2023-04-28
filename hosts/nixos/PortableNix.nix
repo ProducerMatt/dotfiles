@@ -43,7 +43,7 @@
     enable = true;
     sound = true;
     printing = true;
-    displayLink = true;
+    displayLink = false;
     desktop = "gnome";
     autoStart = true;
     autoLogin = true;
