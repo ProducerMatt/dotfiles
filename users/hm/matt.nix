@@ -215,6 +215,7 @@ in
       nixfmt
       nodePackages.mermaid-cli
       micromamba
+      cpplint
     ]
     (import ../../profiles/font-list.nix pkgs)
   ];
