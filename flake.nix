@@ -66,6 +66,7 @@
         url = "github:foo-dogsquared/nix-overlay-guix";
         inputs.nixpkgs.follows = "nixos-22-05";
       };
+      dwarffs.url = "github:edolstra/dwarffs";
     };
 
   outputs =
@@ -80,6 +81,7 @@
     , deploy
     , nixpkgs
     , guix-overlay
+    , dwarffs
     , ...
     } @ inputs:
     let
@@ -185,7 +187,9 @@
           imports = [ (digga.lib.importHosts ./hosts/nixos) ];
           hosts = {
             /* set host-specific properties here */
-            #PortableNix = { channelName = "latest"; };
+            PortableNix = {
+              modules = [ dwarffs.nixosModules.dwarffs ];
+            };
           };
           importables = rec {
             profiles = digga.lib.rakeLeaves ./profiles // {
