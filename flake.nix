@@ -66,7 +66,7 @@
         url = "github:foo-dogsquared/nix-overlay-guix";
         inputs.nixpkgs.follows = "nixos-22-05";
       };
-      dwarffs.url = "github:edolstra/dwarffs";
+      nixseparatedebuginfod.url = "github:symphorien/nixseparatedebuginfod";
     };
 
   outputs =
@@ -81,7 +81,7 @@
     , deploy
     , nixpkgs
     , guix-overlay
-    , dwarffs
+    , nixseparatedebuginfod
     , ...
     } @ inputs:
     let
@@ -188,7 +188,7 @@
           hosts = {
             /* set host-specific properties here */
             PortableNix = {
-              modules = [ dwarffs.nixosModules.dwarffs ];
+              modules = [ nixseparatedebuginfod.nixosModules.default ];
             };
           };
           importables = rec {
