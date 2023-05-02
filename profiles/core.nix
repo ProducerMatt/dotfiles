@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     comma # get any arbitrary program
+    tmux
     vim
     wget
     git

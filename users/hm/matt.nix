@@ -1,4 +1,4 @@
-{ pkgs, self, lib, ... }:
+{ pkgs, self, lib, suites, profiles, ... }:
 let
   start_emacs = "emacsclient -c -a 'emacs'";
   myAliases = {
@@ -59,21 +59,13 @@ let
   };
 in
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  # https://github.com/NixOS/nixpkgs/issues/196651
-  manual.manpages.enable = false;
-
+  imports =
+    suites.base ++
+    suites.dev ++
+    suites.graphical;
   home.username = "matt";
   home.homeDirectory = "/home/matt";
   home.stateVersion = "22.05";
-
-  programs.nix-index = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-  };
 
   programs.fish = {
     enable = true;
@@ -81,7 +73,6 @@ in
       map (plugin: (lib.our.cleanForFish pkgs.sources."${plugin}"))
         [
           "fish-abbreviation-tips"
-          "fzf"
           "jethrokuan-z"
           "nvmfish"
           "replayfish"
@@ -92,15 +83,6 @@ in
     enable = true;
     initExtra = builtins.readFile ./bash_prompt.sh;
     shellAliases = myAliases;
-  };
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
   };
 
   programs.gpg.enable = true;
@@ -118,15 +100,9 @@ in
   };
 
   programs.git = {
-    enable = true;
-    lfs.enable = true;
     package = pkgs.gitAndTools.gitFull;
     userEmail = "58014742+ProducerMatt@users.noreply.github.com";
     userName = "Producer Matt";
-    extraConfig = {
-      init = { defaultBranch = "main"; };
-      pull = { rebase = false; }; # setting to true was a mistake
-    };
   };
 
   home.packages = with pkgs; builtins.concatLists [
@@ -139,33 +115,22 @@ in
       kitty
       fish
       exa
-      fd
-      ripgrep
       ripgrep-all
       croc
       p7zip
       psmisc
-      tmux
       bat
-      git-crypt
       passphrase2pgp
-      tig
       keybase
       tere
       nur.repos.ProducerMatt.cosmo
-      direnv
-      nix-direnv
-      git-ignore
       cachix
-      nixpkgs-review
       rlwrap
       httrack
       libressl
       hugo
-      manix # cli package & docs search
-      nur.repos.ProducerMatt.ripsecrets
       nodePackages.pnpm
-      ttfautohint
+      nixpkgs-review
       bind.dnsutils
       metadata-cleaner
       stdenv
@@ -217,7 +182,6 @@ in
       micromamba
       cpplint
     ]
-    (import ../../profiles/font-list.nix pkgs)
   ];
   services.emacs = {
     enable = true;
@@ -225,10 +189,6 @@ in
     defaultEditor = true;
   };
   programs.vim.package = pkgs.vimHugeX;
-
-  fonts = {
-    fontconfig.enable = true;
-  };
 
   home.file = {
     ".guile".text = ''
