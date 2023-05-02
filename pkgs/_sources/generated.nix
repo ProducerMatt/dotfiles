@@ -39,15 +39,15 @@
   };
   nvmfish = {
     pname = "nvmfish";
-    version = "9db8eaf6e3064a962bca398edd42162f65058ae8";
+    version = "c69e5d1017b21bcfca8f42c93c7e89fff6141a8a";
     src = fetchFromGitHub ({
       owner = "jorgebucaran";
       repo = "nvm.fish";
-      rev = "9db8eaf6e3064a962bca398edd42162f65058ae8";
+      rev = "c69e5d1017b21bcfca8f42c93c7e89fff6141a8a";
       fetchSubmodules = false;
-      sha256 = "sha256-LkCpij6i5XEkZGYLx9naO/cnbkUCuemypHwTjvfDzuk=";
+      sha256 = "sha256-LV5NiHfg4JOrcjW7hAasUSukT43UBNXGPi1oZWPbnCA=";
     });
-    date = "2022-06-22";
+    date = "2023-04-30";
   };
   replayfish = {
     pname = "replayfish";
