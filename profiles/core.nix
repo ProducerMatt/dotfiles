@@ -18,6 +18,7 @@
     nixos-generators
     #nox
     niv
+    parallel # xargs but multi-core
 
     nur.repos.ProducerMatt.cosmo.pledge
   ];
