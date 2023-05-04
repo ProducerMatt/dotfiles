@@ -1,8 +1,4 @@
-{ config
-, lib
-, pkgs
-, ...
-} @ args:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.services.mattsDesktop;
@@ -20,7 +16,6 @@ in
     };
     autoStart = mkEnableOption "Start the GUI on boot";
     autoLogin = mkEnableOption "Autologin to the Desktop";
-    stylixEnable = mkEnableOption "Enable stylix (assuming it's been passed)";
   };
   config = with lib; mkIf cfg.enable (mkMerge [
     (mkIf (cfg.desktop == "plasma") {
@@ -205,8 +200,5 @@ in
       # Enable CUPS to print documents.
       services.printing.enable = true;
     })
-    (mkIf cfg.stylixEnable
-      ({ stylix.homeManagerIntegration.followSystem = false; } //
-        (import ./stylix.nix args)))
   ]);
 }
