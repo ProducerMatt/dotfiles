@@ -47,6 +47,7 @@
     desktop = "gnome";
     autoStart = true;
     autoLogin = true;
+    stylixEnable = true;
   };
 
   services.mattsRemoteAccess = {

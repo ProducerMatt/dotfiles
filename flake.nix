@@ -67,6 +67,13 @@
         inputs.nixpkgs.follows = "nixos-22-05";
       };
       nixseparatedebuginfod.url = "github:symphorien/nixseparatedebuginfod";
+      stylix = {
+        url = "github:danth/stylix";
+        inputs = {
+          nixpkgs.follows = "latest";
+          home-manager.follows = "home";
+        };
+      };
     };
 
   outputs =
@@ -82,6 +89,7 @@
     , nixpkgs
     , guix-overlay
     , nixseparatedebuginfod
+    , stylix
     , ...
     } @ inputs:
     let
@@ -181,6 +189,7 @@
                   system.configurationRevision = flakeVersion.rev;
                 })
                 nur-modules.repos.ProducerMatt.modules.apeLoader
+                stylix.nixosModules.stylix
               ];
           };
 
@@ -238,7 +247,9 @@
 
         home = {
           #imports = [ (digga.lib.importExportableModules ./users/modules) ];
-          modules = [ ];
+          modules = [
+            stylix.homeManagerModules.stylix
+          ];
           importables = rec {
             profiles = digga.lib.rakeLeaves ./users/profiles;
             suites = with profiles; rec {
