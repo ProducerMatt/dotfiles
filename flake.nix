@@ -180,6 +180,10 @@
                   '';
                   system.configurationRevision = flakeVersion.rev;
                 })
+                ({ lib, ... }: {
+                  options.myConstants = lib.mkOption
+                    { internal = true; default = import ./constants.nix; };
+                })
                 nur-modules.repos.ProducerMatt.modules.apeLoader
               ];
           };

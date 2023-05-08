@@ -120,7 +120,15 @@
 
   networking = {
     hostName = "PortableNix";
-    networkmanager.enable = true;
+    interfaces.enp112s0 = {
+      useDHCP = false;
+      ipv4.addresses = map
+        (attr: lib.filterAttrs (name: value: (name == "address") || (name == "prefixLength")) attr)
+        config.myConstants.machines.PortableNix.IPv4;
+    };
+    defaultGateway = "192.168.1.1";
+    nameservers = config.myConstants.net.home.DNS;
+    #    networkmanager.enable = true;
     wireguard.interfaces =
       import ../../secrets/wg-PortableNix.nix {
         privateKeyPath =
