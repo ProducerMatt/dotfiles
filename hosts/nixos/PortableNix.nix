@@ -118,16 +118,17 @@
   boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".device = "/dev/disk/by-uuid/90dc3598-b566-4723-8c36-ba6110d2bd98";
   boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".keyFile = "/crypto_keyfile.bin";
 
+  services.mattsNetwork.hostname = "PortableNix";
   networking = {
-    hostName = "PortableNix";
-    interfaces.enp112s0 = {
-      useDHCP = false;
-      ipv4.addresses = map
-        (attr: lib.filterAttrs (name: value: (name == "address") || (name == "prefixLength")) attr)
-        config.myConstants.machines.PortableNix.IPv4;
-    };
-    defaultGateway = "192.168.1.1";
-    nameservers = config.myConstants.net.home.DNS;
+    #    hostName = "PortableNix";
+    #    interfaces.enp112s0 = {
+    #      useDHCP = false;
+    #      ipv4.addresses = map
+    #        (attr: lib.filterAttrs (name: value: (name == "address") || (name == "prefixLength")) attr)
+    #        config.myConstants.machines.PortableNix.IPv4;
+    #    };
+    #    defaultGateway = "192.168.1.1";
+    #    nameservers = config.myConstants.net.home.DNS;
     #    networkmanager.enable = true;
     wireguard.interfaces =
       import ../../secrets/wg-PortableNix.nix {
