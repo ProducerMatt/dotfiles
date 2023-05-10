@@ -1,4 +1,5 @@
-with builtins;
+{ lib }:
+with builtins; with lib;
 
 let
   getTaggedIPs = wantedTag: list: filter (x: any (t: t == wantedTag) x.tags) list;
@@ -11,10 +12,11 @@ rec {
   net.home = {
     DNS = netIPv4addrs machines "home" [ "apu4vpn" "Pi4OpenBSD" ];
     gateway = "192.168.1.1";
+    postfix = ".local";
   };
   machines = {
     PortableNix = {
-      net = net.home;
+      net = "home";
       IPv4 = [
         {
           address = "192.168.1.5";
@@ -26,6 +28,7 @@ rec {
       ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEzedljAnnwHwDno7cVfShZN2D3Dt5SwAWYUlLex/2Yg";
     };
     apu4vpn = {
+      net = "home";
       IPv4 = [
         {
           address = "192.168.1.16";
@@ -36,6 +39,7 @@ rec {
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQtRcU6x6Ot7IFF5N+ecpOofQnQ5GaZMCcWaECyal0w";
     };
     Pi4OpenBSD = {
+      net = "home";
       IPv4 = [
         {
           address = "192.168.1.61";
@@ -46,6 +50,7 @@ rec {
       ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPaVb1exjSJZbRyyC7l0bHCKp8VXJIhcafG4x3SdQlEM";
     };
     BabyDell = {
+      net = "home";
       IPv4 = [
         {
           address = "192.168.1.9";
@@ -58,7 +63,7 @@ rec {
 
     # outside
     github = {
-      DNS.public = [ "github.com" ];
+      DNS = [ "github.com" ];
       ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
       tags = [ "outside" ];
     };

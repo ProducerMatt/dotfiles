@@ -182,7 +182,11 @@
                 })
                 ({ lib, ... }: {
                   options.myConstants = lib.mkOption
-                    { internal = true; default = import ./constants.nix; };
+                    {
+                      internal = true;
+                      default =
+                        import ./constants.nix { inherit lib; };
+                    };
                 })
                 nur-modules.repos.ProducerMatt.modules.apeLoader
               ];

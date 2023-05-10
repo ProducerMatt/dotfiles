@@ -1,12 +1,20 @@
 { config, lib, pkgs, ... }:
 
-let
+with builtins; with lib; let
   cfg = config.services.mattsNetwork;
   myConstants = config.myConstants;
-  wantedAttrs = listOfNames: a:
-    lib.filterAttrs (n: v: lib.any (name: n == name) listOfNames) a;
-  recUpdateList = listOfAttrs:
-    builtins.foldl' lib.recursiveUpdate { } listOfAttrs;
+  getIPsAndAssignToIFs =
+    machine: wantedIF: {
+      ${wantedIF} = {
+        useDHCP = false;
+        ipv4.addresses =
+          (map (our.wantedAttrs [ "address" "prefixLength" ])
+            (filter
+              (i: (hasAttr "interface" i
+                && i.interface == wantedIF))
+              machine.IPv4));
+      };
+    };
 in
 {
   options.services.mattsNetwork = with builtins; with lib; {
@@ -18,35 +26,36 @@ in
   };
   #options.myConstants = lib.mkOption
   #  { internal = true; default = myConstants; };
-  config = with lib; mkIf (cfg.hostname != null) (
+  config = mkIf (cfg.hostname != null) (
     let
       this = myConstants.machines.${cfg.hostname};
     in
     {
       networking = {
-        defaultGateway = this.net.gateway;
-        nameservers = this.net.DNS;
+        defaultGateway = myConstants.net.${this.net}.gateway;
+        nameservers = myConstants.net.${this.net}.DNS;
         hostName = cfg.hostname;
         interfaces = #recursiveUpdate
           (if ((hasAttr "IPv4" this) &&
             any (hasAttr "interface") this.IPv4)
           then
             let ifs = catAttrs "interface" this.IPv4;
-            in recUpdateList (map
-              (wantedIF: {
-                ${wantedIF} = {
-                  useDHCP = false;
-                  ipv4.addresses =
-                    (map (wantedAttrs [ "address" "prefixLength" ])
-                      (filter
-                        (i: (hasAttr "interface" i
-                          && i.interface == wantedIF))
-                        this.IPv4));
-                };
-              })
-              ifs)
+            in our.recUpdateList (map (getIPsAndAssignToIFs this) ifs)
           else
             { });
+        hosts =
+          # needed: attrset of IPs and lists of hostnames
+          zipAttrs
+            (flatten
+              (mapAttrsToList
+                (name: value:
+                  let
+                    ips =
+                      (flatten (catAttrs "address"
+                        (our.getTaggedIPs this.net value.IPv4)));
+                  in
+                  map (ip: { ${ip} = "${name}.local"; }) ips)
+                (filterAttrs (n: v: v ? IPv4) myConstants.machines)));
       };
     }
   );

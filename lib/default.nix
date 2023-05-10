@@ -20,12 +20,28 @@ rec {
         (pnameToName)
         (x: removeAttrs x [ "date" "version" ])
       ];
-  filterAllButDefaultNix = key: value: value == "regular" && lib.hasSuffix ".nix" key && key != "default.nix";
+  filterAllButDefaultNix = key: value:
+    value == "regular" && hasSuffix ".nix" key && key != "default.nix";
   rakeThisProfileFolder = folder:
     let
       toImport = name: value: folder + ("/" + name);
     in
-    lib.mapAttrsToList toImport
-      (lib.filterAttrs filterAllButDefaultNix
-        (builtins.readDir folder));
+    mapAttrsToList toImport
+      (filterAttrs filterAllButDefaultNix
+        (readDir folder));
+  wantedAttrs = listOfNames: a:
+    # return only the Attrs in the list of attrs
+    filterAttrs (n: v: any (name: n == name) listOfNames) a;
+  recUpdateList = listOfAttrs:
+    # take list of attrs and merge them all
+    foldl' recursiveUpdate { } listOfAttrs;
+
+  # made for constants.nix
+  getTaggedIPs = wantedTag: list:
+    filter (x: any (t: t == wantedTag) x.tags) list;
+  netIPv4addrs = machineset: tag: wantedMachines:
+    catAttrs "address" (concatMap
+      (machine:
+        (getTaggedIPs tag machineset.${machine}.IPv4))
+      wantedMachines);
 })
