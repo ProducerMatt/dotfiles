@@ -145,6 +145,7 @@ in
       nix-init
       sd # sed alternative
       resolve-march-native # find appropriate compiler flags for your cpu
+      nix-diff
 
       # mainly for Emacs
       clang
