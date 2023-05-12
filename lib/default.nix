@@ -49,4 +49,7 @@ rec {
       (machine:
         (getTaggedIPs tag machineset.${machine}.IPv4))
       wantedMachines);
+  sameNetwork = m1: m2:
+    (m1 ? net) && (m2 ? net) &&
+    m1.net == m2.net;
 })

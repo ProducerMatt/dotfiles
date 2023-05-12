@@ -64,9 +64,12 @@ in
               myConstants.machines;
         in
         mapAttrs'
-          (machine: v:
+          (machineName: v:
             let
-              topname = if v ? DNS then head v.DNS else "${machine}.local";
+              topname =
+                if v ? DNS then head v.DNS else
+                if (our.sameNetwork v this) then "${machineName}.local"
+                else abort "machines not of the same network: ${cfg.hostname} and ${machineName}";
             in
             nameValuePair topname
               ({ publicKey = v.ssh.public; }
