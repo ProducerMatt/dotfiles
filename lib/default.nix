@@ -37,6 +37,11 @@ rec {
     foldl' recursiveUpdate { } listOfAttrs;
 
   # made for constants.nix
+  getAllMachineIPs = machine:
+    (optionals (machine ? IPv4)
+      (catAttrs "address" machine.IPv4)) ++
+    (optionals (machine ? IPv6)
+      (catAttrs "address" machine.IPv6));
   getTaggedIPs = wantedTag: list:
     filter (x: any (t: t == wantedTag) x.tags) list;
   netIPv4addrs = machineset: tag: wantedMachines:

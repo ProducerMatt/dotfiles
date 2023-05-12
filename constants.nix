@@ -36,7 +36,7 @@ rec {
           tags = [ "home" ];
         }
       ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQtRcU6x6Ot7IFF5N+ecpOofQnQ5GaZMCcWaECyal0w";
+      ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQtRcU6x6Ot7IFF5N+ecpOofQnQ5GaZMCcWaECyal0w";
     };
     Pi4OpenBSD = {
       net = "home";

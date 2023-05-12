@@ -57,6 +57,25 @@ in
                   map (ip: { ${ip} = "${name}.local"; }) ips)
                 (filterAttrs (n: v: v ? IPv4) myConstants.machines)));
       };
+      programs.ssh.knownHosts =
+        let
+          hostsToKnow =
+            filterAttrs (n: v: v ? ssh && v.ssh ? public)
+              myConstants.machines;
+        in
+        mapAttrs'
+          (machine: v:
+            let
+              topname = if v ? DNS then head v.DNS else "${machine}.local";
+            in
+            nameValuePair topname
+              ({ publicKey = v.ssh.public; }
+                // {
+                extraHostNames =
+                  (optionals (v ? DNS) (tail v.DNS))
+                    ++ (our.getAllMachineIPs v);
+              }))
+          hostsToKnow;
     }
   );
 }
