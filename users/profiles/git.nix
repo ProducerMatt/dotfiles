@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  getSnippet = s: import (builtins.toPath "../../snippets/${s}.nix") pkgs;
+in
 {
   programs.git = {
     enable = true;
@@ -9,10 +12,5 @@
       pull = { rebase = false; }; # setting to true was a mistake
     };
   };
-  home.packages = with pkgs; [
-    git-crypt
-    tig
-    git-ignore
-    nur.repos.ProducerMatt.ripsecrets
-  ];
+  home.packages = getSnippet "dev";
 }

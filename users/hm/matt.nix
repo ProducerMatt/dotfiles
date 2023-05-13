@@ -1,5 +1,6 @@
 { pkgs, self, lib, suites, profiles, ... }:
 let
+  getSnippet = s: import (builtins.toPath "../../snippets/${s}.nix") pkgs;
   start_emacs = "emacsclient -c -a 'emacs'";
   myAliases = {
     l = "exa";
