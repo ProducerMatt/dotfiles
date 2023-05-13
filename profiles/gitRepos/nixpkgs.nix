@@ -43,7 +43,7 @@ in
     serviceConfig.DynamicUser = true;
     serviceConfig.Group = "nixpkgs";
     serviceConfig.ReadWritePaths = "/var/lib/git/nixpkgs.git";
-    serviceConfig.ExecStart = "${pkgs.gitMinimal}/bin/git --git-dir /var/lib/git/nixpkgs.git fetch";
+    serviceConfig.ExecStart = "${pkgs.gitAndTools}/bin/git --git-dir /var/lib/git/nixpkgs.git fetch";
     serviceConfig.Type = "oneshot";
     serviceConfig.UMask = "0002";
   };
