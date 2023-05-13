@@ -1,6 +1,7 @@
 pkgs:
 
 with pkgs; [
+  emacs28NativeComp
   nixos-generators
   #nox
   niv
