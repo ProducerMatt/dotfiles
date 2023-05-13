@@ -13,8 +13,6 @@ with pkgs; [
   vim
   bat
   wget
-  git
-  nano
   fd
   ripgrep
   aria2

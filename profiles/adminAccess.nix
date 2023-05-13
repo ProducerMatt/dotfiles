@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 
+let
+  getSnippet = s: import (../snippets + "/${s}.nix") pkgs;
+in
 {
-  home.packages = with pkgs; builtins.concatLists [
+  environment.systemPackages = with pkgs; builtins.concatLists [
     (getSnippet "base_cli")
     (getSnippet "dev")
     (getSnippet "sysadmin")

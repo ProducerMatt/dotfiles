@@ -12,5 +12,5 @@ in
       pull = { rebase = false; }; # setting to true was a mistake
     };
   };
-  home.packages = getSnippet "dev";
+  home.packages = getSnippet "git";
 }
