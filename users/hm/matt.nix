@@ -1,6 +1,6 @@
 { pkgs, self, lib, suites, profiles, ... }:
 let
-  getSnippet = s: import (../../snippets + "/${s}.nix") pkgs;
+  getSnippet = lib.our.getPkgSnippet pkgs;
   start_emacs = "emacsclient -c -a 'emacs'";
   myAliases = {
     l = "exa";

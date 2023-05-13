@@ -36,6 +36,8 @@ rec {
     # take list of attrs and merge them all
     foldl' recursiveUpdate { } listOfAttrs;
 
+  getPkgSnippet = pkgs: s: import (../snippets + "/${s}.nix") pkgs;
+
   # made for constants.nix
   getAllMachineIPs = machine:
     (optionals (machine ? IPv4)
