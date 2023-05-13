@@ -1,6 +1,6 @@
 { pkgs, self, lib, suites, profiles, ... }:
 let
-  getSnippet = s: import (builtins.toPath "../../snippets/${s}.nix") pkgs;
+  getSnippet = s: import (../../snippets + "/${s}.nix") pkgs;
   start_emacs = "emacsclient -c -a 'emacs'";
   myAliases = {
     l = "exa";
@@ -107,46 +107,29 @@ in
   };
 
   home.packages = with pkgs; builtins.concatLists [
+    (getSnippet "base_cli")
+    (getSnippet "dev")
+    (getSnippet "sysadmin")
+    (getSnippet "git")
     [
-      vimHugeX
-      htop # top alternative
-      bottom # top alternative
-      emacs28NativeComp
       #firefox
-      kitty
-      fish
-      exa
       ripgrep-all
-      croc
-      p7zip
       psmisc
-      bat
       passphrase2pgp
       keybase
-      tere
       nur.repos.ProducerMatt.cosmo
       cachix
       rlwrap
       httrack
-      libressl
       hugo
       nodePackages.pnpm
-      nixpkgs-review
-      bind.dnsutils
       metadata-cleaner
-      stdenv
-      gnumake
       #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
-      lsof # list files and sockets in use
       nodePackages.node2nix # node packages to nix packages
       nodePackages.browser-sync # live-reloading dev server
       bc # cli calculators
       imagemagickBig
-      remarshal # convert between config file formats
-      nix-init
       sd # sed alternative
-      resolve-march-native # find appropriate compiler flags for your cpu
-      nix-diff
 
       # mainly for Emacs
       clang
@@ -179,7 +162,6 @@ in
       shellcheck
       editorconfig-core-c
       nodejs
-      nixfmt
       nodePackages.mermaid-cli
       micromamba
       cpplint

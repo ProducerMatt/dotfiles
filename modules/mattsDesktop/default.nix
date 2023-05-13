@@ -18,6 +18,11 @@ in
     autoLogin = mkEnableOption "Autologin to the Desktop";
   };
   config = with lib; mkIf cfg.enable (mkMerge [
+    {
+      environment.packages = [
+        kitty
+      ];
+    }
     (mkIf (cfg.desktop == "plasma") {
       # Enable the X11 windowing system.
       services.xserver = {

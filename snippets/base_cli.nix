@@ -1,9 +1,17 @@
 pkgs:
 
 with pkgs; [
+  coreutils
+  croc
+  exa
+  fish
+  htop # top alternative
+  bottom # top alternative
   comma # get any arbitrary program
+  p7zip
   tmux
   vim
+  bat
   wget
   git
   nano
@@ -12,4 +20,7 @@ with pkgs; [
   aria2
   libressl
   parallel # xargs but multi-core
+  tere
+  bind.dnsutils
+  lsof # list files and sockets in use
 ]

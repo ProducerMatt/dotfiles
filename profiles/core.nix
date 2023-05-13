@@ -1,12 +1,11 @@
 { config, pkgs, lib, ... }:
 
 let
-  getSnippet = s: import (builtins.toPath "../snippets/${s}.nix") pkgs;
+  getSnippet = s: import (../snippets + "/${s}.nix") pkgs;
 in
 {
-  environment.systemPackages = with pkgs;
-    (getSnippet "base_cli")
-    ++ (getSnippet "sysadmin");
+  environment.systemPackages =
+    (getSnippet "base_cli");
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

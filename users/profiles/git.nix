@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  getSnippet = s: import (builtins.toPath "../../snippets/${s}.nix") pkgs;
+  getSnippet = s: import (../../snippets + "/${s}.nix") pkgs;
 in
 {
   programs.git = {
