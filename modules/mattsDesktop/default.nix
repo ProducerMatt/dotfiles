@@ -19,7 +19,7 @@ in
   };
   config = with lib; mkIf cfg.enable (mkMerge [
     {
-      environment.packages = [
+      environment.systemPackages = with pkgs; [
         kitty
       ];
     }
