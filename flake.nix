@@ -28,6 +28,7 @@
       digga.inputs.nixlib.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
+      digga.inputs.flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
       home.url = "github:nix-community/home-manager/release-22.11";
       home.inputs.nixpkgs.follows = "nixos";
