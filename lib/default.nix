@@ -4,6 +4,12 @@ with builtins; with lib; let
   callLibs = file: import file { lib = self; };
 in
 rec {
+  optionalAttrs =
+    # Condition under which the `as` attribute set is returned.
+    cond:
+    # The attribute set to return if `cond` is `true`.
+    as:
+    if cond then as else { };
   descendOne = f: mapAttrs (n: v: f v);
   pnameToName = L:
     (mapAttrs' (name: value:

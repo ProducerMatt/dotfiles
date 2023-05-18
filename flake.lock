@@ -297,26 +297,6 @@
         "type": "github"
       }
     },
-    "guix-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "nixos-22-05"
-        ]
-      },
-      "locked": {
-        "lastModified": 1671581861,
-        "narHash": "sha256-tj6mhEHpvVXz38DtnYytq9IzWm0qX/ie0IuPyLkQUe4=",
-        "owner": "foo-dogsquared",
-        "repo": "nix-overlay-guix",
-        "rev": "6ea748a541fa994058de94903fd1adaa3e1f6a8a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "foo-dogsquared",
-        "repo": "nix-overlay-guix",
-        "type": "github"
-      }
-    },
     "home": {
       "inputs": {
         "nixpkgs": [
@@ -687,7 +667,6 @@
         "darwin": "darwin_2",
         "deploy": "deploy",
         "digga": "digga",
-        "guix-overlay": "guix-overlay",
         "home": "home",
         "latest": "latest",
         "mynur": "mynur",

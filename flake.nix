@@ -63,10 +63,10 @@
       mynur = {
         url = "github:ProducerMatt/my-nur-pkgs";
       };
-      guix-overlay = {
-        url = "github:foo-dogsquared/nix-overlay-guix";
-        inputs.nixpkgs.follows = "nixos-22-05";
-      };
+      #guix-overlay = {
+      #  url = "github:foo-dogsquared/nix-overlay-guix";
+      #  inputs.nixpkgs.follows = "nixos-22-05";
+      #};
       nixseparatedebuginfod.url = "github:symphorien/nixseparatedebuginfod";
     };
 
@@ -81,7 +81,7 @@
     , nvfetcher
     , deploy
     , nixpkgs
-    , guix-overlay
+      #, guix-overlay
     , nixseparatedebuginfod
     , ...
     } @ inputs:
@@ -95,6 +95,12 @@
         shortRev = (self.shortRev or "dirty");
         revCount = (self.revCount or "dirty");
       };
+      optionalAttrs =
+        # Condition under which the `as` attribute set is returned.
+        cond:
+        # The attribute set to return if `cond` is `true`.
+        as:
+        if cond then as else { };
     in
     digga.lib.mkFlake
       {
@@ -116,7 +122,7 @@
               in
               [
                 nur-modules.repos.ProducerMatt.overlays.mosh-unset-tty
-                guix-overlay.overlays.default
+                #guix-overlay.overlays.default
               ];
           };
           nixpkgs-darwin-stable = {
@@ -126,7 +132,7 @@
               # `importOverlays` will import everything under the path given
               (channels: final: prev: {
                 inherit (channels.latest) mas;
-              } // prev.lib.optionalAttrs true { })
+              } // optionalAttrs true { })
             ];
           };
           latest = { };
@@ -145,7 +151,7 @@
           nur.overlay
           agenix.overlays.default
           nvfetcher.overlays.default
-          guix-overlay.overlays.default
+          #guix-overlay.overlays.default
           (final: prev: {
             latest = nixpkgs;
           })

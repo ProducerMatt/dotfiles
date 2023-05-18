@@ -17,7 +17,7 @@
       profiles.ML_Nvidia
       profiles.backuppc
       profiles.mysyncthing
-      profiles.guix
+      #profiles.guix
       profiles.sicp
       profiles.homeNetwork
       profiles.earlyOOM
