@@ -170,7 +170,6 @@ in
   services.emacs = {
     enable = true;
     package = pkgs.emacs28NativeComp;
-    defaultEditor = true;
   };
   programs.vim.package = pkgs.vimHugeX;
 
