@@ -10,7 +10,7 @@
   inputs =
     {
       # Track channels with commits tested and built by hydra
-      nixos.url = "github:nixos/nixpkgs/nixos-22.11";
+      nixos.url = "github:nixos/nixpkgs/nixos-23.05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
       nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
       # For darwin hosts: it can be helpful to track this darwin-specific stable
@@ -19,7 +19,7 @@
       # But, perhaps even more usefully, it provides a place for adding
       # darwin-specific overlays and packages which could otherwise cause build
       # failures on Linux systems.
-      nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
+      nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
 
       nur.url = "github:nix-community/nur";
 
@@ -30,8 +30,10 @@
       digga.inputs.deploy.follows = "deploy";
       digga.inputs.flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
-      home.url = "github:nix-community/home-manager/release-22.11";
+      home.url = "github:nix-community/home-manager/release-23.05";
       home.inputs.nixpkgs.follows = "nixos";
+      home-latest.url = "github:nix-community/home-manager/master";
+      home-latest.inputs.nixpkgs.follows = "latest";
 
       darwin.url = "github:LnL7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
@@ -51,6 +53,7 @@
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       nixos-generators.url = "github:nix-community/nixos-generators";
+      nixos-generators.inputs.nixpkgs.follows = "latest";
 
       rnix-lsp = {
         url = "github:nix-community/rnix-lsp";
@@ -75,6 +78,7 @@
     , digga
     , nixos
     , home
+    , home-latest
     , nixos-hardware
     , nur
     , agenix
@@ -177,7 +181,7 @@
                 { lib.our = self.lib; }
                 digga.nixosModules.bootstrapIso
                 digga.nixosModules.nixConfig
-                home.nixosModules.home-manager
+                home-latest.nixosModules.home-manager
                 agenix.nixosModules.age
                 ({ pkgs, config, ... }: {
                   users.motd = ''
