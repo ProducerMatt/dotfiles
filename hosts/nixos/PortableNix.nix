@@ -19,7 +19,7 @@
       profiles.mysyncthing
       #profiles.guix
       profiles.sicp
-      profiles.homeNetwork
+      #profiles.homeNetwork
       profiles.earlyOOM
       profiles.gitRepos.nixpkgs
       profiles.adminAccess
@@ -30,14 +30,6 @@
     gcc.arch = "skylake";
     gcc.tune = "skylake";
     system = "x86_64-linux";
-  };
-
-  # My Nix desktop is becoming unresponsive, only breaking free once the
-  # OOM-killer kicks in. But this can take a _long_ time. Let's get aggressive.
-  services.earlyoom = {
-    enable = true;
-    freeMemThreshold = 15; # <%15 free ram
-    freeSwapThreshold = 50; # <%50 free swap
   };
 
   services.mattsDesktop = {
@@ -58,8 +50,6 @@
     enable = false;
     mode = "workaround";
   };
-
-  services.hardenedUnbound.enable = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
@@ -95,16 +85,6 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
-
-  #programs.apeloader.enable = true;
-  ## APE helper (not ape loader)
-  #boot.binfmt.registrations = {
-  #  "APE" = {
-  #    recognitionType = "magic";
-  #    magicOrExtension = "MZqFpD";
-  #    interpreter = "${pkgs.bash}/bin/sh";
-  #  };
-  #};
 
   # Setup keyfile
   boot.initrd.secrets = {
