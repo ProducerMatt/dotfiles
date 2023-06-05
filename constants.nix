@@ -60,37 +60,6 @@ rec {
       ];
       ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFuvDGtyzI0wFZgIREiJsjddnrnv8dZQI0choswy4qmW";
     };
-    PherigoNAS = {
-      net = "home";
-      IPv4 = [
-        {
-          address = "192.168.1.3";
-          prefixLength = 16;
-          tags = [ "home" ];
-        }
-      ];
-      ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJKaCWm/sUg2VHB6MX47Gn4/rdQD9A60F+UCJowm9jFj";
-      services = {
-        remoteFS = {
-          "/mnt/PublicNAS" = {
-            device = "PherigoNAS.local:/mnt/PherigoRAID/Public";
-            fsType = "nfs";
-            options = [
-              #      "nfsvers=3"
-              "noatime"
-            ];
-          };
-          "/mnt/MattNAS" = {
-            device = "PherigoNAS.local:/mnt/PherigoRAID/Matt";
-            fsType = "nfs";
-            options = [
-              #      "nfsvers=3"
-              "noatime"
-            ];
-          };
-        };
-      };
-    };
 
     # outside
     github = {
