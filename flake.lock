@@ -688,7 +688,31 @@
         "nixseparatedebuginfod": "nixseparatedebuginfod",
         "nur": "nur",
         "nvfetcher": "nvfetcher",
-        "rnix-lsp": "rnix-lsp"
+        "rnix-lsp": "rnix-lsp",
+        "rtx-flake": "rtx-flake"
+      }
+    },
+    "rtx-flake": {
+      "inputs": {
+        "flake-utils": [
+          "digga"
+        ],
+        "nixpkgs": [
+          "latest"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685951766,
+        "narHash": "sha256-xgUNBmHIxP0/vMBY6sYb2q8hVTzVIrKqVTVPgg8N3+I=",
+        "owner": "jdxcode",
+        "repo": "rtx",
+        "rev": "f67a62e6e3c304d88b07217c8573cd5303fbfea6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jdxcode",
+        "repo": "rtx",
+        "type": "github"
       }
     },
     "systems": {

@@ -71,6 +71,12 @@
       #  inputs.nixpkgs.follows = "nixos-22-05";
       #};
       nixseparatedebuginfod.url = "github:symphorien/nixseparatedebuginfod";
+
+      rtx-flake = {
+        url = "github:jdxcode/rtx";
+        inputs.nixpkgs.follows = "latest";
+        inputs.flake-utils.follows = "digga";
+      };
     };
 
   outputs =
@@ -87,6 +93,7 @@
     , nixpkgs
       #, guix-overlay
     , nixseparatedebuginfod
+    , rtx-flake
     , ...
     } @ inputs:
     let
@@ -163,6 +170,7 @@
           (import ./overlays/webkitgtk.nix)
 
           (import ./pkgs)
+          rtx-flake.overlay
         ];
 
         nixos = {
