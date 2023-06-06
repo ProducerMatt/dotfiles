@@ -15,6 +15,11 @@ with builtins; with lib; let
               machine.IPv4));
       };
     };
+  getRemoteFS =
+    machines: recursiveUpdate (concatMap
+      (attrByPath
+        [ "services" "remoteFS" ] [ ])
+      (attrValues machines));
 in
 {
   options.services.mattsNetwork = with builtins; with lib; {
@@ -79,6 +84,8 @@ in
                     ++ (our.getAllMachineIPs v);
               }))
           hostsToKnow;
+      fileSystems =
+        getRemoteFS myConstants.machines;
     }
   );
 }
