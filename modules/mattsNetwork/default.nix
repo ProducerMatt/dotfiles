@@ -16,9 +16,10 @@ with builtins; with lib; let
       };
     };
   getRemoteFS =
-    machines: recursiveUpdate (concatMap
+    machines: foldl' (x: y: x // y) { } (map
       (attrByPath
-        [ "services" "remoteFS" ] [ ])
+        [ "services" "remoteFS" ]
+        { })
       (attrValues machines));
 in
 {
