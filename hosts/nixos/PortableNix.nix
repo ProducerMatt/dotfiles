@@ -33,7 +33,7 @@
   };
 
   services.mattsDesktop = {
-    enable = true;
+    enable = false;
     sound = true;
     printing = true;
     displayLink = false;
@@ -43,7 +43,7 @@
   };
 
   services.mattsRemoteAccess = {
-    enable = true;
+    enable = false;
   };
 
   programs.apeLoader = {
