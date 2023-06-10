@@ -11,6 +11,11 @@ in
 {
   users.groups.nixpkgs = { };
 
+  environment.etc.gitconfig.text = ''
+    [safe]
+      directory = /var/lib/git/nixpkgs.git
+  '';
+
   systemd.tmpfiles.rules = [
     "L+ /var/lib/git/nixpkgs.git/HEAD - - - - refs/heads/master"
     "L+ /var/lib/git/nixpkgs.git/config - - - - ${writeText "config" (toGitConfig {
@@ -43,7 +48,7 @@ in
     serviceConfig.DynamicUser = true;
     serviceConfig.Group = "nixpkgs";
     serviceConfig.ReadWritePaths = "/var/lib/git/nixpkgs.git";
-    serviceConfig.ExecStart = "${pkgs.gitMinimal}/bin/git --git-dir /var/lib/git/nixpkgs.git fetch -vupP";
+    serviceConfig.ExecStart = "${pkgs.gitMinimal}/bin/git --git-dir /var/lib/git/nixpkgs.git fetch"; # -vupP";
     serviceConfig.Type = "oneshot";
     serviceConfig.UMask = "0002";
   };
