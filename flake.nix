@@ -282,7 +282,7 @@
         # TODO: similar to the above note: does it make sense to make all of
         # these users available on all systems?
         homeConfigurations = digga.lib.mergeAny
-          (digga.lib.mkHomeConfigurations self.darwinConfigurations)
+          #(digga.lib.mkHomeConfigurations self.darwinConfigurations)
           (digga.lib.mkHomeConfigurations self.nixosConfigurations)
         ;
 
