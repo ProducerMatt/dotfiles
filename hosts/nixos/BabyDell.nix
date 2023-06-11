@@ -12,6 +12,9 @@
     ];
 
   services.mattsNetwork.hostname = "BabyDell";
+  services.mattsDesktop = {
+    enable = false;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
