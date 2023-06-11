@@ -19,8 +19,6 @@
       profiles.mysyncthing
       #profiles.guix
       profiles.sicp
-      #profiles.homeNetwork
-      profiles.earlyOOM
       profiles.gitRepos.nixpkgs
       profiles.adminAccess
       #profiles.virtualbox
