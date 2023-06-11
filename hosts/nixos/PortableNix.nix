@@ -46,6 +46,8 @@
     enable = false;
   };
 
+  services.mattsNetwork.hostname = "PortableNix";
+
   programs.apeLoader = {
     enable = false;
     mode = "workaround";
@@ -99,7 +101,6 @@
   boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".device = "/dev/disk/by-uuid/90dc3598-b566-4723-8c36-ba6110d2bd98";
   boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".keyFile = "/crypto_keyfile.bin";
 
-  services.mattsNetwork.hostname = "PortableNix";
   networking = {
     #    hostName = "PortableNix";
     #    interfaces.enp112s0 = {
