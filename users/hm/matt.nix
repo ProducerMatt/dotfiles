@@ -62,8 +62,8 @@ in
 {
   imports =
     suites.base ++
-    suites.dev ++
-    suites.graphical;
+    suites.dev; # ++
+  #suites.graphical;
   home.username = "matt";
   home.homeDirectory = "/home/matt";
   home.stateVersion = "22.05";
