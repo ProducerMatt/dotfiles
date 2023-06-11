@@ -53,7 +53,7 @@ rec {
       net = "home";
       IPv4 = [
         {
-          address = "192.168.1.9";
+          address = "192.168.1.10";
           prefixLength = 16;
           tags = [ "home" ];
         }
