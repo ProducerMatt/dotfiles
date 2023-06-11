@@ -20,6 +20,9 @@
     settings = {
       auto-optimise-store = true;
       trusted-users = [ "root" "matt" ];
+      trusted-public-keys = [
+        "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
+      ];
     };
   };
   nixpkgs.config.allowUnfree = true;
