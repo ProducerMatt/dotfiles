@@ -56,6 +56,7 @@ rec {
           address = "192.168.1.10";
           prefixLength = 16;
           tags = [ "home" ];
+          interface = "enp0s31f6";
         }
       ];
       ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFuvDGtyzI0wFZgIREiJsjddnrnv8dZQI0choswy4qmW";
