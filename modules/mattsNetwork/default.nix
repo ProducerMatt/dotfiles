@@ -41,6 +41,7 @@ in
         defaultGateway = myConstants.net.${this.net}.gateway;
         nameservers = myConstants.net.${this.net}.DNS;
         hostName = cfg.hostname;
+        useDHCP = false;
         interfaces = #recursiveUpdate
           (if ((hasAttr "IPv4" this) &&
             any (hasAttr "interface") this.IPv4)
