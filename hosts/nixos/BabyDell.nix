@@ -11,6 +11,8 @@
       profiles.adminAccess
     ];
 
+  users.mutableUsers = true;
+
   services.mattsNetwork.hostname = "BabyDell";
   services.mattsDesktop = {
     enable = false;
@@ -28,13 +30,13 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/7e8f1507-0448-43e4-be57-23e4e21e8e5c";
+      device = "/dev/disk/by-uuid/d957b5e6-fbd4-42da-bf5d-b15be331ef98";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
     {
-      device = "/dev/disk/by-uuid/2C37-365F";
+      device = "/dev/disk/by-uuid/5613-4E94";
       fsType = "vfat";
     };
 
