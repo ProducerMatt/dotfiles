@@ -59,7 +59,7 @@ rec {
           interface = "enp0s31f6";
         }
       ];
-      ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFuvDGtyzI0wFZgIREiJsjddnrnv8dZQI0choswy4qmW";
+      ssh.public = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4jG9M12tFG9aJtvoU8vUB0cfDVVieVk/PyrHQbqDy+";
     };
     PherigoNAS = {
       net = "home";
