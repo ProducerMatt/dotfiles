@@ -9,9 +9,9 @@ let
     nix
     nixpkgs-fmt
     nvfetcher-bin
-    ripsecrets
     git-crypt
     ;
+  ripsecrets = pkgs.nur.repos.ProducerMatt.ripsecrets;
 
   hooks = import ./hooks;
 
