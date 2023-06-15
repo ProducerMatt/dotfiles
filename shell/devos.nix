@@ -10,6 +10,7 @@ let
     nixpkgs-fmt
     nvfetcher-bin
     ripsecrets
+    git-crypt
     ;
 
   hooks = import ./hooks;
@@ -18,6 +19,7 @@ let
   devos = pkgWithCategory "devos";
   linter = pkgWithCategory "linter";
   docs = pkgWithCategory "docs";
+  repo = pkgWithCategory "repo";
 
 in
 {
@@ -56,6 +58,8 @@ in
     (linter editorconfig-checker)
 
     (docs mdbook)
+    (repo ripsecrets)
+    (repo git-crypt)
   ]
   ++ lib.optionals (!pkgs.stdenv.buildPlatform.isi686) [
     (devos cachix)
