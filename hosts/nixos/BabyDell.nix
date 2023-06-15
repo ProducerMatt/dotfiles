@@ -9,6 +9,7 @@
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       profiles.adminAccess
+      profiles.jellyfin
     ];
 
   users.mutableUsers = true;
@@ -18,7 +19,7 @@
     enable = false;
   };
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
