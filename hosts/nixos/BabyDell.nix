@@ -9,7 +9,7 @@
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       profiles.adminAccess
-      profiles.plex
+      profiles.jellyfin
     ];
 
   users.mutableUsers = true;
