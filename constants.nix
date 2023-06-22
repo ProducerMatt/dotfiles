@@ -79,6 +79,7 @@ rec {
             options = [
               "nfsvers=4"
               "noatime"
+              "noexec"
             ];
           };
           "/mnt/MattNAS" = {
@@ -87,6 +88,7 @@ rec {
             options = [
               "nfsvers=4"
               "noatime"
+              "noexec"
             ];
           };
         };
