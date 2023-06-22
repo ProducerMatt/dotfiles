@@ -77,7 +77,7 @@ rec {
             device = "PherigoNAS.local:/mnt/PherigoRAID/Public";
             fsType = "nfs";
             options = [
-              #      "nfsvers=3"
+              "nfsvers=4"
               "noatime"
             ];
           };
@@ -85,7 +85,7 @@ rec {
             device = "PherigoNAS.local:/mnt/PherigoRAID/Matt";
             fsType = "nfs";
             options = [
-              #      "nfsvers=3"
+              "nfsvers=4"
               "noatime"
             ];
           };
