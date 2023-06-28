@@ -19,4 +19,14 @@ with pkgs; [
   ansible-lint
   ansible-later
   ansible-language-server
+
+  exercism
+
+  erlang_nox
+  erlang-ls
+
+  elixir
+  elixir_ls
+
+  gleam
 ]
