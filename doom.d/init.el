@@ -84,7 +84,7 @@
        grammar           ; tasing grammar mistake every you make
 
        :tools
-       ;;ansible
+       ansible
        ;;biblio            ; Writes a PhD for you (citation needed)
        debugger          ; FIXME stepping through code, to help you add bugs
        direnv
@@ -122,7 +122,7 @@
        data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        dhall
-       ;;elixir            ; erlang done right
+       elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age

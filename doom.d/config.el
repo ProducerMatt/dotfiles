@@ -283,3 +283,22 @@
           (let ((new-id (org-id-new)))
             (org-entry-put (point) "ID" new-id)
             (org-entry-put (point) "CUSTOM-ID" new-id)))))))
+
+(use-package! disaster
+  :commands (disaster)
+  :init
+  ;; If you prefer viewing assembly code in `nasm-mode` instead of `asm-mode`
+  (setq disaster-assembly-mode 'nasm-mode)
+
+  (map! :localleader
+        :map (c++-mode-map c-mode-map fortran-mode-map)
+        :desc "Disaster" "d" #'disaster))
+
+(after! flycheck
+  (require 'flycheck-google-cpplint)
+  ;; Add Google C++ Style checker.
+  ;; In default, syntax checked by Clang and Cppcheck.
+  (flycheck-add-next-checker 'c/c++-clang
+                          '(warning . c/c++-googlelint)))
+
+(add-hook! 'c-mode-common-hook 'google-set-c-style 'google-make-newline-indent)
