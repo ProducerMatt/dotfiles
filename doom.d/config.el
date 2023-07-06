@@ -302,3 +302,9 @@
                           '(warning . c/c++-googlelint)))
 
 (add-hook! 'c-mode-common-hook 'google-set-c-style 'google-make-newline-indent)
+
+;(add-hook! 'elixir-mode-hook ')
+
+(setq lsp-log-io t)
+(setq lsp-elixir-server-path "elixir-ls")
+(setq lsp-python-ms-executable (executable-find "python-language-server"))
