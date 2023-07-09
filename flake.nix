@@ -77,6 +77,10 @@
         inputs.nixpkgs.follows = "latest";
         inputs.flake-utils.follows = "digga";
       };
+      poetry2nix = {
+        url = "github:nix-community/poetry2nix";
+        inputs.nixpkgs.follows = "latest";
+      };
     };
 
   outputs =
@@ -94,6 +98,7 @@
       #, guix-overlay
     , nixseparatedebuginfod
     , rtx-flake
+    , poetry2nix
     , ...
     } @ inputs:
     let
@@ -278,6 +283,7 @@
         };
 
         devshell = ./shell;
+        myShells.py311 = digga.lib.eachSystem digga.lib.system (system: import ./shell/py311 { pkgs = nixpkgs.legacyPackages.${system}; inherit inputs; });
 
         # TODO: similar to the above note: does it make sense to make all of
         # these users available on all systems?
