@@ -18,6 +18,7 @@
       AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
       AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
       AcceptEnv XMODIFIERS
+      AcceptEnv TERM
 
       # disallow ssh-agent forwarding to prevent lateral movement
       AllowAgentForwarding no
