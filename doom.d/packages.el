@@ -85,3 +85,12 @@
 
 (package! nix-update
           :recipe (:host github :repo "jwiegley/nix-update-el"))
+
+(package! disaster
+  :recipe (:host github :repo "jart/disaster"))
+
+(package! google-c-style)
+(package! flycheck-google-cpplint)
+
+(package! gleam-mode
+  :recipe (:host github :repo "gleam-lang/gleam-mode"))
