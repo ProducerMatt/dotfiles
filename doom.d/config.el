@@ -306,5 +306,12 @@
 ;(add-hook! 'elixir-mode-hook ')
 
 (setq lsp-log-io t)
-(setq lsp-elixir-server-path "elixir-ls")
+;; Elixir machine broke, sorry
+;(after! f
+;  (let* ((els (executable-find "elixir-ls"))
+;         (els-lib (f-join (file-name-directory (file-truename els))
+;                          "../lib/")))
+;    (setq lsp-elixir-server-command els)
+;    (setq lsp-elixir-ls-server-dir els-lib)
+;    (add-to-list 'exec-path els-lib)))
 (setq lsp-python-ms-executable (executable-find "python-language-server"))
