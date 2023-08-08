@@ -10,6 +10,7 @@
       (modulesPath + "/installer/scan/not-detected.nix")
       profiles.adminAccess
       profiles.jellyfin
+      profiles.intelQSV
     ];
 
   users.mutableUsers = true;
