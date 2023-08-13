@@ -26,7 +26,7 @@ in
   options.services.mattsNetwork = with builtins; with lib; {
     hostname = mkOption {
       description = "hostname for this machine";
-      type = with types; nullOr string;
+      type = with types; nullOr str;
       default = null;
     };
   };

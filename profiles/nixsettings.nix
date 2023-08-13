@@ -7,8 +7,8 @@
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
-      builders-use-substitutes = true
     '';
+    # on my local network, builders-use-substitutes slows it down
     gc = {
       automatic = true;
       dates = "weekly";
