@@ -10,7 +10,7 @@
   };
   users.groups.nixremote = { };
   services.openssh.extraConfig = ''
-    Match User nix-ssh
+    Match User nixremote
       AllowAgentForwarding no
       AllowTcpForwarding no
       PermitTTY no

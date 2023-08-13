@@ -25,6 +25,7 @@
       profiles.users.nixremote
     ];
 
+  nix.settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
   nixpkgs.localSystem = {
     gcc.arch = "skylake";
     gcc.tune = "skylake";
