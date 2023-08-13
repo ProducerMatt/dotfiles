@@ -22,7 +22,7 @@
       profiles.gitRepos.nixpkgs
       profiles.adminAccess
       #profiles.virtualbox
-      users.nixremote
+      profiles.users.nixremote
     ];
 
   nixpkgs.localSystem = {
