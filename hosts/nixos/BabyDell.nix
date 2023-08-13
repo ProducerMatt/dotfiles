@@ -20,7 +20,7 @@
         system = "x86_64-linux";
         protocol = "ssh-ng";
         sshUser = "nixremote";
-        sshKey = "/home/matt/id_nixremote_ed25519";
+        sshKey = "/home/matt/.ssh/id_nixremote_ed25519";
         speedFactor = 8;
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       }
