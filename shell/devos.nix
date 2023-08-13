@@ -65,7 +65,7 @@ in
     (devos cachix)
   ]
   ++ lib.optionals (pkgs.stdenv.hostPlatform.isLinux && !pkgs.stdenv.buildPlatform.isDarwin) [
-    (devos inputs.nixos-generators.defaultPackage.${pkgs.system})
+    (devos inputs.nixos-generators.packages.${pkgs.system}.default)
     (devos inputs.deploy.packages.${pkgs.system}.deploy-rs)
   ]
   ;
