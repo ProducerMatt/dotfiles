@@ -13,6 +13,27 @@
       profiles.intelQSV
     ];
 
+  nix = {
+    buildMachines = [
+      {
+        hostName = "PortableNix.local";
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        sshUser = "nixremote";
+        sshKey = "/home/matt/id_nixremote_ed25519";
+        speedFactor = 8;
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      }
+    ];
+    distributedBuilds = true;
+    #sshServe = {
+    #  enable = "true";
+    #  write = true;
+    #  keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHR4G/Vse74jiFwpKYagAEMlfqYs/HdXzSkXgd/6cIKk" ];
+    #  protocol = "ssh-ng";
+    #};
+  };
+
   users.mutableUsers = true;
 
   services.mattsNetwork.hostname = "BabyDell";

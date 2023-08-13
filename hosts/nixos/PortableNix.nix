@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, overlays, ... }:
+{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, overlays, users, ... }:
 
 {
   age.secrets."wg-PortableNix.key".file =
@@ -22,6 +22,7 @@
       profiles.gitRepos.nixpkgs
       profiles.adminAccess
       #profiles.virtualbox
+      users.nixremote
     ];
 
   nixpkgs.localSystem = {

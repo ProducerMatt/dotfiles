@@ -7,11 +7,12 @@
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      builders-use-substitutes = true
     '';
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 14d";
     };
     optimise = {
       automatic = true;
@@ -19,7 +20,7 @@
     };
     settings = {
       auto-optimise-store = true;
-      trusted-users = [ "root" "matt" ];
+      trusted-users = [ "root" "matt" "nixremote" ];
       trusted-public-keys = [
         "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
       ];
