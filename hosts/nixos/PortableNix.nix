@@ -23,6 +23,7 @@
       profiles.adminAccess
       #profiles.virtualbox
       profiles.users.nixremote
+      profiles.cockpit
     ];
 
   nix.settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
