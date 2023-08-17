@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, overlays, users, ... }:
+{ config, pkgs, lib, modulesPath, profiles, suites, age, modules, overlays, ... }:
 
 {
   age.secrets."wg-PortableNix.key".file =
