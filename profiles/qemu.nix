@@ -15,7 +15,7 @@
     bridges = {
       br0 = {
         interfaces = [
-          "br0"
+          "enp112s0"
         ];
       };
     };
