@@ -23,7 +23,7 @@
       profiles.adminAccess
       #profiles.virtualbox
       profiles.users.nixremote
-      profiles.cockpit
+      profiles.qemu
     ];
 
   nix.settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -124,7 +124,6 @@
       8080
       7860
       7861 # dev servers gotta dev
-      5900
     ];
   };
 
