@@ -12,12 +12,5 @@
     firewall.allowedTCPPorts = [
       5900
     ];
-    bridges = {
-      br0 = {
-        interfaces = [
-          "enp112s0"
-        ];
-      };
-    };
   };
 }
