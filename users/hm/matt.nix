@@ -112,8 +112,7 @@ in
     (getSnippet "sysadmin")
     (getSnippet "git")
     [
-      #firefox
-      ripgrep-all
+      #ripgrep-all # bug
       psmisc
       passphrase2pgp
       keybase
