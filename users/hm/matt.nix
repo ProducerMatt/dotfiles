@@ -139,19 +139,19 @@ in
       # required by +jupyter
       #(python38.withPackages(ps: with ps; [jupyter]))
 
-      # Emacs + Python
-      (python310.withPackages (ps: with ps; [
-        ipython
-        pyflakes
-        black
-        pytest
-        nose
-        isort
-        # Latex source code highlighting
-        pygments
-      ]))
-
-      conda
+      ## Emacs + Python
+      #(python310.withPackages (ps: with ps; [
+      #  ipython
+      #  pyflakes
+      #  black
+      #  pytest
+      #  nose
+      #  isort
+      #  # Latex source code highlighting
+      #  pygments
+      #]))
+      #micromamba
+      #conda
       ispell
       pandoc
       tectonic
@@ -162,7 +162,6 @@ in
       editorconfig-core-c
       nodejs
       nodePackages.mermaid-cli
-      micromamba
       cpplint
     ]
   ];
