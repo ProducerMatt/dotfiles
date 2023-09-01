@@ -155,7 +155,7 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyright) ; extra stuff bugged on Nix
+       (python +lsp +poetry +pyenv) ; extra stuff bugged on Nix
        ;(python +conda +lsp +pyright)           ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs
