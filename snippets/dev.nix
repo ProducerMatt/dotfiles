@@ -9,6 +9,7 @@ with pkgs; [
   nix-init
   nix-diff
   nixfmt
+  rnix-lsp
   stdenv
   gnumake
   resolve-march-native # find appropriate compiler flags for your cpu
