@@ -24,10 +24,10 @@ with pkgs; [
   exercism
 
   erlang_nox
-  #erlang-ls
+  erlang-ls
 
   elixir
-  #elixir_ls
+  elixir_ls
 
-  #gleam
+  gleam
 ]
