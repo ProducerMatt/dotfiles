@@ -305,7 +305,11 @@
 
 ;(add-hook! 'elixir-mode-hook ')
 
-(setq lsp-log-io t)
+  (setq lsp-log-io t)
+;(after! lsp-elixir
+;  (setq lsp-elixir-server-command '("language_server.sh"))
+;  (setq lsp-elixir-ls-server-dir "~/elixir-ls/rel/")
+;  (setq lsp-elixir-ls-local-server-command "~/elixir-ls/rel/language_server.sh"))
 ;; Elixir machine broke, sorry
 ;(after! f
 ;  (let* ((els (executable-find "elixir-ls"))
@@ -335,3 +339,34 @@
 ;                                     :json-false))))
 ;             (lsp--set-configuration config)))))))
 (setq lsp-python-ms-executable (executable-find "python-language-server"))
+
+;;; Be sure to edit the path appropriately; use the `.bat` script instead for Windows:
+;(after! eglot
+;  (add-to-list 'eglot-server-programs '(elixir-mode "~/elixir-ls/rel/language_server.sh")))
+;
+;(require 'eglot)
+;
+;(add-to-list 'exec-path "~/next-ls/bin/")
+;
+;(with-eval-after-load 'eglot
+;  (add-to-list 'eglot-server-programs
+;               `((elixir-ts-mode heex-ts-mode elixir-mode) .
+;                 ("nextls"))))
+;
+;(add-hook 'elixir-mode-hook 'eglot-ensure)
+;(add-hook 'elixir-ts-mode-hook 'eglot-ensure)
+;(add-hook 'heex-ts-mode-hook 'eglot-ensure)
+
+(use-package lsp-mode
+  :commands lsp
+  :ensure t
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (add-to-list 'exec-path "~/elixir-ls/rel/"))
+  ;(add-to-list 'exec-path "~/next-ls/bin/"))
+
+;; (setq lsp-elixir-server-command '("nextls"))
+;; (setq lsp-elixir-ls-server-dir "~/next-ls/bin/")
+;; (setq lsp-elixir-ls-local-server-command "~/next-ls/bin/nextls")
