@@ -310,8 +310,28 @@
 ;(after! f
 ;  (let* ((els (executable-find "elixir-ls"))
 ;         (els-lib (f-join (file-name-directory (file-truename els))
-;                          "../lib/")))
-;    (setq lsp-elixir-server-command els)
+;                          "../lib/"))
+;         (els-dbg (f-join (file-name-directory (file-truename els-lib))
+;                          "./language-server.sh")))
+;    (setq lsp-elixir-server-command els-dbg)
 ;    (setq lsp-elixir-ls-server-dir els-lib)
-;    (add-to-list 'exec-path els-lib)))
+;    (add-to-list 'exec-path els-lib))
+;)
+;; Workaround to enable running credo after lsp
+;(after! lsp-clients
+;  (lsp-register-client
+;   (make-lsp-client :new-connection
+;    (lsp-stdio-connection
+;        (expand-file-name
+;          "~/elixir-ls/rel/language_server.sh"))
+;        :major-modes '(elixir-mode)
+;        :priority -1
+;        :server-id 'elixir-ls
+;        :initialized-fn (lambda (workspace)
+;            (with-lsp-workspace workspace
+;             (let ((config `(:elixirLS
+;                             (:mixEnv "dev"
+;                                     :dialyzerEnabled
+;                                     :json-false))))
+;             (lsp--set-configuration config)))))))
 (setq lsp-python-ms-executable (executable-find "python-language-server"))

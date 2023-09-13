@@ -92,5 +92,11 @@
 (package! google-c-style)
 (package! flycheck-google-cpplint)
 
-(package! gleam-mode
-  :recipe (:host github :repo "gleam-lang/gleam-mode"))
+;(package! gleam-mode
+;  :recipe (:local-repo "~/gleam-mode"))
+;(package! tree-sitter)
+;(package! tree-sitter-indent
+;  :recipe (:host nil
+;           :repo "https://codeberg.org/FelipeLema/tree-sitter-indent.el.git"
+;           :branch "main"
+;           :files ("tree-sitter-indent.el")))
