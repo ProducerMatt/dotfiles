@@ -15,15 +15,15 @@
   };
   fzf = {
     pname = "fzf";
-    version = "c5e170730b4f8395e116d7c06883ed53da2d5561";
+    version = "bbaf29ae8ad30e1cb1c78d2c14814b1678022875";
     src = fetchFromGitHub {
       owner = "PatrickF1";
       repo = "fzf.fish";
-      rev = "c5e170730b4f8395e116d7c06883ed53da2d5561";
+      rev = "bbaf29ae8ad30e1cb1c78d2c14814b1678022875";
       fetchSubmodules = false;
-      sha256 = "sha256-xWaMd5POCDeeFTsGtHbIvsPelIp+GZPC1X1CseCo3BA=";
+      sha256 = "sha256-6ebzDQkpJNq7ZEmDeheek/OfMgbYH4wU3tf1QGgZr40=";
     };
-    date = "2023-05-23";
+    date = "2023-09-05";
   };
   jethrokuan-z = {
     pname = "jethrokuan-z";
