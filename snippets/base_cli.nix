@@ -3,7 +3,7 @@ pkgs:
 with pkgs; [
   coreutils
   croc
-  exa
+  eza
   fish
   htop # top alternative
   bottom # top alternative

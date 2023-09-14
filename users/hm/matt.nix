@@ -3,9 +3,9 @@ let
   getSnippet = lib.our.getPkgSnippet pkgs;
   start_emacs = "emacsclient -c -a 'emacs'";
   myAliases = {
-    l = "exa";
-    ll = "exa -la";
-    la = "exa -a";
+    l = "eza";
+    ll = "eza -la";
+    la = "eza -a";
     e = start_emacs;
     er = "systemctl --user restart emacs.service";
 
