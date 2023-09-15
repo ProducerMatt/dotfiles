@@ -11,6 +11,7 @@
       profiles.adminAccess
       profiles.jellyfin
       profiles.intelQSV
+      profiles.vscodeserver
     ];
 
   nix = {

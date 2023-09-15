@@ -275,7 +275,7 @@
             profiles = digga.lib.rakeLeaves ./users/profiles;
             suites = with profiles; rec {
               base = [ core direnv git ];
-              dev = [ fzf nix-index ];
+              dev = [ fzf nix-index vscode ];
               graphical = [ fonts ];
             };
           };
