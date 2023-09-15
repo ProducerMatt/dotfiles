@@ -135,7 +135,7 @@ in
       ccls
       rnix-lsp
       # any less than medium isn't guaranteed to work
-      texlive.combined.scheme-full
+      #texlive.combined.scheme-full
       # required by +jupyter
       #(python38.withPackages(ps: with ps; [jupyter]))
 
@@ -154,7 +154,7 @@ in
       #conda
       ispell
       pandoc
-      tectonic
+      #tectonic
       gnuplot
       graphviz
       cmake
