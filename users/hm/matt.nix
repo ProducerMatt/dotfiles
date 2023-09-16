@@ -116,24 +116,24 @@ in
       #ripgrep-all # bug
       psmisc
       passphrase2pgp
-      keybase
+      #keybase
       nur.repos.ProducerMatt.cosmo
       cachix
-      rlwrap
-      httrack
-      hugo
-      nodePackages.pnpm
-      metadata-cleaner
+      #rlwrap
+      #httrack
+      #hugo
+      #nodePackages.pnpm
+      #metadata-cleaner
       #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
-      nodePackages.node2nix # node packages to nix packages
-      nodePackages.browser-sync # live-reloading dev server
+      #nodePackages.node2nix # node packages to nix packages
+      #nodePackages.browser-sync # live-reloading dev server
       bc # cli calculators
-      imagemagickBig
-      sd # sed alternative
+      imagemagick
+      #sd # sed alternative
 
       # mainly for Emacs
-      clang
-      ccls
+      #clang
+      #ccls
       rnix-lsp
       # any less than medium isn't guaranteed to work
       #texlive.combined.scheme-full
@@ -154,23 +154,23 @@ in
       #micromamba
       #conda
       ispell
-      pandoc
+      #pandoc
       #tectonic
-      gnuplot
-      graphviz
-      cmake
+      #gnuplot
+      #graphviz
+      #cmake
       shellcheck
-      editorconfig-core-c
-      nodejs
-      nodePackages.mermaid-cli
-      cpplint
+      #editorconfig-core-c
+      #nodejs
+      #nodePackages.mermaid-cli
+      #cpplint
     ]
   ];
   services.emacs = {
     enable = true;
     package = pkgs.emacs28NativeComp;
   };
-  programs.vim.package = pkgs.vimHugeX;
+  programs.vim.package = pkgs.vim;
 
   home.file = {
     ".guile".text = ''

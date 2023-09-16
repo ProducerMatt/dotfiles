@@ -6,7 +6,7 @@ with pkgs; [
   eza
   fish
   htop # top alternative
-  bottom # top alternative
+  #bottom # top alternative
   comma # get any arbitrary program
   p7zip
   tmux
@@ -16,7 +16,7 @@ with pkgs; [
   fd
   ripgrep
   aria2
-  libressl
+  #libressl
   parallel # xargs but multi-core
   tere
   bind.dnsutils

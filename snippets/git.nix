@@ -2,7 +2,7 @@ pkgs:
 
 with pkgs; [
   git-crypt
-  tig
+  lazygit
   git-ignore
   nur.repos.ProducerMatt.ripsecrets
 ]

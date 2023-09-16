@@ -17,10 +17,10 @@ with pkgs; [
   remarshal # convert between config file formats
   rtx # https://github.com/jdxcode/rtx
 
-  ansible
-  ansible-lint
-  ansible-later
-  ansible-language-server
+  #ansible
+  #ansible-lint
+  #ansible-later
+  #ansible-language-server
 
   exercism
 

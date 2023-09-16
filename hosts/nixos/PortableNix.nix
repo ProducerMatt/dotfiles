@@ -12,13 +12,13 @@
     suites.base ++
     [
       (modulesPath + "/installer/scan/not-detected.nix")
-      profiles.fonts
+      #profiles.fonts
       profiles.containers
       profiles.ML_Nvidia
       profiles.backuppc
       profiles.mysyncthing
       #profiles.guix
-      profiles.sicp
+      #profiles.sicp
       profiles.gitRepos.nixpkgs
       profiles.adminAccess
       #profiles.virtualbox
@@ -28,8 +28,8 @@
 
   nix.settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
   nixpkgs.localSystem = {
-    gcc.arch = "skylake";
-    gcc.tune = "skylake";
+    #  gcc.arch = "skylake";
+    #  gcc.tune = "skylake";
     system = "x86_64-linux";
   };
 
