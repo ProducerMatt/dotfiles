@@ -61,7 +61,7 @@ let
 in
 {
   imports =
-    [ profiles.vscode ] ++
+    #[ profiles.vscode ] ++
     suites.base ++
     suites.dev; # ++
   #suites.graphical;
