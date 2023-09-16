@@ -81,6 +81,11 @@
         url = "github:nix-community/poetry2nix";
         inputs.nixpkgs.follows = "latest";
       };
+      vscode-server = {
+        url = "github:nix-community/nixos-vscode-server";
+        inputs.nixpkgs.follows = "latest";
+        inputs.flake-utils.follows = "digga";
+      };
     };
 
   outputs =
@@ -99,6 +104,7 @@
     , nixseparatedebuginfod
     , rtx-flake
     , poetry2nix
+    , vscode-server
     , ...
     } @ inputs:
     let
@@ -270,12 +276,14 @@
 
         home = {
           #imports = [ (digga.lib.importExportableModules ./users/modules) ];
-          modules = [ ];
+          modules = [
+            vscode-server.homeModules.default
+          ];
           importables = rec {
             profiles = digga.lib.rakeLeaves ./users/profiles;
             suites = with profiles; rec {
               base = [ core direnv git ];
-              dev = [ fzf nix-index vscode ];
+              dev = [ fzf nix-index ];
               graphical = [ fonts ];
             };
           };
