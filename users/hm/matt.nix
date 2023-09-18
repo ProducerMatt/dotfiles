@@ -62,6 +62,7 @@ in
 {
   imports =
     #[ profiles.vscode ] ++
+    [ profiles.fonts ] ++
     suites.base ++
     suites.dev; # ++
   #suites.graphical;
