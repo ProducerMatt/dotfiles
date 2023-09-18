@@ -7,6 +7,9 @@
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      # When only 1Gig free, try to free up to 5 gigs
+      min-free = ${toString (1024 * 1024 * 1024)}
+      max-free = ${toString (1024 * 1024 * 1024 * 5)}
     '';
     # on my local network, builders-use-substitutes slows it down
     gc = {
