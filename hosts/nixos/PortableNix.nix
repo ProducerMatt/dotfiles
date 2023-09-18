@@ -12,7 +12,7 @@
     suites.base ++
     [
       (modulesPath + "/installer/scan/not-detected.nix")
-      profiles.fonts
+      #profiles.fonts
       profiles.containers
       profiles.ML_Nvidia
       profiles.backuppc

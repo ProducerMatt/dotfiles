@@ -1,13 +1,13 @@
 pkgs:
 
 with pkgs; [
-  cantarell-fonts
+  #cantarell-fonts
   emacs-all-the-icons-fonts
-  font-awesome
-  hasklig
-  iosevka
-  source-code-pro
-  texlive.combined.scheme-full
+  #font-awesome
+  #hasklig
+  #iosevka
+  #source-code-pro
+  #texlive.combined.scheme-full
   nerdfonts
   atkinson-hyperlegible
   #(iosevka.override {
