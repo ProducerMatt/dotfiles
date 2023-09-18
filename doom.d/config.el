@@ -315,3 +315,8 @@
 ;    (setq lsp-elixir-ls-server-dir els-lib)
 ;    (add-to-list 'exec-path els-lib)))
 (setq lsp-python-ms-executable (executable-find "python-language-server"))
+
+(setq doom-emoji-fallback-font-families '("icons-in-terminal"))
+(after! doom-modeline
+  (setq doom-modeline-icon nil))
+(advice-remove #'doom-modeline-propertize-icon #'+modeline-disable-icon-in-daemon-a)
