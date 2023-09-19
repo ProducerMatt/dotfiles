@@ -147,73 +147,73 @@
   (setq geiser-guile-binary "guile"))
 (defalias 'run-geiser 'geiser)
 
-;; optional: per-section modification times in org-mode
-(after! org
-  (defun yant/getentryhash ()
-    "Get the hash sum of the text in current entry, except :HASH: and :MODIFIED: property texts."
-    (save-excursion
-      (let* ((beg (progn (org-back-to-heading) (point)))
-             (end (progn
-                    (forward-char)
-                    (if (not (re-search-forward "^\*+ " (point-max) t))
-                        (point-max)
-                      (match-beginning 0))))
-             (full-str (buffer-substring beg end))
-             (str-nohash (if (string-match "^ *:HASH:.+\n" full-str)
-                             (replace-match "" nil nil full-str)
-                           full-str))
-             (str-nohash-nomod (if (string-match "^ *:MODIFIED:.+\n" str-nohash)
-                                   (replace-match "" nil nil str-nohash)
-                                 str-nohash))
-             (str-nohash-nomod-nopropbeg (if (string-match "^ *:PROPERTIES:\n" str-nohash-nomod)
-                                             (replace-match "" nil nil str-nohash-nomod)
-                                           str-nohash-nomod))
-             (str-nohash-nomod-nopropbeg-end (if (string-match "^ *:END:\n" str-nohash-nomod-nopropbeg)
-                                                 (replace-match "" nil nil str-nohash-nomod-nopropbeg)
-                                               str-nohash-nomod-nopropbeg)))
-        (sxhash str-nohash-nomod-nopropbeg-end))))
+;;; optional: per-section modification times in org-mode
+;(after! org
+;  (defun yant/getentryhash ()
+;    "Get the hash sum of the text in current entry, except :HASH: and :MODIFIED: property texts."
+;    (save-excursion
+;      (let* ((beg (progn (org-back-to-heading) (point)))
+;             (end (progn
+;                    (forward-char)
+;                    (if (not (re-search-forward "^\*+ " (point-max) t))
+;                        (point-max)
+;                      (match-beginning 0))))
+;             (full-str (buffer-substring beg end))
+;             (str-nohash (if (string-match "^ *:HASH:.+\n" full-str)
+;                             (replace-match "" nil nil full-str)
+;                           full-str))
+;             (str-nohash-nomod (if (string-match "^ *:MODIFIED:.+\n" str-nohash)
+;                                   (replace-match "" nil nil str-nohash)
+;                                 str-nohash))
+;             (str-nohash-nomod-nopropbeg (if (string-match "^ *:PROPERTIES:\n" str-nohash-nomod)
+;                                             (replace-match "" nil nil str-nohash-nomod)
+;                                           str-nohash-nomod))
+;             (str-nohash-nomod-nopropbeg-end (if (string-match "^ *:END:\n" str-nohash-nomod-nopropbeg)
+;                                                 (replace-match "" nil nil str-nohash-nomod-nopropbeg)
+;                                               str-nohash-nomod-nopropbeg)))
+;        (sxhash str-nohash-nomod-nopropbeg-end))))
+;
+;  (defun yant/update-modification-time ()
+;    "Set the :MODIFIED: property of the current entry to NOW and update :HASH: property."
+;    (org-set-property "HASH" (format "%s" (yant/getentryhash)))
+;    (org-set-property "MODIFIED" (format-time-string "%Y-%m-%d %H:%M")))
+;  (defun yant/skip-nonmodified ()
+;    "Skip org entries, which were not modified according to the :HASH: property"
+;    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+;      (if (string= (org-entry-get (point) "HASH" nil) (format "%s" (yant/getentryhash)))
+;          next-headline
+;        nil)))
+;
+;  (add-hook 'before-save-hook (lambda ()
+;                                (when (eq major-mode 'org-mode)
+;                                  (if org-update-heading-mod-times
+;                                      (org-map-entries #'yant/update-modification-time nil 'file #'yant/skip-nonmodified)))))
+;
+;  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
-  (defun yant/update-modification-time ()
-    "Set the :MODIFIED: property of the current entry to NOW and update :HASH: property."
-    (org-set-property "HASH" (format "%s" (yant/getentryhash)))
-    (org-set-property "MODIFIED" (format-time-string "%Y-%m-%d %H:%M")))
-  (defun yant/skip-nonmodified ()
-    "Skip org entries, which were not modified according to the :HASH: property"
-    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-      (if (string= (org-entry-get (point) "HASH" nil) (format "%s" (yant/getentryhash)))
-          next-headline
-        nil)))
-
-  (add-hook 'before-save-hook (lambda ()
-                                (when (eq major-mode 'org-mode)
-                                  (if org-update-heading-mod-times
-                                      (org-map-entries #'yant/update-modification-time nil 'file #'yant/skip-nonmodified)))))
-
-  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
-
-;; latex export
-(after! ox-latex
-                                        ;;  (setq org-latex-listings 'engraved))
-  (setq org-latex-listings 'minted)
-  (setq org-latex-src-block-backend 'minted)
-  (setq org-export-latex-listings 'minted)
-  (when (boundp 'org-export-latex-packages-alist)
-    (add-to-list 'org-export-latex-packages-alist '("" "minted")))
-    (setq org-latex-compiler "xelatex")
-    (when (boundp 'org-latex-default-packages-alist)
-      (add-to-list 'org-latex-default-packages-alist
-                   '("" "titletoc" t)))
-  (when (boundp 'org-latex-minted-langs)
-    (add-to-list 'org-latex-minted-langs '(ipython "python"))
-    (add-to-list 'org-latex-minted-langs '(scheme "scheme")))
-  (setq org-latex-minted-options '(("breaklines" "true")
-                                   ("breakanywhere" "true")
-                                   ("linenos" "true")))
-    (setq org-latex-pdf-process
-          ;'("latexmk -xelatex -pdfxe -verbose -gg -shell-escape -interaction=nonstopmode -output-directory=%o %f")) ; debugging
-          '("latexmk -xelatex -pdfxe -verbose -f -shell-escape -interaction=nonstopmode -output-directory=%o %f"))
-    (setq org-export-latex-hyperref-format "\\ref{%s}")
-  )
+;;; latex export
+;(after! ox-latex
+;                                        ;;  (setq org-latex-listings 'engraved))
+;  (setq org-latex-listings 'minted)
+;  (setq org-latex-src-block-backend 'minted)
+;  (setq org-export-latex-listings 'minted)
+;  (when (boundp 'org-export-latex-packages-alist)
+;    (add-to-list 'org-export-latex-packages-alist '("" "minted")))
+;    (setq org-latex-compiler "xelatex")
+;    (when (boundp 'org-latex-default-packages-alist)
+;      (add-to-list 'org-latex-default-packages-alist
+;                   '("" "titletoc" t)))
+;  (when (boundp 'org-latex-minted-langs)
+;    (add-to-list 'org-latex-minted-langs '(ipython "python"))
+;    (add-to-list 'org-latex-minted-langs '(scheme "scheme")))
+;  (setq org-latex-minted-options '(("breaklines" "true")
+;                                   ("breakanywhere" "true")
+;                                   ("linenos" "true")))
+;    (setq org-latex-pdf-process
+;          ;'("latexmk -xelatex -pdfxe -verbose -gg -shell-escape -interaction=nonstopmode -output-directory=%o %f")) ; debugging
+;          '("latexmk -xelatex -pdfxe -verbose -f -shell-escape -interaction=nonstopmode -output-directory=%o %f"))
+;    (setq org-export-latex-hyperref-format "\\ref{%s}")
+;  )
 
 
 (add-to-list 'auto-mode-alist '("\\.\\(scm\\|stk\\|ss\\|sch\\|scheme\\)\\'" . scheme-mode))
@@ -222,25 +222,25 @@
   (setq org-auto-tangle-babel-safelist '(
                                          "~/SICP-group/1/Answers.org")))
 
-(require 'org-id)
-(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
-;; when interactively getting links, create random id if none found
-
-(defun replace-all-header-links-with-id-links ()
-  "Replace all header links with id links and add ID properties when needed."
-  (interactive)
-  (save-excursion
-    (point-min)
-    (while (re-search-forward "\\[\\[\\*\\(.*?\\)\\]\\[\\(.*?\\)\\]\\]")
-      (let* ((link-text (match-string 2))
-             (header-title (match-string 1))
-             (header (org-find-exact-headline-in-buffer header-title)))
-        (when header
-	  ;(org-goto-marker-or-bmk header)
-          (let ((id (org-id-get header t)))
-            (replace-match (format "[[id:%s][%s]]" id link-text))
-            (org-entry-put (org-element-property :begin header) "ID" id)))))))
-;;; Chat GPT's first suggestion
+;(require 'org-id)
+;(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+;;; when interactively getting links, create random id if none found
+;
+;(defun replace-all-header-links-with-id-links ()
+;  "Replace all header links with id links and add ID properties when needed."
+;  (interactive)
+;  (save-excursion
+;    (point-min)
+;    (while (re-search-forward "\\[\\[\\*\\(.*?\\)\\]\\[\\(.*?\\)\\]\\]")
+;      (let* ((link-text (match-string 2))
+;             (header-title (match-string 1))
+;             (header (org-find-exact-headline-in-buffer header-title)))
+;        (when header
+;	  ;(org-goto-marker-or-bmk header)
+;          (let ((id (org-id-get header t)))
+;            (replace-match (format "[[id:%s][%s]]" id link-text))
+;            (org-entry-put (org-element-property :begin header) "ID" id)))))))
+;;;; Chat GPT's first suggestion
 ;
 ;(defun replace-all-header-links-with-id-links ()
 ;  "Replace all header links with id links and add ID properties when needed."
