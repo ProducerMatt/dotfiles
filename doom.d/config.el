@@ -370,3 +370,7 @@
 ;; (setq lsp-elixir-server-command '("nextls"))
 ;; (setq lsp-elixir-ls-server-dir "~/next-ls/bin/")
 ;; (setq lsp-elixir-ls-local-server-command "~/next-ls/bin/nextls")
+(setq doom-emoji-fallback-font-families '("icons-in-terminal"))
+(after! doom-modeline
+  (setq doom-modeline-icon nil))
+(advice-remove #'doom-modeline-propertize-icon #'+modeline-disable-icon-in-daemon-a)
