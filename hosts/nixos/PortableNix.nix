@@ -120,11 +120,6 @@
         apuKeyPath =
           config.age.secrets."wg-apu4VPN-preshared.key".path;
       };
-    firewall.allowedTCPPorts = [
-      8080
-      7860
-      7861 # dev servers gotta dev
-    ];
   };
 
   # Set your time zone.

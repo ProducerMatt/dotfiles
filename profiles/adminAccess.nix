@@ -10,4 +10,10 @@ in
     (getSnippet "sysadmin")
     (getSnippet "git")
   ];
+  networking.firewall.allowedTCPPorts = [
+    8888
+    8080
+    7860
+    7861 # dev servers gotta dev
+  ];
 }
