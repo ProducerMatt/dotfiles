@@ -23,17 +23,19 @@
       # disallow ssh-agent forwarding to prevent lateral movement
       AllowAgentForwarding no
 
-      # prevent TCP ports from being forwarded over SSH tunnels
-      # **please be aware that disabling TCP forwarding does not prevent port forwarding**
-      # any user with an interactive login shell can spin up his/her own instance of sshd
-      AllowTcpForwarding no
+      ## prevent TCP ports from being forwarded over SSH tunnels
+      ## **please be aware that disabling TCP forwarding does not prevent port forwarding**
+      ## any user with an interactive login shell can spin up his/her own instance of sshd
+      #AllowTcpForwarding no
+      AllowTcpForwarding yes
 
       # prevent StreamLocal (Unix-domain socket) forwarding
       AllowStreamLocalForwarding no
 
-      # disables all forwarding features
-      # overrides all other forwarding switches
-      DisableForwarding yes
+      ## disables all forwarding features
+      ## overrides all other forwarding switches
+      #DisableForwarding yes
+      DisableForwarding no
 
       # disallow remote hosts from connecting to forwarded ports
       # i.e. forwarded ports are forced to bind to 127.0.0.1 instad of 0.0.0.0
