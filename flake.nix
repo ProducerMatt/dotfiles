@@ -73,7 +73,7 @@
       nixseparatedebuginfod.url = "github:symphorien/nixseparatedebuginfod";
 
       rtx-flake = {
-        url = "github:jdxcode/rtx?rev=4311536e4cf2280d098dba3f3754a9cdbc36a6fc";
+        url = "github:jdxcode/rtx";
         inputs.nixpkgs.follows = "latest";
         inputs.flake-utils.follows = "digga";
       };

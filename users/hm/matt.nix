@@ -117,7 +117,7 @@ in
       psmisc
       passphrase2pgp
       #keybase
-      nur.repos.ProducerMatt.cosmo
+      #nur.repos.ProducerMatt.cosmo
       cachix
       #rlwrap
       #httrack
