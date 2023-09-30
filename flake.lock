@@ -802,17 +802,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1690727143,
-        "narHash": "sha256-NHIEkC8hCzDjIDNIW2KEqEE9q7ga4WQ9QwgDC2DvU28=",
+        "lastModified": 1695661542,
+        "narHash": "sha256-Xpo9Zm+cAq+E81GmRferC3qj0dkqwyajLHwgeCDVnbg=",
         "owner": "jdxcode",
         "repo": "rtx",
-        "rev": "4311536e4cf2280d098dba3f3754a9cdbc36a6fc",
+        "rev": "155dadb0f7521c76a268a261dfad86dfbf2767a5",
         "type": "github"
       },
       "original": {
         "owner": "jdxcode",
         "repo": "rtx",
-        "rev": "4311536e4cf2280d098dba3f3754a9cdbc36a6fc",
         "type": "github"
       }
     },
