@@ -1,4 +1,4 @@
-import System, only: [halt: 0]
+import System, only: [halt: 0, stop: 0]
 
 timestamp = fn -> # for use in your prompt
   {_date, {hour, minute, _second}} = :calendar.local_time
