@@ -2,6 +2,7 @@
 
 {
   # Mostly cribbed from github.com/k4yt3x/sshd_config
+  # Last Updated: December 21, 2023
   # TODO:
   # - allow only specified users to log in
   # - allow only specified IPs and ports
@@ -90,7 +91,9 @@
       ########## Cryptography ##########
 
       # explicitly define cryptography algorithms to avoid the use of weak algorithms
-      Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+      # AES CTR modes have been removed to mitigate the Terrapin attack
+      #   https://terrapin-attack.com/
+      Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com
       HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
       MACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com
 
