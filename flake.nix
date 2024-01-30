@@ -2,10 +2,9 @@
   description = "Description for the project";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # Track channels with commits tested and built by hydra
-    nixos.url = "github:nixos/nixpkgs/nixos-23.05";
-    latest.url = "github:nixos/nixpkgs/nixos-unstable";
+    pkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    pkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
     # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -20,33 +19,33 @@
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
     home.url = "github:nix-community/home-manager/release-23.05";
-    home.inputs.nixpkgs.follows = "nixos";
+    home.inputs.nixpkgs.follows = "pkgs-latest";
     home-latest.url = "github:nix-community/home-manager/master";
-    home-latest.inputs.nixpkgs.follows = "latest";
+    home-latest.inputs.nixpkgs.follows = "pkgs-latest";
 
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
 
     deploy.url = "github:serokell/deploy-rs";
-    deploy.inputs.nixpkgs.follows = "nixos";
+    deploy.inputs.nixpkgs.follows = "pkgs-stable";
 
     agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixos";
+    agenix.inputs.nixpkgs.follows = "pkgs-stable";
 
     nvfetcher.url = "github:berberman/nvfetcher";
-    nvfetcher.inputs.nixpkgs.follows = "nixos";
+    nvfetcher.inputs.nixpkgs.follows = "pkgs-stable";
 
     naersk.url = "github:nmattia/naersk";
-    naersk.inputs.nixpkgs.follows = "latest";
+    naersk.inputs.nixpkgs.follows = "pkgs-latest";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "latest";
+    nixos-generators.inputs.nixpkgs.follows = "pkgs-latest";
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "latest";
+      inputs.nixpkgs.follows = "pkgs-latest";
     };
 
     nixrepl = {
@@ -63,16 +62,16 @@
 
     rtx-flake = {
       url = "github:jdxcode/rtx";
-      inputs.nixpkgs.follows = "latest";
+      inputs.nixpkgs.follows = "pkgs-latest";
       inputs.flake-utils.follows = "flake-utils-plus";
     };
     poetry2nix = {
       url = "github:nix-community/poetry2nix";
-      inputs.nixpkgs.follows = "latest";
+      inputs.nixpkgs.follows = "pkgs-latest";
     };
     #vscode-server = {
     #  url = "github:nix-community/nixos-vscode-server";
-    #  inputs.nixpkgs.follows = "latest";
+    #  inputs.nixpkgs.follows = "pkgs-latest";
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
   };
@@ -81,7 +80,8 @@
     { self
     , flake-parts
     , flake-utils-plus
-    , nixos
+    , pkgs-stable
+    , pkgs-latest
     , home
     , home-latest
     , nixos-hardware
@@ -105,9 +105,11 @@
         shortRev = (self.shortRev or "dirty");
         revCount = (self.revCount or "dirty");
       };
-      lib = import ./utils.nix { lib = nixos.lib; };
+      lib = import ./utils.nix { lib = pkgs-stable.lib; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
+      debug = true; # DEBUG
+
       imports = [
         # To import a flake module
         # 1. Add foo to inputs
@@ -118,20 +120,21 @@
       systems = [ "x86_64-linux" ];
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         # This sets `pkgs` to a nixpkgs with allowUnfree option set.
-        _module.args.pkgs = import nixpkgs {
+        _module.args.pkgs = import pkgs-latest {
           inherit system;
-          config.allowUnfree = true;
+          config = {
+            allowUnfree = true;
+            allowMeta = true;
+          };
         };
 
         # Per-system attributes can be defined here. The self' and inputs'
         # module parameters provide easy access to attributes of the same
         # system.
 
-        # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-        #packages.default = pkgs.hello;
-
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
+            colmena
             fish
             nil
           ];
@@ -142,7 +145,17 @@
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
 
-        nixosConfigurations = lib.makeSystems ./hosts { inherit lib; };
+        colmena = {
+          meta = {
+            nixpkgs = import pkgs-latest {
+              system = "x86_64-linux";
+            };
+          };
+          defaults = { ... }: {
+            system.copySystemConfiguration = lib.mkForce false;
+          };
+          NixVM = import ./hosts/NixVM;
+        };
       };
     };
 }

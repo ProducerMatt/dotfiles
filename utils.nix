@@ -1,5 +1,6 @@
 { lib }:
-lib // {
+
+let
   flattenTree =
     /* from divnix/digga, under the MIT license
      *
@@ -114,8 +115,11 @@ lib // {
     in
       lib.filterAttrs (n: v: v != {}) (lib.mapAttrs' collect files);
 
-  makeSystems = path: inputs:
+  makeSystems =
+    path: inputs@{ lib, pkgs-stable, pkgs-latest }:
     lib.recursiveMap
       (sys: sys inputs)
       (rakeLeaves path);
-}
+
+in
+  lib // { inherit rakeLeaves flattenTree makeSystems; }
