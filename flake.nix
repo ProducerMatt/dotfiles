@@ -1,6 +1,8 @@
 {
   description = "Description for the project";
 
+  nixConfig.extra-experimental-features = "nix-command flakes";
+
   inputs = {
     # Track channels with commits tested and built by hydra
     pkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -134,6 +136,7 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
+            nix
             colmena
             fish
             nil
@@ -151,8 +154,16 @@
               system = "x86_64-linux";
             };
           };
-          defaults = { ... }: {
+          defaults = { pkgs, ... }: {
             system.copySystemConfiguration = lib.mkForce false;
+            nix = {
+              package = pkgs.nixUnstable;
+              settings = {
+                trusted-users = [ "matt" ];
+                extra-experimental-features = "nix-command flakes";
+              };
+            };
+            security.sudo.wheelNeedsPassword = false;
           };
           NixVM = import ./hosts/NixVM;
         };
