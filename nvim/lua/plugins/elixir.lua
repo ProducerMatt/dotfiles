@@ -18,22 +18,22 @@ return {
 
         elixir.setup {
           nextls = {
-            enable = true,
+            enable = false,
 
           },
-          credo = {enable = false},
+          credo = {enable = trie},
           elixirls = {
-            enable = false,
-          --  settings = elixirls.settings {
-          --    dialyzerEnabled = true,
-          --    enableTestLenses = true,
-          --    suggestSpecs = true,
-          --  },
-          --  on_attach = function(client, bufnr)
-          --    vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-          --    vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-          --    vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-          --  end,
+            enable = true,
+            settings = elixirls.settings {
+              dialyzerEnabled = true,
+              enableTestLenses = true,
+              suggestSpecs = true,
+            },
+            on_attach = function(client, bufnr)
+              vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+              vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+              vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+            end,
           }
         }
       end,
