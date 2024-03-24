@@ -78,38 +78,37 @@
     #};
   };
 
-  outputs =
-    { self
-    , flake-parts
-    , flake-utils-plus
-    , pkgs-stable
-    , pkgs-latest
-    , home
-    , home-latest
-    , nixos-hardware
-    , nur
-    , agenix
-    , nvfetcher
-    , deploy
-    , nixpkgs
-      #, guix-overlay
-    , nixseparatedebuginfod
-    , rtx-flake
-    , poetry2nix
-      #, vscode-server
-    , ...
-    } @ inputs:
-    let
-      flakeVersion = with self; {
-        inherit lastModified lastModifiedDate narHash;
-        # TODO: could clearly be a function mapping
-        rev = (self.rev or "dirty");
-        shortRev = (self.shortRev or "dirty");
-        revCount = (self.revCount or "dirty");
-      };
-      lib = import ./utils.nix { lib = pkgs-stable.lib; };
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = {
+    self,
+    flake-parts,
+    flake-utils-plus,
+    pkgs-stable,
+    pkgs-latest,
+    home,
+    home-latest,
+    nixos-hardware,
+    nur,
+    agenix,
+    nvfetcher,
+    deploy,
+    nixpkgs,
+    #, guix-overlay
+    nixseparatedebuginfod,
+    rtx-flake,
+    poetry2nix,
+    #, vscode-server
+    ...
+  } @ inputs: let
+    flakeVersion = with self; {
+      inherit lastModified lastModifiedDate narHash;
+      # TODO: could clearly be a function mapping
+      rev = self.rev or "dirty";
+      shortRev = self.shortRev or "dirty";
+      revCount = self.revCount or "dirty";
+    };
+    lib = import ./utils.nix {lib = pkgs-stable.lib;};
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
       debug = true; # DEBUG
 
       imports = [
@@ -117,10 +116,16 @@
         # 1. Add foo to inputs
         # 2. Add foo as a parameter to the outputs function
         # 3. Add here: foo.flakeModule
-
       ];
-      systems = [ "x86_64-linux" ];
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
+      systems = ["x86_64-linux"];
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
         # This sets `pkgs` to a nixpkgs with allowUnfree option set.
         _module.args.pkgs = import pkgs-latest {
           inherit system;
@@ -140,6 +145,7 @@
             colmena
             fish
             nil
+            alejandra
           ];
         };
       };
@@ -154,12 +160,12 @@
               system = "x86_64-linux";
             };
           };
-          defaults = { pkgs, ... }: {
+          defaults = {pkgs, ...}: {
             system.copySystemConfiguration = lib.mkForce false;
             nix = {
               package = pkgs.nixUnstable;
               settings = {
-                trusted-users = [ "matt" ];
+                trusted-users = ["matt"];
                 extra-experimental-features = "nix-command flakes";
               };
             };

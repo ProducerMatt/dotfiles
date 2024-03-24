@@ -1,36 +1,35 @@
-{ lib }:
-
-let
+{lib}: let
   flattenTree =
-    /* from divnix/digga, under the MIT license
-     *
-     Synopsis: flattenTree _tree_
+    /*
+      from divnix/digga, under the MIT license
+    *
+    Synopsis: flattenTree _tree_
 
-     Flattens a _tree_ of the shape that is produced by rakeLeaves.
+    Flattens a _tree_ of the shape that is produced by rakeLeaves.
 
-     Output Format:
-     An attrset with names in the spirit of the Reverse DNS Notation form
-     that fully preserve information about grouping from nesting.
+    Output Format:
+    An attrset with names in the spirit of the Reverse DNS Notation form
+    that fully preserve information about grouping from nesting.
 
-     Example input:
-     ```
-     {
-     a = {
-     b = {
-     c = <path>;
-     };
-     };
-     }
-     ```
+    Example input:
+    ```
+    {
+    a = {
+    b = {
+    c = <path>;
+    };
+    };
+    }
+    ```
 
-     Example output:
-     ```
-     {
-     "a.b.c" = <path>;
-     }
-     ```
-     *
-     */
+    Example output:
+    ```
+    {
+    "a.b.c" = <path>;
+    }
+    ```
+    *
+    */
     tree: let
       op = sum: path: val: let
         pathStr = builtins.concatStringsSep "." path; # dot-based reverse DNS notation
@@ -61,38 +60,39 @@ let
       recurse {} [] tree;
 
   rakeLeaves =
-    /* from divnix/digga, under the MIT license
-     *
-     Synopsis: rakeLeaves _path_
+    /*
+      from divnix/digga, under the MIT license
+    *
+    Synopsis: rakeLeaves _path_
 
-     Recursively collect the nix files of _path_ into attrs.
+    Recursively collect the nix files of _path_ into attrs.
 
-     Output Format:
-     An attribute set where all `.nix` files and directories with `default.nix` in them
-     are mapped to keys that are either the file with .nix stripped or the folder name.
-     All other directories are recursed further into nested attribute sets with the same format.
+    Output Format:
+    An attribute set where all `.nix` files and directories with `default.nix` in them
+    are mapped to keys that are either the file with .nix stripped or the folder name.
+    All other directories are recursed further into nested attribute sets with the same format.
 
-     Example file structure:
-     ```
-     ./core/default.nix
-     ./base.nix
-     ./main/dev.nix
-     ./main/os/default.nix
-     ```
+    Example file structure:
+    ```
+    ./core/default.nix
+    ./base.nix
+    ./main/dev.nix
+    ./main/os/default.nix
+    ```
 
-     Example output:
-     ```
-     {
-     core = ./core;
-     base = base.nix;
-     main = {
-     dev = ./main/dev.nix;
-     os = ./main/os;
-     };
-     }
-     ```
-     *
-     */
+    Example output:
+    ```
+    {
+    core = ./core;
+    base = base.nix;
+    main = {
+    dev = ./main/dev.nix;
+    os = ./main/os;
+    };
+    }
+    ```
+    *
+    */
     dirPath: let
       seive = file: type:
       # Only rake `.nix` files or directories
@@ -115,11 +115,13 @@ let
     in
       lib.filterAttrs (n: v: v != {}) (lib.mapAttrs' collect files);
 
-  makeSystems =
-    path: inputs@{ lib, pkgs-stable, pkgs-latest }:
+  makeSystems = path: inputs @ {
+    lib,
+    pkgs-stable,
+    pkgs-latest,
+  }:
     lib.recursiveMap
-      (sys: sys inputs)
-      (rakeLeaves path);
-
+    (sys: sys inputs)
+    (rakeLeaves path);
 in
-  lib // { inherit rakeLeaves flattenTree makeSystems; }
+  lib // {inherit rakeLeaves flattenTree makeSystems;}
