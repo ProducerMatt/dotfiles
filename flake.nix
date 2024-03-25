@@ -76,6 +76,8 @@
     #  inputs.nixpkgs.follows = "pkgs-latest";
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
+
+    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
   };
 
   outputs = {
@@ -96,7 +98,8 @@
     nixseparatedebuginfod,
     rtx-flake,
     poetry2nix,
-    #, vscode-server
+    #, vscode-server,
+    nix-formatter-pack,
     ...
   } @ inputs: let
     flakeVersion = with self; {
@@ -106,7 +109,17 @@
       shortRev = self.shortRev or "dirty";
       revCount = self.revCount or "dirty";
     };
-    lib = import ./utils.nix {lib = pkgs-stable.lib;};
+    lib = import ./utils.nix {inherit (pkgs-stable) lib;};
+    nfpSettings = {system, pkgs}: {
+          inherit system pkgs;
+          config = {
+            tools = {
+              deadnix.enable = true;
+              alejandra.enable = true;
+              statix.enable = true;
+            };
+          };
+        };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       debug = true; # DEBUG
@@ -146,8 +159,17 @@
             fish
             nil
             alejandra
+            statix
+            deadnix
           ];
         };
+
+        formatter = nix-formatter-pack.lib.mkFormatter (nfpSettings {inherit pkgs system;});
+
+        checks.nix-formatter-pack =
+          nix-formatter-pack.lib.mkCheck
+          ((nfpSettings {inherit pkgs system;})
+          // {checkFiles = [./.];});
       };
       flake = {
         # The usual flake attributes can be defined here, including system-

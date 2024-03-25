@@ -2,9 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -12,10 +10,14 @@
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["ata_piix" "virtio_pci" "virtio_scsi" "floppy" "sd_mod" "sr_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot = {
+    initrd = {
+      availableKernelModules = ["ata_piix" "virtio_pci" "virtio_scsi" "floppy" "sd_mod" "sr_mod"];
+      kernelModules = [];
+    };
+    kernelModules = [];
+    extraModulePackages = [];
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/3d59cefc-09b7-4d70-83c5-f724ab159886";
