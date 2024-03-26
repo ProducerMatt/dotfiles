@@ -102,24 +102,14 @@
     nix-formatter-pack,
     ...
   } @ inputs: let
-    flakeVersion = with self; {
-      inherit lastModified lastModifiedDate narHash;
-      # TODO: could clearly be a function mapping
-      rev = self.rev or "dirty";
-      shortRev = self.shortRev or "dirty";
-      revCount = self.revCount or "dirty";
-    };
+    #flakeVersion = with self; {
+    #  inherit lastModified lastModifiedDate narHash;
+    #  # TODO: could clearly be a function mapping
+    #  rev = self.rev or "dirty";
+    #  shortRev = self.shortRev or "dirty";
+    #  revCount = self.revCount or "dirty";
+    #};
     lib = import ./utils.nix {inherit (pkgs-stable) lib;};
-    nfpSettings = {system, pkgs}: {
-          inherit system pkgs;
-          config = {
-            tools = {
-              deadnix.enable = true;
-              alejandra.enable = true;
-              statix.enable = true;
-            };
-          };
-        };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       debug = true; # DEBUG
@@ -164,18 +154,37 @@
           ];
         };
 
-        formatter = nix-formatter-pack.lib.mkFormatter (nfpSettings {inherit pkgs system;});
+        formatter = nix-formatter-pack.lib.mkFormatter {
+          inherit system pkgs;
+          config = {
+            tools = {
+              deadnix.enable = true;
+              alejandra.enable = true;
+              statix.enable = true;
+            };
+          };
+        };
 
         checks.nix-formatter-pack =
           nix-formatter-pack.lib.mkCheck
-          ((nfpSettings {inherit pkgs system;})
-          // {checkFiles = [./.];});
+          {
+            inherit system pkgs;
+            config = {
+              tools = {
+                alejandra.enable = true;
+                statix.enable = true;
+              };
+            };
+            checkFiles = [./.];
+          };
       };
       flake = {
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
 
+        nixosModules.profiles =
+          lib.makeProfiles ./profiles;
         colmena = {
           meta = {
             nixpkgs = import pkgs-latest {

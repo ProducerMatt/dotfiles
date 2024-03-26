@@ -113,15 +113,21 @@
 
       files = lib.filterAttrs seive (builtins.readDir dirPath);
     in
-      lib.filterAttrs (n: v: v != {}) (lib.mapAttrs' collect files);
+      lib.filterAttrs (_n: v: v != {}) (lib.mapAttrs' collect files);
 
   makeSystems = path: inputs @ {
     lib,
-    pkgs-stable,
-    pkgs-latest,
   }:
     lib.recursiveMap
     (sys: sys inputs)
     (rakeLeaves path);
+
+  makeProfiles = path:
+    lib.recursiveMap
+    (profile:
+      if builtins.isFunction profile
+      then profile
+      else (_: profile))
+    (rakeLeaves path);
 in
-  lib // {inherit rakeLeaves flattenTree makeSystems;}
+  lib // {inherit rakeLeaves flattenTree makeSystems makeProfiles;}
