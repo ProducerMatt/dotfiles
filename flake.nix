@@ -102,13 +102,23 @@
     nix-formatter-pack,
     ...
   } @ inputs: let
-    #flakeVersion = with self; {
-    #  inherit lastModified lastModifiedDate narHash;
-    #  # TODO: could clearly be a function mapping
-    #  rev = self.rev or "dirty";
-    #  shortRev = self.shortRev or "dirty";
-    #  revCount = self.revCount or "dirty";
-    #};
+    flakeVersion = with self; {
+      inherit lastModified lastModifiedDate narHash;
+      # TODO: could clearly be a function mapping
+      rev = self.rev or "dirty";
+      shortRev = self.shortRev or "dirty";
+      revCount = self.revCount or "dirty";
+    };
+    noteVersion =
+      # nixosModule using the info
+      ({ pkgs, config, ... }: {
+       users.motd = ''
+       ${config.networking.hostName}
+       Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
+       Flake commit ${flakeVersion.shortRev}
+       '';
+       system.configurationRevision = flakeVersion.rev;
+       });
     lib = import ./utils.nix {inherit (pkgs-stable) lib;};
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -183,8 +193,12 @@
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
 
-        nixosModules.profiles =
-          lib.makeProfiles ./profiles;
+        nixosModules = {
+          inherit noteVersion;
+          profiles =
+            lib.makeProfiles ./profiles;
+        };
+
         colmena = {
           meta = {
             nixpkgs = import pkgs-latest {
@@ -192,6 +206,7 @@
             };
           };
           defaults = {pkgs, ...}: {
+            imports = [ noteVersion ];
             system.copySystemConfiguration = lib.mkForce false;
             nix = {
               package = pkgs.nixUnstable;
