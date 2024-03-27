@@ -1,4 +1,9 @@
 {lib}: let
+  recursiveMap = f:
+    lib.mapAttrs (name: value:
+      (if builtins.isAttrs value
+      then (recursiveMap f value)
+      else (f name value)));
   flattenTree =
     /*
       from divnix/digga, under the MIT license
@@ -118,16 +123,16 @@
   makeSystems = path: inputs @ {
     lib,
   }:
-    lib.recursiveMap
+    recursiveMap
     (sys: sys inputs)
     (rakeLeaves path);
 
   makeProfiles = path:
-    lib.recursiveMap
+    recursiveMap
     (profile:
       if builtins.isFunction profile
       then profile
       else (_: profile))
     (rakeLeaves path);
 in
-  lib // {inherit rakeLeaves flattenTree makeSystems makeProfiles;}
+  lib // { our = {inherit rakeLeaves flattenTree makeSystems makeProfiles;};}

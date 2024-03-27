@@ -195,14 +195,16 @@
 
         nixosModules = {
           inherit noteVersion;
-          profiles =
-            lib.makeProfiles ./profiles;
         };
 
         colmena = {
           meta = {
             nixpkgs = import pkgs-latest {
               system = "x86_64-linux";
+            };
+            specialArgs = {
+              profiles =
+                lib.our.makeProfiles ./profiles;
             };
           };
           defaults = {pkgs, ...}: {
