@@ -1,6 +1,9 @@
-{lib}: let
+final: prev:
+let
+  # import other files that take {lib}
+  callLibs = file: import file { lib = final; };
   recursiveMap = f:
-    lib.mapAttrs (name: value:
+    prev.mapAttrs (name: value:
       (if builtins.isAttrs value
       then (recursiveMap f value)
       else (f name value)));
@@ -101,10 +104,10 @@
     dirPath: let
       seive = file: type:
       # Only rake `.nix` files or directories
-        (type == "regular" && lib.hasSuffix ".nix" file) || (type == "directory");
+        (type == "regular" && prev.hasSuffix ".nix" file) || (type == "directory");
 
       collect = file: type: {
-        name = lib.removeSuffix ".nix" file;
+        name = prev.removeSuffix ".nix" file;
         value = let
           path = dirPath + "/${file}";
         in
@@ -116,12 +119,13 @@
           else rakeLeaves path;
       };
 
-      files = lib.filterAttrs seive (builtins.readDir dirPath);
+      files = prev.filterAttrs seive (builtins.readDir dirPath);
     in
-      lib.filterAttrs (_n: v: v != {}) (lib.mapAttrs' collect files);
+      prev.filterAttrs (_n: v: v != {}) (prev.mapAttrs' collect files);
 
   makeSystems = path: inputs @ {
     lib,
+    ...
   }:
     recursiveMap
     (sys: sys inputs)
@@ -133,6 +137,10 @@
       if builtins.isFunction profile
       then profile
       else (_: profile))
-    (rakeLeaves path);
+    (flattenTree (rakeLeaves path));
 in
-  lib // { our = {inherit rakeLeaves flattenTree makeSystems makeProfiles;};}
+  {
+    our = {
+      inherit rakeLeaves flattenTree makeSystems makeProfiles;
+    };
+  }

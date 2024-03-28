@@ -93,7 +93,6 @@
     agenix,
     nvfetcher,
     deploy,
-    nixpkgs,
     #, guix-overlay
     nixseparatedebuginfod,
     rtx-flake,
@@ -119,9 +118,28 @@
        '';
        system.configurationRevision = flakeVersion.rev;
        });
-    lib = import ./utils.nix {inherit (pkgs-stable) lib;};
+    utils = import ./utils.nix;
+    lib = pkgs-latest.lib.extend utils;
+    defaultPkgs = system: import pkgs-latest {
+          inherit system;
+          config = {
+            allowUnfree = true;
+            allowMeta = true;
+          } // {
+                lib = pkgs-latest.lib.extend utils;
+          };
+    };
+    #dogfoodModules =
+    #  {
+    #
+    #  };
   in
-    flake-parts.lib.mkFlake {inherit inputs;} {
+    flake-parts.lib.mkFlake {
+      inherit inputs;
+      #specialArgs = {
+      #  inherit lib;
+      #};
+    } {
       debug = true; # DEBUG
 
       imports = [
@@ -140,13 +158,7 @@
         ...
       }: {
         # This sets `pkgs` to a nixpkgs with allowUnfree option set.
-        _module.args.pkgs = import pkgs-latest {
-          inherit system;
-          config = {
-            allowUnfree = true;
-            allowMeta = true;
-          };
-        };
+        _module.args.pkgs = defaultPkgs system;
 
         # Per-system attributes can be defined here. The self' and inputs'
         # module parameters provide easy access to attributes of the same
@@ -154,7 +166,7 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            nix
+            nixUnstable
             colmena
             fish
             nil
@@ -199,15 +211,12 @@
 
         colmena = {
           meta = {
-            nixpkgs = import pkgs-latest {
-              system = "x86_64-linux";
-            };
+            nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
-              profiles =
-                lib.our.makeProfiles ./profiles;
+              profiles = (lib.our.rakeLeaves ./profiles);
             };
           };
-          defaults = {pkgs, ...}: {
+          defaults = {pkgs, lib, ...}: {
             imports = [ noteVersion ];
             system.copySystemConfiguration = lib.mkForce false;
             nix = {

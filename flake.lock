@@ -521,18 +521,6 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-BCrB3l0qpJokOnIVc3g2lHiGhnjUi0MoXiw6t1o8H1E=",
-        "path": "/nix/store/02pg1kr963gyk2qs3m9hg1lvfgvvhmjy-source",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
         "lastModified": 1686277352,
         "narHash": "sha256-quryYLnntwZZrwJ4Vsx24hiCkwiYZAEttiOu983akGg=",
         "owner": "NixOS",
@@ -565,7 +553,7 @@
     "nixseparatedebuginfod": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1695643200,
@@ -741,7 +729,6 @@
         "nixos-22-05": "nixos-22-05",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
         "nixpkgs-darwin-stable": "nixpkgs-darwin-stable",
         "nixrepl": "nixrepl",
         "nixseparatedebuginfod": "nixseparatedebuginfod",
