@@ -83,21 +83,21 @@
   outputs = {
     self,
     flake-parts,
-    flake-utils-plus,
-    pkgs-stable,
+    #flake-utils-plus,
+    #pkgs-stable,
     pkgs-latest,
-    home,
-    home-latest,
-    nixos-hardware,
-    nur,
-    agenix,
-    nvfetcher,
-    deploy,
-    #, guix-overlay
-    nixseparatedebuginfod,
-    rtx-flake,
-    poetry2nix,
-    #, vscode-server,
+    #home,
+    #home-latest,
+    #nixos-hardware,
+    #nur,
+    #agenix,
+    #nvfetcher,
+    #deploy,
+    #guix-overlay,
+    #nixseparatedebuginfod,
+    #rtx-flake,
+    #poetry2nix,
+    #vscode-server,
     nix-formatter-pack,
     ...
   } @ inputs: let
@@ -110,23 +110,27 @@
     };
     noteVersion =
       # nixosModule using the info
-      ({ pkgs, config, ... }: {
-       users.motd = ''
-       ${config.networking.hostName}
-       Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
-       Flake commit ${flakeVersion.shortRev}
-       '';
-       system.configurationRevision = flakeVersion.rev;
-       });
+      {
+        config,
+        ...
+      }: {
+        users.motd = ''
+          ${config.networking.hostName}
+          Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
+          Flake commit ${flakeVersion.shortRev}
+        '';
+        system.configurationRevision = flakeVersion.rev;
+      };
     utils = import ./utils.nix;
     myLib = utils pkgs-latest.lib;
-    defaultPkgs = system: import pkgs-latest {
-          inherit system;
-          config = {
-            allowUnfree = true;
-            allowMeta = true;
-          };
-    };
+    defaultPkgs = system:
+      import pkgs-latest {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          allowMeta = true;
+        };
+      };
   in
     flake-parts.lib.mkFlake {
       inherit inputs;
@@ -145,8 +149,6 @@
       systems = ["x86_64-linux"];
       perSystem = {
         config,
-        self',
-        inputs',
         pkgs,
         system,
         ...
@@ -207,12 +209,16 @@
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
-              profiles = (myLib.makeProfiles ./profiles);
-              myLib = myLib;
+              profiles = myLib.makeProfiles ./profiles;
+              inherit myLib;
             };
           };
-          defaults = {pkgs, lib, ...}: {
-            imports = [ noteVersion ];
+          defaults = {
+            pkgs,
+            lib,
+            ...
+          }: {
+            imports = [noteVersion];
             system.copySystemConfiguration = lib.mkForce false;
             nix = {
               package = pkgs.nixUnstable;
