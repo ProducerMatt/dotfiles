@@ -15,7 +15,6 @@
   security.sudo = {
     enable = true;
     execWheelOnly = true;
-    wheelNeedsPassword = true;
   };
   security.pam.enableSSHAgentAuth = true;
 }

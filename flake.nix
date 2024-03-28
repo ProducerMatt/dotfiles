@@ -227,7 +227,8 @@
                 extra-experimental-features = "nix-command flakes";
               };
             };
-            security.sudo.wheelNeedsPassword = false;
+            # colmena needs no password
+            security.sudo.wheelNeedsPassword = lib.mkForce false;
           };
           NixVM = import ./hosts/NixVM;
         };
