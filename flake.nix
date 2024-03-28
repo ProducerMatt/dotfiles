@@ -119,20 +119,14 @@
        system.configurationRevision = flakeVersion.rev;
        });
     utils = import ./utils.nix;
-    lib = pkgs-latest.lib.extend utils;
+    myLib = utils pkgs-latest.lib;
     defaultPkgs = system: import pkgs-latest {
           inherit system;
           config = {
             allowUnfree = true;
             allowMeta = true;
-          } // {
-                lib = pkgs-latest.lib.extend utils;
           };
     };
-    #dogfoodModules =
-    #  {
-    #
-    #  };
   in
     flake-parts.lib.mkFlake {
       inherit inputs;
@@ -213,7 +207,8 @@
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
-              profiles = (lib.our.rakeLeaves ./profiles);
+              profiles = (myLib.makeProfiles ./profiles);
+              myLib = myLib;
             };
           };
           defaults = {pkgs, lib, ...}: {

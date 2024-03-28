@@ -1,12 +1,13 @@
-final: prev:
+lib:
+lib.makeExtensible (self:
 let
   # import other files that take {lib}
-  callLibs = file: import file { lib = final; };
+  callLibs = file: import file { inherit lib; myLib = self; };
   recursiveMap = f:
-    prev.mapAttrs (name: value:
+    lib.mapAttrs (name: value:
       (if builtins.isAttrs value
       then (recursiveMap f value)
-      else (f name value)));
+      else (f value)));
   flattenTree =
     /*
       from divnix/digga, under the MIT license
@@ -67,7 +68,6 @@ let
     in
       recurse {} [] tree;
 
-  rakeLeaves =
     /*
       from divnix/digga, under the MIT license
     *
@@ -83,6 +83,7 @@ let
     Example file structure:
     ```
     ./core/default.nix
+    ./core/not_default.nix
     ./base.nix
     ./main/dev.nix
     ./main/os/default.nix
@@ -101,27 +102,29 @@ let
     ```
     *
     */
-    dirPath: let
+  rakeLeaves = rakeLeavesF (path: import path);
+  rakeLeavesF =
+    f: dirPath: let
       seive = file: type:
       # Only rake `.nix` files or directories
-        (type == "regular" && prev.hasSuffix ".nix" file) || (type == "directory");
+        (type == "regular" && lib.hasSuffix ".nix" file) || (type == "directory");
 
       collect = file: type: {
-        name = prev.removeSuffix ".nix" file;
+        name = lib.removeSuffix ".nix" file;
         value = let
           path = dirPath + "/${file}";
         in
           if
             (type == "regular")
             || (type == "directory" && builtins.pathExists (path + "/default.nix"))
-          then path
+          then f path
           # recurse on directories that don't contain a `default.nix`
-          else rakeLeaves path;
+          else rakeLeavesF path;
       };
 
-      files = prev.filterAttrs seive (builtins.readDir dirPath);
+      files = lib.filterAttrs seive (builtins.readDir dirPath);
     in
-      prev.filterAttrs (_n: v: v != {}) (prev.mapAttrs' collect files);
+      lib.filterAttrs (_n: v: v != {}) (lib.mapAttrs' collect files);
 
   makeSystems = path: inputs @ {
     lib,
@@ -131,16 +134,17 @@ let
     (sys: sys inputs)
     (rakeLeaves path);
 
-  makeProfiles = path:
-    recursiveMap
-    (profile:
+  makeProfiles = profileDir:
+  let
+    f = path:
+    let profile = import path; in
       if builtins.isFunction profile
       then profile
-      else (_: profile))
-    (flattenTree (rakeLeaves path));
+      else (_: profile);
+  in
+    rakeLeavesF f profileDir;
+  getPkgSnippet = pkgs: s: import (./snippets + "/${s}.nix") pkgs;
 in
   {
-    our = {
-      inherit rakeLeaves flattenTree makeSystems makeProfiles;
-    };
-  }
+      inherit rakeLeaves rakeLeavesF flattenTree makeSystems makeProfiles getPkgSnippet;
+  })
