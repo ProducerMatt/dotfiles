@@ -3,11 +3,9 @@ let
   cfg = config.matt.hm;
 in
 {
-    imports = lib.optionals cfg.enable (lib.singleton
-      (builtins.foldl'
-        (name: acc:
-          lib.recursiveUpdate acc (import ../users/default.nix).${name}.nixos)
-        {} cfg.users));
+  imports = (map
+    (name: (import ../users/default.nix)."${name}".nixos)
+    ["matt"]);
   options = {
     matt.hm = {
       enable = lib.mkEnableOption "this module";
@@ -22,7 +20,7 @@ in
       #};
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
