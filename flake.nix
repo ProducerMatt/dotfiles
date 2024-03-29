@@ -118,7 +118,7 @@
       rev = self.rev or "dirty";
       shortRev = self.shortRev or "dirty";
       revCount = self.revCount or "dirty";
-      rootDir = ../.;
+      rootDir = ./.;
     };
   in
     flake-parts.lib.mkFlake {
