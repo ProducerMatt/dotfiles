@@ -206,7 +206,6 @@
             ...
           }: {
             imports = [
-              home-manager-latest.nixosModules.home-manager
               hm
             ];
             users.motd = ''
