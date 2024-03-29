@@ -223,28 +223,28 @@
         "type": "github"
       }
     },
-    "home": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "pkgs-latest"
+          "agenix",
+          "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1695108154,
-        "narHash": "sha256-gSg7UTVtls2yO9lKtP0yb66XBHT1Fx5qZSZbGMpSn2c=",
+        "lastModified": 1682203081,
+        "narHash": "sha256-kRL4ejWDhi0zph/FpebFYhzqlOBrk0Pl3dzGEKSAlEw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "07682fff75d41f18327a871088d20af2710d4744",
+        "rev": "32d3e39c491e2f91152c84f8ad8b003420eab0a1",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-23.05",
         "repo": "home-manager",
         "type": "github"
       }
     },
-    "home-latest": {
+    "home-manager-latest": {
       "inputs": {
         "nixpkgs": [
           "pkgs-latest"
@@ -265,23 +265,23 @@
         "type": "github"
       }
     },
-    "home-manager": {
+    "home-manager-stable": {
       "inputs": {
         "nixpkgs": [
-          "agenix",
-          "nixpkgs"
+          "pkgs-stable"
         ]
       },
       "locked": {
-        "lastModified": 1682203081,
-        "narHash": "sha256-kRL4ejWDhi0zph/FpebFYhzqlOBrk0Pl3dzGEKSAlEw=",
+        "lastModified": 1710888565,
+        "narHash": "sha256-s9Hi4RHhc6yut4EcYD50sZWRDKsugBJHSbON8KFwoTw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "32d3e39c491e2f91152c84f8ad8b003420eab0a1",
+        "rev": "f33900124c23c4eca5831b9b5eb32ea5894375ce",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "release-23.11",
         "repo": "home-manager",
         "type": "github"
       }
@@ -721,8 +721,8 @@
         "deploy": "deploy",
         "flake-parts": "flake-parts",
         "flake-utils-plus": "flake-utils-plus",
-        "home": "home",
-        "home-latest": "home-latest",
+        "home-manager-latest": "home-manager-latest",
+        "home-manager-stable": "home-manager-stable",
         "mynur": "mynur",
         "naersk": "naersk",
         "nix-formatter-pack": "nix-formatter-pack",

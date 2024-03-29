@@ -20,10 +20,10 @@
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
-    home.url = "github:nix-community/home-manager/release-23.05";
-    home.inputs.nixpkgs.follows = "pkgs-latest";
-    home-latest.url = "github:nix-community/home-manager/master";
-    home-latest.inputs.nixpkgs.follows = "pkgs-latest";
+    home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
+    home-manager-stable.inputs.nixpkgs.follows = "pkgs-stable";
+    home-manager-latest.url = "github:nix-community/home-manager/master";
+    home-manager-latest.inputs.nixpkgs.follows = "pkgs-latest";
 
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
@@ -86,8 +86,8 @@
     #flake-utils-plus,
     #pkgs-stable,
     pkgs-latest,
-    #home,
-    #home-latest,
+    home-manager-stable,
+    home-manager-latest,
     #nixos-hardware,
     #nur,
     #agenix,
@@ -101,26 +101,6 @@
     nix-formatter-pack,
     ...
   } @ inputs: let
-    flakeVersion = with self; {
-      inherit lastModified lastModifiedDate narHash;
-      # TODO: could clearly be a function mapping
-      rev = self.rev or "dirty";
-      shortRev = self.shortRev or "dirty";
-      revCount = self.revCount or "dirty";
-    };
-    noteVersion =
-      # nixosModule using the info
-      {
-        config,
-        ...
-      }: {
-        users.motd = ''
-          ${config.networking.hostName}
-          Flake revision #${builtins.toString flakeVersion.revCount} from ${flakeVersion.lastModifiedDate}
-          Flake commit ${flakeVersion.shortRev}
-        '';
-        system.configurationRevision = flakeVersion.rev;
-      };
     utils = import ./utils.nix;
     myLib = utils pkgs-latest.lib;
     defaultPkgs = system:
@@ -131,12 +111,11 @@
           allowMeta = true;
         };
       };
+    hm = import ./modules/hm.nix;
+    metaInfo = import ./modules/metaInfo.nix;
   in
     flake-parts.lib.mkFlake {
       inherit inputs;
-      #specialArgs = {
-      #  inherit lib;
-      #};
     } {
       debug = true; # DEBUG
 
@@ -202,7 +181,7 @@
         # those are more easily expressed in perSystem.
 
         nixosModules = {
-          inherit noteVersion;
+          inherit metaInfo hm;
         };
 
         colmena = {
@@ -218,7 +197,11 @@
             lib,
             ...
           }: {
-            imports = [noteVersion];
+            imports = [
+              metaInfo
+              #home-manager-latest.nixosModules.home-manager
+              hm
+            ];
             system.copySystemConfiguration = lib.mkForce false;
             nix = {
               package = pkgs.nixUnstable;
