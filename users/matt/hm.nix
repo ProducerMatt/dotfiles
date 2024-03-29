@@ -1,6 +1,6 @@
-{ pkgs, self, lib, suites, myLib, ... }:
+{ pkgs, self, lib, suites, myLib, flakeInfo, ... }:
 let
-#  getSnippet = myLib.getPkgSnippet pkgs;
+  getSnippet = myLib.getPkgSnippet pkgs;
   start_emacs = "emacsclient -c -a 'emacs'";
   myAliases = {
     l = "eza";
@@ -90,7 +90,7 @@ in
   programs.gpg.enable = true;
 
   home.sessionVariables = {
-    FLAKE = ../..;
+    FLAKE = flakeInfo.rootDir;
     REALNAME = "ProducerMatt";
     EMAIL = "ProducerMatt42@gmail.com";
     KEYID = "E6EA80E5CB3E1F9C";
@@ -107,65 +107,65 @@ in
 #    userName = "Producer Matt";
 #  };
 #
-#  home.packages = with pkgs; builtins.concatLists [
-#    (getSnippet "base_cli")
-#    (getSnippet "dev")
-#    (getSnippet "sysadmin")
-#    (getSnippet "git")
-#    [
-#      #ripgrep-all # bug
-#      psmisc
-#      passphrase2pgp
-#      #keybase
-#      #nur.repos.ProducerMatt.cosmo
-#      cachix
-#      #rlwrap
-#      #httrack
-#      #hugo
-#      #nodePackages.pnpm
-#      #metadata-cleaner
-#      #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
-#      #nodePackages.node2nix # node packages to nix packages
-#      #nodePackages.browser-sync # live-reloading dev server
-#      bc # cli calculators
-#      imagemagick
-#      #sd # sed alternative
-#
-#      # mainly for Emacs
-#      #clang
-#      #ccls
-#      rnix-lsp
-#      # any less than medium isn't guaranteed to work
-#      #texlive.combined.scheme-full
-#      # required by +jupyter
-#      #(python38.withPackages(ps: with ps; [jupyter]))
-#
-#      ## Emacs + Python
-#      #(python310.withPackages (ps: with ps; [
-#      #  ipython
-#      #  pyflakes
-#      #  black
-#      #  pytest
-#      #  nose
-#      #  isort
-#      #  # Latex source code highlighting
-#      #  pygments
-#      #]))
-#      #micromamba
-#      #conda
-#      ispell
-#      #pandoc
-#      #tectonic
-#      #gnuplot
-#      #graphviz
-#      #cmake
-#      shellcheck
-#      #editorconfig-core-c
-#      #nodejs
-#      #nodePackages.mermaid-cli
-#      #cpplint
-#    ]
-#  ];
+  home.packages = with pkgs; builtins.concatLists [
+    (getSnippet "base_cli")
+    (getSnippet "dev")
+    (getSnippet "sysadmin")
+    (getSnippet "git")
+    [
+      #ripgrep-all # bug
+      psmisc
+      passphrase2pgp
+      #keybase
+      #nur.repos.ProducerMatt.cosmo
+      cachix
+      #rlwrap
+      #httrack
+      #hugo
+      #nodePackages.pnpm
+      #metadata-cleaner
+      #nur.repos.ProducerMatt.yaml2nix # why aren't you working???
+      #nodePackages.node2nix # node packages to nix packages
+      #nodePackages.browser-sync # live-reloading dev server
+      bc # cli calculators
+      imagemagick
+      #sd # sed alternative
+
+      # mainly for Emacs
+      #clang
+      #ccls
+      rnix-lsp
+      # any less than medium isn't guaranteed to work
+      #texlive.combined.scheme-full
+      # required by +jupyter
+      #(python38.withPackages(ps: with ps; [jupyter]))
+
+      ## Emacs + Python
+      #(python310.withPackages (ps: with ps; [
+      #  ipython
+      #  pyflakes
+      #  black
+      #  pytest
+      #  nose
+      #  isort
+      #  # Latex source code highlighting
+      #  pygments
+      #]))
+      #micromamba
+      #conda
+      ispell
+      #pandoc
+      #tectonic
+      #gnuplot
+      #graphviz
+      #cmake
+      shellcheck
+      #editorconfig-core-c
+      #nodejs
+      #nodePackages.mermaid-cli
+      #cpplint
+    ]
+  ];
 #  services.emacs = {
 #    enable = true;
 #    package = pkgs.emacs28NativeComp;

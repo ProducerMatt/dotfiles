@@ -112,7 +112,14 @@
         };
       };
     hm = import ./modules/hm.nix;
-    metaInfo = import ./modules/metaInfo.nix;
+    flakeInfo = {
+      inherit (self) lastModified lastModifiedDate narHash;
+      # TODO: could clearly be a function mapping
+      rev = self.rev or "dirty";
+      shortRev = self.shortRev or "dirty";
+      revCount = self.revCount or "dirty";
+      rootDir = ../.;
+    };
   in
     flake-parts.lib.mkFlake {
       inherit inputs;
@@ -181,7 +188,7 @@
         # those are more easily expressed in perSystem.
 
         nixosModules = {
-          inherit metaInfo hm;
+          inherit hm;
         };
 
         colmena = {
@@ -189,20 +196,29 @@
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
               profiles = myLib.makeProfiles ./profiles;
-              inherit myLib;
+              inherit myLib flakeInfo;
             };
           };
           defaults = {
+            config,
             pkgs,
             lib,
             ...
           }: {
             imports = [
-              metaInfo
               home-manager-latest.nixosModules.home-manager
               hm
             ];
+            users.motd = ''
+            === ${config.networking.hostName} ===
+            Flake revision #${builtins.toString flakeInfo.revCount} from ${flakeInfo.lastModifiedDate}
+            Flake commit ${flakeInfo.shortRev}
+            '';
+            system.configurationRevision = flakeInfo.rev;
             system.copySystemConfiguration = lib.mkForce false;
+            matt.hm = {
+                enable = true;
+            };
             nix = {
               package = pkgs.nixUnstable;
               settings = {
