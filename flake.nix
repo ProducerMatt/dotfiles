@@ -199,7 +199,7 @@
           }: {
             imports = [
               metaInfo
-              #home-manager-latest.nixosModules.home-manager
+              home-manager-latest.nixosModules.home-manager
               hm
             ];
             system.copySystemConfiguration = lib.mkForce false;

@@ -1,7 +1,13 @@
 {inputs, config, lib, ...}: {
   options = {
+    imports = [
+      #inputs."home-manager-${config.matt.hm.branch}".nixosModules.home-manager
+    ] ++ (map (name:
+        lib.recursiveUpdate
+          (import ../users/default.nix).${name}.nixos
+          (lib.setAttrByPath ["home-manager" "users" name "home" "stateVersion"] config.metaInfo.stateVersion))
+      config.matt.hm.users);
     matt.hm = {
-      enable = lib.mkEnableOption "module";
       users = lib.mkOption {
         default = [
           "matt"
@@ -13,10 +19,7 @@
       };
     };
   };
-  config = lib.mkIf config.matt.hm.enable {
-    imports = [
-      inputs."home-manager-${config.matt.hm.branch}".nixosModules.home-manager
-    ] ++ (map (name: (import ../users/default.nix).${name}.nixos) config.matt.hm.users);
+  config = {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
