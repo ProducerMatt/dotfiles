@@ -1,7 +1,7 @@
 hm:
-{ pkgs, ... }:
+here@{ pkgs, lib, ... }:
 {
-  home-manager.users = hm;
+  home-manager.users = lib.callPackageWith here hm {};
 
   users.users.matt = {
     isNormalUser = true;

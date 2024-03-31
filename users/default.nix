@@ -1,3 +1,9 @@
+{lib, env}:
+let
+  f = path: (import path)."${env}";
+in
 {
-    matt = import ./matt;
+    imports = map f [
+      ./matt
+    ];
 }

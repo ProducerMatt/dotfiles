@@ -3,13 +3,14 @@ let
   cfg = config.matt.hm;
 in
 {
-  imports = (map
-    (name: (import ../users/default.nix)."${name}".nixos)
-    ["matt"]);
+  imports = [
+    (import ../users/default.nix {inherit lib; env = "nixos";})
+  ];
   options = {
     matt.hm = {
       enable = lib.mkEnableOption "this module";
       users = lib.mkOption {
+# NOTE: this will be resolved in user loading
         default = [
           "matt"
         ];
@@ -20,7 +21,7 @@ in
       #};
     };
   };
-  config = {
+  config = lib.mkIf cfg.matt.hm.enable {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
