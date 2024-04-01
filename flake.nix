@@ -206,9 +206,10 @@
             ...
           }: {
             imports = [
-              home-manager-latest.nixosModules.home-manager
+              inputs.home-manager-latest.nixosModules.home-manager
               hm
             ];
+            matt.hm.enable = true;
             users.motd = ''
             === ${config.networking.hostName} ===
             Flake revision #${builtins.toString flakeInfo.revCount} from ${flakeInfo.lastModifiedDate}
@@ -216,9 +217,6 @@
             '';
             system.configurationRevision = flakeInfo.rev;
             system.copySystemConfiguration = lib.mkForce false;
-            matt.hm = {
-                enable = true;
-            };
             nix = {
               package = pkgs.nixUnstable;
               settings = {

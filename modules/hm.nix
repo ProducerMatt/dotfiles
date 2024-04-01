@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    (import ../users/default.nix {inherit lib; env = "nixos";})
+    (import ../users/matt {pred = lib.any (x: x == "matt") cfg.users;})
   ];
   options = {
     matt.hm = {
@@ -14,14 +14,14 @@ in
         default = [
           "matt"
         ];
-        type = with lib.types; listOf str;
+        type = with lib.types; listOf (enum ["matt"]);
       };
       #branch = lib.mkOption {
       #  type = with lib.types; uniq (enum ["stable" "latest"]);
       #};
     };
   };
-  config = lib.mkIf cfg.matt.hm.enable {
+  config = lib.mkIf cfg.enable {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
