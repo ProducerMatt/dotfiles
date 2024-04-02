@@ -1,4 +1,4 @@
-{inputs, config, lib, ...}:
+{self, inputs, config, lib, myLib, ...}:
 let
   cfg = config.matt.hm;
 in
@@ -25,6 +25,9 @@ in
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+      extraSpecialArgs = {
+        inherit self myLib;
+      };
     };
   };
 }

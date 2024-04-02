@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, myLib, ... }:
 
 let
-  getSnippet = lib.our.getPkgSnippet pkgs;
+  getSnippet = myLib.getPkgSnippet pkgs;
 in
 {
   programs.git = {

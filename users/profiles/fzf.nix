@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, myLib, mySources, ... }:
 
 {
   programs.fzf = {
@@ -8,8 +8,8 @@
   };
   programs.fish = {
     enable = true;
-    plugins = with pkgs; with lib;
-      map (plugin: (lib.our.cleanForFish pkgs.sources."${plugin}"))
+    plugins =
+      map (plugin: (myLib.cleanForFish mySources."${plugin}"))
         [
           "fzf"
         ];

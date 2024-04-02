@@ -84,7 +84,7 @@
     self,
     flake-parts,
     #flake-utils-plus,
-    #pkgs-stable,
+    pkgs-stable,
     pkgs-latest,
     home-manager-stable,
     home-manager-latest,
@@ -195,8 +195,9 @@
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
-              profiles = myLib.makeProfiles ./profiles;
               inherit myLib flakeInfo;
+              profiles = myLib.makeProfiles ./profiles;
+              hmProfiles = myLib.makeProfiles ./users/profiles;
             };
           };
           defaults = {

@@ -1,5 +1,5 @@
 {pred}:
-{ self, pkgs, lib, myLib, flakeInfo, ... }:
+{ self, pkgs, lib, myLib, flakeInfo, hmProfiles, ... }:
 {
   config = lib.mkIf pred (
 let
@@ -47,7 +47,7 @@ let
     nrb = "sudo nixos-rebuild";
 
     # fix nixos-option for flake compat
-    nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
+    #nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
 
     ## systemd
     #ctl = "systemctl";
@@ -65,11 +65,16 @@ let
   };
 in
 {
-#  imports =
-#    #[ profiles.vscode ] ++
-#    suites.base ++
-#    suites.dev; # ++
-#  #suites.graphical;
+  imports = with hmProfiles;
+    #[ profiles.vscode ] ++
+    [
+      core
+      #fzf
+      git
+      direnv
+      nix-index
+    ];
+  #suites.graphical;
   home.username = "matt";
   home.homeDirectory = "/home/matt";
   home.stateVersion = "23.11";
