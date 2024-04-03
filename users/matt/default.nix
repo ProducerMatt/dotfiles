@@ -1,7 +1,7 @@
-{pred}:
+{enable}:
 { self, pkgs, lib, myLib, flakeInfo, hmProfiles, ... }:
 {
-  config = lib.mkIf pred (
+  config = lib.mkIf enable (
 let
   hm =
 let
@@ -47,7 +47,7 @@ let
     nrb = "sudo nixos-rebuild";
 
     # fix nixos-option for flake compat
-    #nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
+    nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
 
     ## systemd
     #ctl = "systemctl";
@@ -110,13 +110,13 @@ in
     EDITOR = start_emacs;
     VISUAL = start_emacs;
   };
-#
-#  programs.git = {
-#    package = pkgs.gitAndTools.gitFull;
-#    userEmail = "58014742+ProducerMatt@users.noreply.github.com";
-#    userName = "Producer Matt";
-#  };
-#
+
+  programs.git = {
+    package = pkgs.gitAndTools.gitFull;
+    userEmail = "58014742+ProducerMatt@users.noreply.github.com";
+    userName = "Producer Matt";
+  };
+
   home.packages = with pkgs; builtins.concatLists [
     (getSnippet "base_cli")
     (getSnippet "dev")
@@ -139,12 +139,12 @@ in
       #nodePackages.browser-sync # live-reloading dev server
       bc # cli calculators
       imagemagick
-      #sd # sed alternative
+      sd # sed alternative
 
       # mainly for Emacs
       #clang
       #ccls
-      rnix-lsp
+      nil
       # any less than medium isn't guaranteed to work
       #texlive.combined.scheme-full
       # required by +jupyter
@@ -176,12 +176,12 @@ in
       #cpplint
     ]
   ];
-#  services.emacs = {
-#    enable = true;
-#    package = pkgs.emacs28NativeComp;
-#  };
-#  programs.vim.package = pkgs.vim;
-#
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs28NativeComp;
+  };
+  programs.vim.package = pkgs.vim;
+
   home.file = {
     ".guile".text = ''
       ;; managed by flake

@@ -195,7 +195,7 @@
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
-              inherit myLib flakeInfo;
+              inherit self myLib flakeInfo;
               profiles = myLib.makeProfiles ./profiles;
               hmProfiles = myLib.makeProfiles ./users/profiles;
             };
