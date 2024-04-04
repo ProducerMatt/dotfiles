@@ -138,7 +138,10 @@ lib.makeExtensible (self: let
       else (_: profile);
   in
     rakeLeavesF f profileDir;
+
   getPkgSnippet = pkgs: s: import (./snippets + "/${s}.nix") pkgs;
+
+  contains = lst: item: lib.any (x: x == item) lst;
 in {
-  inherit rakeLeaves rakeLeavesF flattenTree makeSystems makeProfiles getPkgSnippet;
+  inherit rakeLeaves rakeLeavesF flattenTree makeSystems makeProfiles getPkgSnippet contains;
 })

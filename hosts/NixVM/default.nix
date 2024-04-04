@@ -12,10 +12,16 @@
     targetUser = "matt";
   };
 
-  imports = [
+  imports = with profiles; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    profiles.core
+      core
+      nixsettings
+      cachix
+      openssh
+      earlyOOM
+      adminAccess
+      qemu
   ];
 
   # Use the GRUB 2 boot loader.
