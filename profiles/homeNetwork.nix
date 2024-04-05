@@ -1,4 +1,4 @@
-{...}: {
+{
   fileSystems."/mnt/PublicNAS" = {
     device = "192.168.1.3:/mnt/PherigoRAID/Public";
     fsType = "nfs";
