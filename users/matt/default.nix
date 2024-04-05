@@ -83,18 +83,20 @@
         home.homeDirectory = "/home/matt";
         home.stateVersion = "23.11";
 
-        #  programs.fish = {
-        #    enable = true;
-        #    plugins = with pkgs; with lib;
-        #      map (plugin: (myLib.cleanForFish pkgs.sources."${plugin}"))
-        #        [
-        #          "fish-abbreviation-tips"
-        #          "jethrokuan-z"
-        #          "nvmfish"
-        #          "replayfish"
-        #        ];
-        #    shellAliases = myAliases;
-        #  };
+        programs.fish = {
+          enable = true;
+          plugins =
+            myLib.cleanForFish {
+              sources = pkgs._sources;
+              wanted = [
+                "fish-abbreviation-tips"
+                "z"
+                "nvm.fish"
+                "replay.fish"
+              ];
+            };
+          shellAliases = myAliases;
+        };
         programs.bash = {
           enable = true;
           initExtra = builtins.readFile ./bash_prompt.sh;

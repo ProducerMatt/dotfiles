@@ -1,0 +1,89 @@
+{
+  "pins": {
+    "fish-abbreviation-tips": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "gazorby",
+        "repo": "fish-abbreviation-tips"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "v0.7.0",
+      "revision": "8ed76a62bb044ba4ad8e3e6832640178880df485",
+      "url": "https://api.github.com/repos/gazorby/fish-abbreviation-tips/tarball/v0.7.0",
+      "hash": "05b5qp7yly7mwsqykjlb79gl24bs6mbqzaj5b3xfn3v2b7apqnqp"
+    },
+    "fzf.fish": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "PatrickF1",
+        "repo": "fzf.fish"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "v10.2",
+      "revision": "85503fbc4b6026c616dd5dc8ebb4cfb82e1ef16c",
+      "url": "https://api.github.com/repos/PatrickF1/fzf.fish/tarball/v10.2",
+      "hash": "0pf0nwqiaf13cp41c4cj4f4lpsig4zkizsxhc0yqfyq78lm0pwyp"
+    },
+    "nvm.fish": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jorgebucaran",
+        "repo": "nvm.fish"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "2.2.13",
+      "revision": "19c82acb233d59230bc0a5c377af8b85bab78938",
+      "url": "https://api.github.com/repos/jorgebucaran/nvm.fish/tarball/2.2.13",
+      "hash": "084wvdinas1d7v3da16lim7s8asimh389frmfamr7q70fy44spid"
+    },
+    "replay.fish": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jorgebucaran",
+        "repo": "replay.fish"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "1.2.1",
+      "revision": "1c42f37eb18f15da90376ab84a857fa6a1134c11",
+      "url": "https://api.github.com/repos/jorgebucaran/replay.fish/tarball/1.2.1",
+      "hash": "0inniabgdbd7yq71rpmpnzhbk8y23ggvlk4jhaapc7bz0yhbxkkc"
+    },
+    "rsync-bpc": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "backuppc",
+        "repo": "rsync-bpc"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "3.1.3.0",
+      "revision": "dcb672942e4094849ff035506729a998b340e7e3",
+      "url": "https://api.github.com/repos/backuppc/rsync-bpc/tarball/3.1.3.0",
+      "hash": "1c66br8fvk9rrp7jrkrnk4f42j60v82hwva9yz0andcribr8dc1b"
+    },
+    "z": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jethrokuan",
+        "repo": "z"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "1.1",
+      "revision": "ca4b1a996e6d211e882d937602b35f81b87c7c41",
+      "url": "https://api.github.com/repos/jethrokuan/z/tarball/1.1",
+      "hash": "0fkizfw2qfdv2qd3shzrxvfwnsv9i2bvybyrmfcj643jkjbamcz4"
+    }
+  },
+  "version": 3
+}

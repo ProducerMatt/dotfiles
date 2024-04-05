@@ -155,6 +155,7 @@
             alejandra
             statix
             deadnix
+            npins
           ];
         };
 
@@ -198,12 +199,14 @@
               inherit self myLib flakeInfo;
               profiles = myLib.makeProfiles ./profiles;
               hmProfiles = myLib.makeProfiles ./users/profiles;
+              overlays = myLib.rakeLeaves ./overlays;
             };
           };
           defaults = {
             config,
             pkgs,
             lib,
+            overlays,
             ...
           }: {
             imports = [
@@ -225,6 +228,11 @@
                 extra-experimental-features = "nix-command flakes";
               };
             };
+            nixpkgs.overlays = [
+              (final: prev: {_sources = import ./npins/default.nix;})
+              overlays.webkitgtk
+              overlays.displaylinkFix
+            ];
             # colmena needs no password
             security.sudo.wheelNeedsPassword = lib.mkForce false;
           };

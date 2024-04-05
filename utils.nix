@@ -1,8 +1,8 @@
 lib:
-lib.makeExtensible (_self: let
+lib.makeExtensible (_self: with lib; let
   # import other files that take {lib}
   recursiveMap = f:
-    lib.mapAttrs (_name: value: (
+    mapAttrs (_name: value: (
       if builtins.isAttrs value
       then (recursiveMap f value)
       else (f value)
@@ -105,10 +105,10 @@ lib.makeExtensible (_self: let
   rakeLeavesF = f: dirPath: let
     seive = file: type:
     # Only rake `.nix` files or directories
-      (type == "regular" && lib.hasSuffix ".nix" file) || (type == "directory");
+      (type == "regular" && hasSuffix ".nix" file) || (type == "directory");
 
     collect = file: type: {
-      name = lib.removeSuffix ".nix" file;
+      name = removeSuffix ".nix" file;
       value = let
         path = dirPath + "/${file}";
       in
@@ -120,9 +120,9 @@ lib.makeExtensible (_self: let
         else rakeLeavesF path;
     };
 
-    files = lib.filterAttrs seive (builtins.readDir dirPath);
+    files = filterAttrs seive (builtins.readDir dirPath);
   in
-    lib.filterAttrs (_n: v: v != {}) (lib.mapAttrs' collect files);
+    filterAttrs (_n: v: v != {}) (mapAttrs' collect files);
 
   makeSystems = path: inputs:
     recursiveMap
@@ -140,6 +140,20 @@ lib.makeExtensible (_self: let
     rakeLeavesF f profileDir;
 
   getPkgSnippet = pkgs: s: import (./snippets + "/${s}.nix") pkgs;
+
+  removeUnwanted = listOfUnwanted: A: (filterAttrsRecursive
+    (name: value: all (item: name != item) listOfUnwanted)
+    A);
+
+  keepWanted = listOfWanted: A:
+    filterAttrs (name: value: builtins.elem name listOfWanted) A;
+
+  cleanForFish =
+    {sources, wanted}:
+    pipe sources [
+      (keepWanted wanted)
+      (mapAttrsToList (name: sourceInfo: {inherit name; src = sourceInfo.outPath;}))
+    ];
 in {
-  inherit rakeLeaves rakeLeavesF flattenTree makeSystems makeProfiles getPkgSnippet;
+  inherit rakeLeaves rakeLeavesF flattenTree makeSystems makeProfiles getPkgSnippet cleanForFish removeUnwanted;
 })
