@@ -1,4 +1,4 @@
-{...}: {
+_: {
   users.users.nixremote = {
     description = "user for remotely initiated build jobs";
     isSystemUser = true;

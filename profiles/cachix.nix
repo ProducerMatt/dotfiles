@@ -29,7 +29,7 @@ in
   with builtins;
   with lib; {
     nix.settings = {
-      substituters = map (pair: head pair) sources;
-      trusted-public-keys = map (pair: last pair) sources;
+      substituters = map head sources;
+      trusted-public-keys = map last sources;
     };
   }
