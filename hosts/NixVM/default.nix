@@ -17,7 +17,6 @@
     ./hardware-configuration.nix
       core
       nixsettings
-      cachix
       openssh
       earlyOOM
       adminAccess

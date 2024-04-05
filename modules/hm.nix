@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    (import ../users/matt {enable = myLib.contains cfg.users "matt";})
+    (import ../users/matt {enable = builtins.elem "matt" cfg.users;})
   ];
   options = {
     matt.hm = {

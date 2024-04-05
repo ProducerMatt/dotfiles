@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./cachix ];
+  imports = [ ./cachix.nix ];
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes

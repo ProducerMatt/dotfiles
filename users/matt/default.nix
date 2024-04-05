@@ -199,7 +199,6 @@ in
 };
 in
 {
-  config = {
   home-manager.users.matt = hm;
 
   users.users.matt = {
@@ -218,6 +217,5 @@ in
     shell = pkgs.fish;
   };
   programs.fish.enable = true; # required for vendor distributions of autocomplete, etc.
-  };
 });
 }
