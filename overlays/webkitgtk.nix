@@ -7,7 +7,7 @@ in {
     opencv4 = opencv4-noCuda;
   };
   webkitgtk = prev.webkitgtk.override {
-    gst-plugins-bad = final.gst-plugins-bad;
+    inherit (final) gst-plugins-bad;
     #enableGLES = false;
     #stdenv = prev.stdenv.override {
     #  enableParallelBuilding = false;
@@ -15,6 +15,6 @@ in {
     #stdenv = prev.llvmPackages_15.stdenv;
   };
   gtk4 = prev.gtk4.override {
-    gst_all_1 = final.gst_all_1;
+    inherit (final) gst_all_1;
   };
 }

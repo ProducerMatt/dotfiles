@@ -1,8 +1,8 @@
 final: prev: {
   linuxPackages_latest =
     prev.linuxPackages_latest.extend
-    (lpfinal: lpprev: {
-      evdi = lpprev.evdi.overrideAttrs (efinal: eprev: {
+    (_lpfinal: lpprev: {
+      evdi = lpprev.evdi.overrideAttrs (_efinal: _eprev: {
         version = "unstable-2023-02-23";
         src = prev.fetchFromGitHub {
           owner = "listout";

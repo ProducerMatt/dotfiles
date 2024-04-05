@@ -229,7 +229,7 @@
               };
             };
             nixpkgs.overlays = [
-              (final: prev: {_sources = import ./npins/default.nix;})
+              (_final: _prev: {_sources = import ./npins/default.nix;})
               overlays.webkitgtk
               overlays.displaylinkFix
             ];

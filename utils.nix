@@ -143,11 +143,11 @@ lib.makeExtensible (_self:
       getPkgSnippet = pkgs: s: import (./snippets + "/${s}.nix") pkgs;
 
       removeUnwanted = listOfUnwanted: A: (filterAttrsRecursive
-        (name: value: all (item: name != item) listOfUnwanted)
+        (name: _value: all (item: name != item) listOfUnwanted)
         A);
 
       keepWanted = listOfWanted: A:
-        filterAttrs (name: value: builtins.elem name listOfWanted) A;
+        filterAttrs (name: _value: builtins.elem name listOfWanted) A;
 
       cleanForFish = {
         sources,
