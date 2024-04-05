@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Also requires Guix module.
   # See profiles.guix
 

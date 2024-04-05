@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: {
   nixpkgs.config = {
     allowUnfree = true;
     cudaSupport = true;

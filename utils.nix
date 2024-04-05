@@ -1,5 +1,5 @@
 lib:
-lib.makeExtensible (self: let
+lib.makeExtensible (_self: let
   # import other files that take {lib}
   recursiveMap = f:
     lib.mapAttrs (_name: value: (

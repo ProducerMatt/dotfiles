@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Mostly cribbed from github.com/k4yt3x/sshd_config
   # Last Updated: December 21, 2023
   # TODO:

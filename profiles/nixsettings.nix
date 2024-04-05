@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   imports = [./cachix.nix];
   nix = {
     extraOptions = ''

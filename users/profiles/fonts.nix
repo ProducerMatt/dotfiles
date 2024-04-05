@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs;
     builtins.concatLists [
       (import ../../profiles/font-list.nix pkgs)
