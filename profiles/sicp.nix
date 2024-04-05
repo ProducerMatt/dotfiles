@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Also requires Guix module.
   # See profiles.guix
 
@@ -10,16 +13,17 @@
 
     racket
     imagemagick
-    (python310.withPackages (ps: with ps; [
-      ipython
-      pyflakes
-      black
-      pytest
-      nose
-      isort
-      # Latex source code highlighting
-      pygments
-    ]))
+    (python310.withPackages (ps:
+      with ps; [
+        ipython
+        pyflakes
+        black
+        pytest
+        nose
+        isort
+        # Latex source code highlighting
+        pygments
+      ]))
 
     ispell
     pandoc

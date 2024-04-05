@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  imports = [ ./cachix.nix ];
+{pkgs, ...}: {
+  imports = [./cachix.nix];
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -19,11 +17,11 @@
     };
     optimise = {
       automatic = true;
-      dates = [ "weekly" ];
+      dates = ["weekly"];
     };
     settings = {
       auto-optimise-store = true;
-      trusted-users = [ "root" "matt" "nixremote" ];
+      trusted-users = ["root" "matt" "nixremote"];
       trusted-public-keys = [
         "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
       ];

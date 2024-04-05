@@ -1,8 +1,13 @@
-{self, inputs, config, lib, myLib, ...}:
-let
-  cfg = config.matt.hm;
-in
 {
+  self,
+  inputs,
+  config,
+  lib,
+  myLib,
+  ...
+}: let
+  cfg = config.matt.hm;
+in {
   imports = [
     (import ../users/matt {enable = builtins.elem "matt" cfg.users;})
   ];
@@ -10,7 +15,7 @@ in
     matt.hm = {
       enable = lib.mkEnableOption "this module";
       users = lib.mkOption {
-# NOTE: this will be resolved in user loading
+        # NOTE: this will be resolved in user loading
         default = [
           "matt"
         ];

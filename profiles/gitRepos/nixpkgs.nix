@@ -1,15 +1,14 @@
 # File originally written by alyssa.net
 # original here under MIT license: https://git.qyliss.net/nixlib/tree/modules/server/git/nixpkgs/default.nix
-
-{ lib, pkgs, ... }:
-
-let
-  inherit (pkgs) writeText;
-  toGitConfig = lib.generators.toINI { listsAsDuplicateKeys = true; };
-in
-
 {
-  users.groups.nixpkgs = { };
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (pkgs) writeText;
+  toGitConfig = lib.generators.toINI {listsAsDuplicateKeys = true;};
+in {
+  users.groups.nixpkgs = {};
 
   environment.etc.gitconfig.text = ''
     [safe]
@@ -43,8 +42,8 @@ in
   ];
 
   systemd.services.git-fetch-nixpkgs = {
-    after = [ "network-online.target" ];
-    requires = [ "network-online.target" ];
+    after = ["network-online.target"];
+    requires = ["network-online.target"];
     serviceConfig.DynamicUser = true;
     serviceConfig.Group = "nixpkgs";
     serviceConfig.ReadWritePaths = "/var/lib/git/nixpkgs.git";
@@ -54,7 +53,7 @@ in
   };
 
   systemd.timers.git-fetch-nixpkgs = {
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
     timerConfig.OnActiveSec = 0;
     timerConfig.OnUnitActiveSec = 300;
   };

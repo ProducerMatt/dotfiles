@@ -1,5 +1,4 @@
 pkgs:
-
 with pkgs; [
   neovim
   emacs28NativeComp

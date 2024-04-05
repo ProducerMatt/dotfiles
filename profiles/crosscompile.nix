@@ -1,5 +1,8 @@
-{ config, lib, pkgs, ... }:
-
 {
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 }

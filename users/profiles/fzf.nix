@@ -1,6 +1,11 @@
-{ config, lib, pkgs, myLib, mySources, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  myLib,
+  mySources,
+  ...
+}: {
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
@@ -10,8 +15,8 @@
     enable = true;
     plugins =
       map (plugin: (myLib.cleanForFish mySources."${plugin}"))
-        [
-          "fzf"
-        ];
+      [
+        "fzf"
+      ];
   };
 }

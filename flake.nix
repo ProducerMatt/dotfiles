@@ -212,9 +212,9 @@
             ];
             matt.hm.enable = true;
             users.motd = ''
-            === ${config.networking.hostName} ===
-            Flake revision #${builtins.toString flakeInfo.revCount} from ${flakeInfo.lastModifiedDate}
-            Flake commit ${flakeInfo.shortRev}
+              === ${config.networking.hostName} ===
+              Flake revision #${builtins.toString flakeInfo.revCount} from ${flakeInfo.lastModifiedDate}
+              Flake commit ${flakeInfo.shortRev}
             '';
             system.configurationRevision = flakeInfo.rev;
             system.copySystemConfiguration = lib.mkForce false;

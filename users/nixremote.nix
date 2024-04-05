@@ -1,14 +1,17 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   users.users.nixremote = {
     description = "user for remotely initiated build jobs";
     isSystemUser = true;
     group = "nixremote";
     useDefaultShell = true;
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHR4G/Vse74jiFwpKYagAEMlfqYs/HdXzSkXgd/6cIKk nix remote building" ];
+    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHR4G/Vse74jiFwpKYagAEMlfqYs/HdXzSkXgd/6cIKk nix remote building"];
   };
-  users.groups.nixremote = { };
+  users.groups.nixremote = {};
   services.openssh.extraConfig = ''
     Match User nixremote
       AllowAgentForwarding no

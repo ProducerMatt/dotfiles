@@ -1,5 +1,4 @@
 pkgs:
-
 with pkgs; [
   ethtool
   smartmontools

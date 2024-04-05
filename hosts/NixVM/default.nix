@@ -15,12 +15,12 @@
   imports = with profiles; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-      core
-      nixsettings
-      openssh
-      earlyOOM
-      adminAccess
-      qemu
+    core
+    nixsettings
+    openssh
+    earlyOOM
+    adminAccess
+    qemu
   ];
 
   # Use the GRUB 2 boot loader.

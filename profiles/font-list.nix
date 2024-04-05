@@ -1,5 +1,4 @@
 pkgs:
-
 with pkgs; [
   #cantarell-fonts
   emacs-all-the-icons-fonts
