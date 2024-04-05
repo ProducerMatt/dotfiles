@@ -85,16 +85,15 @@
 
         programs.fish = {
           enable = true;
-          plugins =
-            myLib.cleanForFish {
-              sources = pkgs._sources;
-              wanted = [
-                "fish-abbreviation-tips"
-                "z"
-                "nvm.fish"
-                "replay.fish"
-              ];
-            };
+          plugins = myLib.cleanForFish {
+            sources = pkgs._sources;
+            wanted = [
+              "fish-abbreviation-tips"
+              "z"
+              "nvm.fish"
+              "replay.fish"
+            ];
+          };
           shellAliases = myAliases;
         };
         programs.bash = {
