@@ -5,7 +5,7 @@
 
   inputs = {
     # Track channels with commits tested and built by hydra
-    pkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    #pkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     pkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
@@ -14,63 +14,58 @@
     # But, perhaps even more usefully, it provides a place for adding
     # darwin-specific overlays and packages which could otherwise cause build
     # failures on Linux systems.
-    nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
+    #nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
 
     nur.url = "github:nix-community/nur";
 
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
+    #flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
-    home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
-    home-manager-stable.inputs.nixpkgs.follows = "pkgs-stable";
+    #home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
+    #home-manager-stable.inputs.nixpkgs.follows = "pkgs-stable";
     home-manager-latest.url = "github:nix-community/home-manager/master";
     home-manager-latest.inputs.nixpkgs.follows = "pkgs-latest";
 
-    darwin.url = "github:LnL7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
+    #darwin.url = "github:LnL7/nix-darwin";
+    #darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
 
-    deploy.url = "github:serokell/deploy-rs";
-    deploy.inputs.nixpkgs.follows = "pkgs-stable";
+    #deploy.url = "github:serokell/deploy-rs";
+    #deploy.inputs.nixpkgs.follows = "pkgs-stable";
 
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "pkgs-stable";
+    #agenix.url = "github:ryantm/agenix";
+    #agenix.inputs.nixpkgs.follows = "pkgs-stable";
 
-    nvfetcher.url = "github:berberman/nvfetcher";
-    nvfetcher.inputs.nixpkgs.follows = "pkgs-stable";
+    #nvfetcher.url = "github:berberman/nvfetcher";
+    #nvfetcher.inputs.nixpkgs.follows = "pkgs-stable";
 
-    naersk.url = "github:nmattia/naersk";
-    naersk.inputs.nixpkgs.follows = "pkgs-latest";
+    #naersk.url = "github:nmattia/naersk";
+    #naersk.inputs.nixpkgs.follows = "pkgs-latest";
 
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    #nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "pkgs-latest";
-
-    rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "pkgs-latest";
-    };
+    #nixos-generators.url = "github:nix-community/nixos-generators";
+    #nixos-generators.inputs.nixpkgs.follows = "pkgs-latest";
 
     nixrepl = {
       url = "github:schuelermine/nixos-repl-setup";
     };
-    mynur = {
-      url = "github:ProducerMatt/my-nur-pkgs";
-    };
+    #mynur = {
+    #  url = "github:ProducerMatt/my-nur-pkgs";
+    #};
     #guix-overlay = {
     #  url = "github:foo-dogsquared/nix-overlay-guix";
     #  inputs.nixpkgs.follows = "nixos-22-05";
     #};
     nixseparatedebuginfod.url = "github:symphorien/nixseparatedebuginfod";
 
-    rtx-flake = {
-      url = "github:jdxcode/rtx";
-      inputs.nixpkgs.follows = "pkgs-latest";
-      inputs.flake-utils.follows = "flake-utils-plus";
-    };
-    poetry2nix = {
-      url = "github:nix-community/poetry2nix";
-      inputs.nixpkgs.follows = "pkgs-latest";
-    };
+    #rtx-flake = {
+    #  url = "github:jdxcode/rtx";
+    #  inputs.nixpkgs.follows = "pkgs-latest";
+    #  inputs.flake-utils.follows = "flake-utils-plus";
+    #};
+    #poetry2nix = {
+    #  url = "github:nix-community/poetry2nix";
+    #  inputs.nixpkgs.follows = "pkgs-latest";
+    #};
     #vscode-server = {
     #  url = "github:nix-community/nixos-vscode-server";
     #  inputs.nixpkgs.follows = "pkgs-latest";
