@@ -118,7 +118,7 @@ lib.makeExtensible (_self:
               || (type == "directory" && builtins.pathExists (path + "/default.nix"))
             then f path
             # recurse on directories that don't contain a `default.nix`
-            else rakeLeavesF path;
+            else rakeLeavesF f path;
         };
 
         files = filterAttrs seive (builtins.readDir dirPath);
