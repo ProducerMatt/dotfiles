@@ -6,7 +6,11 @@
   # age.secrets."wg-apu4VPN-preshared.key".file =
   #   ../../secrets/wg-apu4VPN-preshared.key.age;
 
-  deployment.allowLocalDeployment = true;
+  deployment = {
+    targetHost = "127.0.0.1";
+    targetPort = 22042;
+    targetUser = "matt";
+  };
 
   users.mutableUsers = true;
 
