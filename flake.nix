@@ -143,7 +143,7 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            nixUnstable
+            nixVersions.latest
             colmena
             fish
             nil
@@ -218,14 +218,14 @@
             system.configurationRevision = flakeInfo.rev;
             system.copySystemConfiguration = lib.mkForce false;
             nix = {
-              package = pkgs.nixUnstable;
+              package = pkgs.nixVersions.latest;
               settings = {
                 trusted-users = ["matt"];
                 extra-experimental-features = "nix-command flakes";
               };
             };
             nixpkgs.overlays = [
-              (_final: _prev: {_sources = import ./npins/default.nix;})
+              (import ./pkgs/default.nix)
               overlays.webkitgtk
               overlays.displaylinkFix
             ];
