@@ -1,4 +1,4 @@
-{ config, pkgs, lib, profiles, age, ... }:
+{ config, pkgs, lib, profiles, users, age, ... }:
 
 {
   # age.secrets."wg-PortableNix.key".file =
@@ -31,11 +31,11 @@
   ];
 
   nix.settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-  nixpkgs.localSystem = {
-    #  gcc.arch = "skylake";
-    #  gcc.tune = "skylake";
-    system = "x86_64-linux";
-  };
+  # nixpkgs.localSystem = {
+  #   #  gcc.arch = "skylake";
+  #   #  gcc.tune = "skylake";
+  #   system = "x86_64-linux";
+  # };
 
   # services.mattsDesktop = {
   #   enable = false;
@@ -47,11 +47,55 @@
   #   autoLogin = true;
   # };
 
-  services.mattsRemoteAccess = {
-    enable = false;
+  # services.mattsRemoteAccess = {
+  #   enable = false;
+  # };
+
+  # services.mattsNetwork.hostname = "PortableNix";
+
+  networking = {
+      defaultGateway = "192.168.1.1";
+      nameservers = [
+        "192.168.1.16"
+        "192.168.1.61"
+      ];
+      hostName = "PortableNix";
+      interfaces = {
+        "enp112s0" = {
+          useDHCP = false;
+          ipv4.addresses = [
+          {
+            address = "192.168.1.5";
+            prefixLength = 16;
+          }
+          ];
+        };
+      };
+      hosts = {
+          "192.168.1.3" = ["PherigoNAS.local"];
+        };
   };
 
-  services.mattsNetwork.hostname = "PortableNix";
+  fileSystems = {
+    "/mnt/PublicNAS" = {
+      device = "PherigoNAS.local:/mnt/PherigoRAID/Public";
+      fsType = "nfs";
+      options = [
+        "nfsvers=4"
+          "noatime"
+          "noexec"
+      ];
+    };
+    "/mnt/MattNAS" = {
+      device = "PherigoNAS.local:/mnt/PherigoRAID/Matt";
+      fsType = "nfs";
+      options = [
+        "nfsvers=4"
+          "noatime"
+          "noexec"
+      ];
+    };
+  };
 
   # programs.apeLoader = {
   #   enable = false;
@@ -80,7 +124,6 @@
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

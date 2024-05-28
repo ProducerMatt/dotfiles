@@ -195,6 +195,7 @@
               profiles = myLib.makeProfiles ./profiles;
               hmProfiles = myLib.makeProfiles ./users/profiles;
               overlays = myLib.rakeLeaves ./overlays;
+              users = myLib.rakeLeaves ./users;
             };
           };
           defaults = {
