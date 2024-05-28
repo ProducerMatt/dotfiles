@@ -17,7 +17,7 @@ with pkgs; [
   aria2
   #libressl
   parallel # xargs but multi-core
-  tere
+  #tere
   bind.dnsutils
   lsof # list files and sockets in use
 ]
