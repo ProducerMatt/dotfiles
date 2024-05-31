@@ -1,18 +1,22 @@
-{ lib, stdenv, fetchFromGitHub, pkgs, ... }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkgs,
+  ...
+}:
 # TODO
-
 stdenv.mkDerivation rec {
   pname = "sshdo";
   version = "1.0";
   date = "2022-11-08";
 
-  src = fetchFromGitHub ({
+  src = fetchFromGitHub {
     owner = "SpyGuard";
     repo = "SpyGuard";
     rev = version;
     sha256 = "0000000000000000000000000000000000000000000000000000";
-  });
+  };
   buildInputs = with pkgs; [
     which
     python310

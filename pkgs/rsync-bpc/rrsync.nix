@@ -1,19 +1,22 @@
-{ stdenv, python3, rsync }:
-
+{
+  stdenv,
+  python3,
+  rsync,
+}:
 stdenv.mkDerivation {
   pname = "rrsync";
   inherit (rsync) version src;
 
   buildInputs = [
     rsync
-    (python3.withPackages (pythonPackages: with pythonPackages; [ braceexpand ]))
+    (python3.withPackages (pythonPackages: with pythonPackages; [braceexpand]))
   ];
   # Skip configure and build phases.
   # We just want something from the support directory
   dontConfigure = true;
   dontBuild = true;
 
-  patches = rsync.patches ++ [ ./bpc.patch ];
+  patches = rsync.patches ++ [./bpc.patch];
 
   postPatch = ''
     substituteInPlace support/rrsync --replace /usr/bin/rsync ${rsync}/bin/rsync
@@ -25,7 +28,9 @@ stdenv.mkDerivation {
     chmod a+x $out/bin/rrsync
   '';
 
-  meta = rsync.meta // {
-    description = "A helper to run rsync-only environments from ssh-logins";
-  };
+  meta =
+    rsync.meta
+    // {
+      description = "A helper to run rsync-only environments from ssh-logins";
+    };
 }

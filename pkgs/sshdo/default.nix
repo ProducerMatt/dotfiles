@@ -1,16 +1,21 @@
-{ lib, stdenv, fetchFromGitHub, pkgs, ... }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkgs,
+  ...
+}:
 stdenv.mkDerivation rec {
   pname = "sshdo";
   version = "f15ee8ec33fcdfc2fc637de03806201741e2c78f";
   date = "2021-09-14";
 
-  src = fetchFromGitHub ({
+  src = fetchFromGitHub {
     owner = "raforg";
     repo = "sshdo";
     rev = version;
     sha256 = "sha256-wtjXpscTlaiU8FZxlTZjPkypkn4dvhtCuycw/zQWP8o=";
-  });
+  };
 
   patches = [
     ./test.diff
@@ -40,6 +45,6 @@ stdenv.mkDerivation rec {
     description = "Easily configure which commands an SSH login can call.";
     license = licenses.gpl3Plus;
     platforms = platforms.unix;
-    maintainers = with lib.maintainers; [ ProducerMatt ];
+    maintainers = with lib.maintainers; [ProducerMatt];
   };
 }

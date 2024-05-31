@@ -1,6 +1,12 @@
-{ config, pkgs, lib, profiles, users, age, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  profiles,
+  users,
+  age,
+  ...
+}: {
   # age.secrets."wg-PortableNix.key".file =
   #   ../../secrets/wg-PortableNix.key.age;
   # age.secrets."wg-apu4VPN-preshared.key".file =
@@ -15,26 +21,26 @@
   users.mutableUsers = true;
 
   imports = with profiles; [
-      core
-      nixsettings
-      openssh
-      earlyOOM
-      adminAccess
-      containers
-      ML_Nvidia
-      backuppc
-      mysyncthing
-      gitRepos.nixpkgs
-      adminAccess
-      users.nixremote
-      qemu
-      #profiles.guix
-      #profiles.sicp
-      #profiles.virtualbox
-      #profiles.fonts
+    core
+    nixsettings
+    openssh
+    earlyOOM
+    adminAccess
+    containers
+    ML_Nvidia
+    backuppc
+    mysyncthing
+    gitRepos.nixpkgs
+    adminAccess
+    users.nixremote
+    qemu
+    #profiles.guix
+    #profiles.sicp
+    #profiles.virtualbox
+    #profiles.fonts
   ];
 
-  nix.settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+  nix.settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
   # nixpkgs.localSystem = {
   #   #  gcc.arch = "skylake";
   #   #  gcc.tune = "skylake";
@@ -58,26 +64,26 @@
   # services.mattsNetwork.hostname = "PortableNix";
 
   networking = {
-      defaultGateway = "192.168.1.1";
-      nameservers = [
-        "192.168.1.16"
-        "192.168.1.61"
-      ];
-      hostName = "PortableNix";
-      interfaces = {
-        "enp112s0" = {
-          useDHCP = false;
-          ipv4.addresses = [
+    defaultGateway = "192.168.1.1";
+    nameservers = [
+      "192.168.1.16"
+      "192.168.1.61"
+    ];
+    hostName = "PortableNix";
+    interfaces = {
+      "enp112s0" = {
+        useDHCP = false;
+        ipv4.addresses = [
           {
             address = "192.168.1.5";
             prefixLength = 16;
           }
-          ];
-        };
+        ];
       };
-      hosts = {
-          "192.168.1.3" = ["PherigoNAS.local"];
-        };
+    };
+    hosts = {
+      "192.168.1.3" = ["PherigoNAS.local"];
+    };
   };
 
   fileSystems = {
@@ -86,8 +92,8 @@
       fsType = "nfs";
       options = [
         "nfsvers=4"
-          "noatime"
-          "noexec"
+        "noatime"
+        "noexec"
       ];
     };
     "/mnt/MattNAS" = {
@@ -95,8 +101,8 @@
       fsType = "nfs";
       options = [
         "nfsvers=4"
-          "noatime"
-          "noexec"
+        "noatime"
+        "noexec"
       ];
     };
   };
@@ -106,23 +112,21 @@
   #   mode = "workaround";
   # };
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/4a5f9903-bca6-46e6-ae33-56494b15016c";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/4a5f9903-bca6-46e6-ae33-56494b15016c";
+    fsType = "ext4";
+  };
 
   boot.initrd.luks.devices."luks-c05dea80-c718-46cf-85b8-9f3c6aeca86c".device = "/dev/disk/by-uuid/c05dea80-c718-46cf-85b8-9f3c6aeca86c";
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/bef52767-f7fc-405f-9423-d7b576e79c86"; }];
+  swapDevices = [{device = "/dev/disk/by-uuid/bef52767-f7fc-405f-9423-d7b576e79c86";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
