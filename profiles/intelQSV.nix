@@ -5,7 +5,7 @@
   in {
     inherit ffmpeg_6-full jellyfin-ffmpeg;
     vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-    jellyfin = pkgs.jellyfin.override {ffmpeg = jellyfin-ffmpeg;};
+    jellyfin = pkgs.jellyfin.override {inherit jellyfin-ffmpeg;};
   };
   hardware.opengl = {
     enable = true;
