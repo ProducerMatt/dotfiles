@@ -34,6 +34,7 @@
     adminAccess
     users.nixremote
     qemu
+    myNetwork
     #profiles.guix
     #profiles.sicp
     #profiles.virtualbox
@@ -64,11 +65,6 @@
   # services.mattsNetwork.hostname = "PortableNix";
 
   networking = {
-    defaultGateway = "192.168.1.1";
-    nameservers = [
-      "192.168.1.16"
-      "192.168.1.61"
-    ];
     hostName = "PortableNix";
     interfaces = {
       "enp112s0" = {
