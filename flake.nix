@@ -133,7 +133,13 @@
         pkgs,
         system,
         ...
-      }: {
+      }:
+      let
+        colmena = pkgs.colmena.overrideDerivation (oldSettings: {
+          patches = oldSettings.patches ++ [./pkgs/colmena-disable-pure-eval.patch];
+        });
+      in
+      {
         # This sets `pkgs` to a nixpkgs with allowUnfree option set.
         _module.args.pkgs = defaultPkgs system;
 
