@@ -238,7 +238,6 @@
             # colmena needs no password
             security.sudo.wheelNeedsPassword = lib.mkForce false;
           };
-          NixVM = import ./hosts/NixVM;
           PortableNix = import ./hosts/PortableNix;
           BabyDell = import ./hosts/BabyDell;
         };
