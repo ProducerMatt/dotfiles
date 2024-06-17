@@ -16,8 +16,9 @@
           l = "eza";
           ll = "eza -la";
           la = "eza -a";
-          e = "nvim";
+          e = start_emacs;
           er = "systemctl --user restart emacs.service";
+          v = "nvim";
 
           # quick cd
           ".." = "cd ..";
@@ -112,8 +113,8 @@
           TERM = "xterm-direct";
           COLORTERM = "truecolor";
 
-          EDITOR = "nvim";
-          VISUAL = "nvim";
+          EDITOR = start_emacs;
+          VISUAL = start_emacs;
         };
 
         programs.git = {
