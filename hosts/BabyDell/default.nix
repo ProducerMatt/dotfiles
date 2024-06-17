@@ -1,22 +1,24 @@
-{ lib, profiles, ... }:
-
 {
+  lib,
+  profiles,
+  ...
+}: {
   deployment = {
     targetHost = "192.168.1.10";
     targetUser = "matt";
   };
 
   imports = with profiles; [
-      core
-      nixsettings
-      openssh
-      earlyOOM
-      adminAccess
-      jellyfin
-      intelQSV
-      mysyncthing
-      myNetwork
-    ];
+    core
+    nixsettings
+    openssh
+    earlyOOM
+    adminAccess
+    jellyfin
+    intelQSV
+    mysyncthing
+    myNetwork
+  ];
 
   nix = {
     buildMachines = [
@@ -28,7 +30,7 @@
         sshKey = "/home/matt/.ssh/id_nixremote_ed25519";
         maxJobs = 16;
         speedFactor = 8;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
       }
     ];
     distributedBuilds = true;
@@ -87,25 +89,22 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/d957b5e6-fbd4-42da-bf5d-b15be331ef98";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/d957b5e6-fbd4-42da-bf5d-b15be331ef98";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot/efi" =
-    {
-      device = "/dev/disk/by-uuid/5613-4E94";
-      fsType = "vfat";
-    };
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/5613-4E94";
+    fsType = "vfat";
+  };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/bf374d2e-41b7-461a-9a83-3100fd1c3774"; }];
+  swapDevices = [{device = "/dev/disk/by-uuid/bf374d2e-41b7-461a-9a83-3100fd1c3774";}];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
