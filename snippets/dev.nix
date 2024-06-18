@@ -21,4 +21,7 @@ with pkgs; [
   #ansible-lint
   #ansible-later
   #ansible-language-server
+
+  editorconfig-core-c
+  editorconfig-checker
 ]
