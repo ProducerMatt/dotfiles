@@ -1,14 +1,15 @@
 pkgs:
 with pkgs; [
   neovim
-  emacs28NativeComp
+  emacs-unstable
   nixos-generators
   #nox
   niv
   nixpkgs-review
   nix-init
   nix-diff
-  nixfmt
+  nil
+  alejandra
   stdenv
   gnumake
   resolve-march-native # find appropriate compiler flags for your cpu

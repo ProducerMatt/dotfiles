@@ -185,7 +185,7 @@
           ];
         services.emacs = {
           enable = true;
-          package = pkgs.emacs28NativeComp;
+          package = pkgs.emacs-unstable;
         };
         programs.vim.package = pkgs.vim;
 

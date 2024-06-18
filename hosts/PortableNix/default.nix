@@ -20,6 +20,7 @@
 
   imports = with profiles; [
     core
+    cachix
     nixsettings
     openssh
     earlyOOM

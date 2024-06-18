@@ -73,6 +73,8 @@
     #};
 
     nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
+
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = {
@@ -94,6 +96,7 @@
     #poetry2nix,
     #vscode-server,
     nix-formatter-pack,
+    emacs-overlay,
     ...
   } @ inputs: let
     utils = import ./utils.nix;
@@ -232,6 +235,7 @@
               (import ./pkgs/default.nix)
               overlays.webkitgtk
               overlays.displaylinkFix
+              emacs-overlay.overlays.default
             ];
             # colmena needs no password
             security.sudo.wheelNeedsPassword = lib.mkForce false;
