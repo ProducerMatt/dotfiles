@@ -96,6 +96,11 @@
             ];
           };
           shellAliases = myAliases;
+          shellInit = ''
+            if test "$COLORTERM" = truecolor
+              set -g fish_term24bit 1
+            end
+          '';
         };
         programs.bash = {
           enable = true;
