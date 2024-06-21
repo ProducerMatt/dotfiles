@@ -24,6 +24,10 @@
       "https://cuda-maintainers.cachix.org"
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ]
+    [
+      "https://pre-commit-hooks.cachix.org"
+      "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+    ]
   ];
 in
   with builtins;
