@@ -79,3 +79,5 @@ result
 .direnv
 
 /Old/secrets
+
+/.pre-commit-config.yaml

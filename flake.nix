@@ -5,8 +5,8 @@
 
   inputs = {
     # Track channels with commits tested and built by hydra
-    #pkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     pkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
+    #pkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
     # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -75,6 +75,10 @@
     nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+
+    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks.inputs.nixpkgs.follows = "pkgs-latest";
+    #git-hooks.inputs.nixpkgs-stable.follows = "pkgs-stable";
   };
 
   outputs = {
@@ -97,6 +101,7 @@
     #vscode-server,
     nix-formatter-pack,
     emacs-overlay,
+    git-hooks,
     ...
   } @ inputs: let
     utils = import ./utils.nix;
@@ -140,6 +145,27 @@
         colmena = pkgs.colmena.overrideDerivation (oldSettings: {
           patches = oldSettings.patches ++ [./pkgs/colmena-disable-pure-eval.patch];
         });
+        ########################
+        # Git pre-push checks
+        pc-hooks = git-hooks.lib.${system}.run {
+          # only run on push and directly calling `pre-commit` in the shell
+          default_stages = ["manual" "push" "pre-merge-commit"];
+          src = ./.;
+          hooks = let
+            enable_on_commit = {
+              enable = true;
+              stages = ["manual" "push" "pre-merge-commit" "pre-commit"];
+            };
+          in {
+            alejandra = enable_on_commit;
+            flake-checker.enable = true;
+
+            convco = {
+              enable = true;
+              stages = ["commit-msg"];
+            };
+          };
+        };
       in {
         # This sets `pkgs` to a nixpkgs with allowUnfree option set.
         _module.args.pkgs = defaultPkgs system;
@@ -149,41 +175,22 @@
         # system.
 
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            nixVersions.latest
-            colmena
-            fish
-            nil
-            alejandra
-            statix
-            deadnix
-            npins
-          ];
+          packages = with pkgs;
+            [
+              nixVersions.latest
+              colmena
+              fish
+              nil
+              alejandra
+              statix
+              deadnix
+              npins
+            ]
+            ++ pc-hooks.enabledPackages;
+          shellHook = pc-hooks.shellHook;
         };
 
-        formatter = nix-formatter-pack.lib.mkFormatter {
-          inherit system pkgs;
-          config = {
-            tools = {
-              deadnix.enable = true;
-              alejandra.enable = true;
-              statix.enable = true;
-            };
-          };
-        };
-
-        checks.nix-formatter-pack =
-          nix-formatter-pack.lib.mkCheck
-          {
-            inherit system pkgs;
-            config = {
-              tools = {
-                alejandra.enable = true;
-                statix.enable = true;
-              };
-            };
-            checkFiles = [./.];
-          };
+        checks.default = pc-hooks;
       };
       flake = {
         # The usual flake attributes can be defined here, including system-
