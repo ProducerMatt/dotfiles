@@ -5,8 +5,8 @@
 
   inputs = {
     # Track channels with commits tested and built by hydra
-    pkgs-latest.url = "github:nixos/nixpkgs/nixos-unstable";
-    #pkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
     # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -21,29 +21,29 @@
     #flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
     #home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
-    #home-manager-stable.inputs.nixpkgs.follows = "pkgs-stable";
+    #home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
     home-manager-latest.url = "github:nix-community/home-manager/master";
-    home-manager-latest.inputs.nixpkgs.follows = "pkgs-latest";
+    home-manager-latest.inputs.nixpkgs.follows = "nixpkgs";
 
     #darwin.url = "github:LnL7/nix-darwin";
     #darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
 
     #deploy.url = "github:serokell/deploy-rs";
-    #deploy.inputs.nixpkgs.follows = "pkgs-stable";
+    #deploy.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     #agenix.url = "github:ryantm/agenix";
-    #agenix.inputs.nixpkgs.follows = "pkgs-stable";
+    #agenix.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     #nvfetcher.url = "github:berberman/nvfetcher";
-    #nvfetcher.inputs.nixpkgs.follows = "pkgs-stable";
+    #nvfetcher.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     #naersk.url = "github:nmattia/naersk";
-    #naersk.inputs.nixpkgs.follows = "pkgs-latest";
+    #naersk.inputs.nixpkgs.follows = "nixpkgs";
 
     #nixos-hardware.url = "github:nixos/nixos-hardware";
 
     #nixos-generators.url = "github:nix-community/nixos-generators";
-    #nixos-generators.inputs.nixpkgs.follows = "pkgs-latest";
+    #nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     nixrepl = {
       url = "github:schuelermine/nixos-repl-setup";
@@ -59,16 +59,16 @@
 
     #rtx-flake = {
     #  url = "github:jdxcode/rtx";
-    #  inputs.nixpkgs.follows = "pkgs-latest";
+    #  inputs.nixpkgs.follows = "nixpkgs";
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
     #poetry2nix = {
     #  url = "github:nix-community/poetry2nix";
-    #  inputs.nixpkgs.follows = "pkgs-latest";
+    #  inputs.nixpkgs.follows = "nixpkgs";
     #};
     #vscode-server = {
     #  url = "github:nix-community/nixos-vscode-server";
-    #  inputs.nixpkgs.follows = "pkgs-latest";
+    #  inputs.nixpkgs.follows = "nixpkgs";
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
 
@@ -77,16 +77,16 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     git-hooks.url = "github:cachix/git-hooks.nix";
-    git-hooks.inputs.nixpkgs.follows = "pkgs-latest";
-    #git-hooks.inputs.nixpkgs-stable.follows = "pkgs-stable";
+    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    #git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
   };
 
   outputs = {
     self,
     flake-parts,
     #flake-utils-plus,
-    #pkgs-stable,
-    pkgs-latest,
+    #nixpkgs-stable,
+    nixpkgs,
     #home-manager-stable,
     home-manager-latest,
     #nixos-hardware,
@@ -105,9 +105,9 @@
     ...
   } @ inputs: let
     utils = import ./utils.nix;
-    myLib = utils pkgs-latest.lib;
+    myLib = utils nixpkgs.lib;
     defaultPkgs = system:
-      import pkgs-latest {
+      import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
