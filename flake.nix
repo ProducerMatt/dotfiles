@@ -6,7 +6,7 @@
   inputs = {
     # Track channels with commits tested and built by hydra
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
     # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -72,12 +72,13 @@
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
 
-    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
-
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     #git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
   };
 
@@ -99,7 +100,7 @@
     #rtx-flake,
     #poetry2nix,
     #vscode-server,
-    nix-formatter-pack,
+    #nix-formatter-pack,
     emacs-overlay,
     git-hooks,
     ...
