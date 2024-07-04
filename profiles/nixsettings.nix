@@ -32,15 +32,15 @@
         "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
       ];
     };
-    registry = {
-      nixpkgs = {
+    registry =
+      builtins.mapAttrs (name: flake: {
         from = {
-          id = "nixpkgs";
+          id = name;
           type = "indirect";
         };
-        flake = inputs.nixpkgs;
-      };
-    };
+        flake = flake;
+      })
+      inputs;
   };
   nixpkgs.config.allowUnfree = true;
 }
