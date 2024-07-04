@@ -1,8 +1,6 @@
 {
   description = "Description for the project";
 
-  nixConfig.extra-experimental-features = "nix-command flakes";
-
   inputs = {
     # Track channels with commits tested and built by hydra
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

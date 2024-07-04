@@ -2,7 +2,7 @@
   imports = [./cachix.nix];
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes ca-derivations recursive-nix
       keep-outputs = true
       keep-derivations = true
       # When only 1Gig free, try to free up to 5 gigs
