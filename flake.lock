@@ -139,7 +139,7 @@
         "type": "github"
       }
     },
-    "home-manager-latest": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -290,7 +290,7 @@
         "emacs-overlay": "emacs-overlay",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
-        "home-manager-latest": "home-manager-latest",
+        "home-manager": "home-manager",
         "nixos-22-05": "nixos-22-05",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
