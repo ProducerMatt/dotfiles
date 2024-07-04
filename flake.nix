@@ -204,7 +204,7 @@
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = {
-              inherit self myLib flakeInfo;
+              inherit self myLib flakeInfo inputs;
               profiles = myLib.makeProfiles ./profiles;
               hmProfiles = myLib.makeProfiles ./users/profiles;
               overlays = myLib.rakeLeaves ./overlays;
@@ -230,13 +230,6 @@
             '';
             system.configurationRevision = flakeInfo.rev;
             system.copySystemConfiguration = lib.mkForce false;
-            nix = {
-              package = pkgs.nixVersions.latest;
-              settings = {
-                trusted-users = ["matt"];
-                extra-experimental-features = "nix-command flakes";
-              };
-            };
             nixpkgs.overlays = [
               (import ./pkgs/default.nix)
               overlays.webkitgtk
