@@ -4,7 +4,6 @@
   lib,
   profiles,
   users,
-  age,
   ...
 }: {
   # age.secrets."wg-PortableNix.key".file =
@@ -14,6 +13,8 @@
 
   deployment = {
     allowLocalDeployment = true;
+    targetHost = "192.168.1.5";
+    targetUser = "matt";
   };
 
   users.mutableUsers = true;
