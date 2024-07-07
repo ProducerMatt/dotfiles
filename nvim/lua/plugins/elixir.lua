@@ -19,9 +19,8 @@ return {
         elixir.setup {
           nextls = {
             enable = false,
-
           },
-          credo = {enable = trie},
+          credo = {enable = false},
           elixirls = {
             enable = true,
             settings = elixirls.settings {
