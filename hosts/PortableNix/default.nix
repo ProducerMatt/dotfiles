@@ -39,6 +39,7 @@
     #profiles.sicp
     #profiles.virtualbox
     #profiles.fonts
+    local_llm
   ];
 
   nix.settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
