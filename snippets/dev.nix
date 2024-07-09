@@ -3,7 +3,6 @@ with pkgs; [
   neovim
   emacs-unstable
   nixos-generators
-  steam-run
   #nox
   niv
   nixpkgs-review
