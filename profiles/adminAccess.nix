@@ -12,8 +12,8 @@ in {
       (getSnippet "sysadmin")
       (getSnippet "git")
     ];
-    extraOutputsToInstall = ["dev" "lib"];
   };
+  programs.nix-ld.enable = true;
   networking.firewall.allowedTCPPorts = [
     8888
     8080
