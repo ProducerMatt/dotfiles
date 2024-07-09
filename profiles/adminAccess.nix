@@ -5,13 +5,15 @@
 }: let
   getSnippet = myLib.getPkgSnippet pkgs;
 in {
-  environment.systemPackages = with pkgs;
-    builtins.concatLists [
+  environment = {
+    systemPackages = builtins.concatLists [
       (getSnippet "base_cli")
       (getSnippet "dev")
       (getSnippet "sysadmin")
       (getSnippet "git")
     ];
+    extraOutputsToInstall = ["dev" "lib"];
+  };
   networking.firewall.allowedTCPPorts = [
     8888
     8080
