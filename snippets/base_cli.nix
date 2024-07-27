@@ -6,7 +6,6 @@ with pkgs; [
   fish
   htop # top alternative
   #bottom # top alternative
-  comma # get any arbitrary program
   p7zip
   tmux
   vim

@@ -78,6 +78,9 @@
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     #git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -101,6 +104,7 @@
     #nix-formatter-pack,
     emacs-overlay,
     git-hooks,
+    nix-index-database,
     ...
   } @ inputs: let
     utils = import ./utils.nix;
@@ -221,7 +225,9 @@
             imports = [
               inputs.home-manager.nixosModules.home-manager
               hm
+              nix-index-database.nixosModules.nix-index
             ];
+            programs.nix-index-database.comma.enable = true;
             matt.hm.enable = true;
             users.motd = ''
               === ${config.networking.hostName} ===

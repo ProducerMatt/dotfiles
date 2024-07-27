@@ -9,6 +9,7 @@
 in {
   imports = [
     (import ../users/matt {enable = builtins.elem "matt" cfg.users;})
+    self.inputs.nix-index-database.hmModules.nix-index
   ];
   options = {
     matt.hm = {
@@ -33,5 +34,6 @@ in {
         inherit self myLib;
       };
     };
+    programs.nix-index-database.comma.enable = true;
   };
 }

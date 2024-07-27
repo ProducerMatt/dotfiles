@@ -77,7 +77,6 @@
             #fzf
             git
             direnv
-            nix-index
           ];
         #suites.graphical;
         home.username = "matt";
