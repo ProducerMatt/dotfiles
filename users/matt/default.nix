@@ -5,6 +5,7 @@
   myLib,
   flakeInfo,
   hmProfiles,
+  inputs,
   ...
 }: {
   config = lib.mkIf enable (
@@ -77,7 +78,9 @@
             #fzf
             git
             direnv
+            inputs.nix-index-database.hmModules.nix-index
           ];
+        programs.nix-index-database.comma.enable = true;
         #suites.graphical;
         home.username = "matt";
         home.homeDirectory = "/home/matt";

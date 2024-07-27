@@ -3,13 +3,13 @@
   config,
   lib,
   myLib,
+  inputs,
   ...
 }: let
   cfg = config.matt.hm;
 in {
   imports = [
     (import ../users/matt {enable = builtins.elem "matt" cfg.users;})
-    self.inputs.nix-index-database.hmModules.nix-index
   ];
   options = {
     matt.hm = {
@@ -31,9 +31,8 @@ in {
       useGlobalPkgs = true;
       useUserPackages = true;
       extraSpecialArgs = {
-        inherit self myLib;
+        inherit self inputs myLib;
       };
     };
-    programs.nix-index-database.comma.enable = true;
   };
 }
