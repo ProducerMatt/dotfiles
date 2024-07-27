@@ -213,37 +213,8 @@
               hmProfiles = myLib.makeProfiles ./users/profiles;
               overlays = myLib.rakeLeaves ./overlays;
               users = myLib.rakeLeaves ./users;
+              modules = myLib.rakeLeaves ./modules;
             };
-          };
-          defaults = {
-            config,
-            pkgs,
-            lib,
-            overlays,
-            ...
-          }: {
-            imports = [
-              inputs.home-manager.nixosModules.home-manager
-              hm
-              nix-index-database.nixosModules.nix-index
-            ];
-            programs.nix-index-database.comma.enable = true;
-            matt.hm.enable = true;
-            users.motd = ''
-              === ${config.networking.hostName} ===
-              Flake revision #${builtins.toString flakeInfo.revCount} from ${flakeInfo.lastModifiedDate}
-              Flake commit ${flakeInfo.shortRev}
-            '';
-            system.configurationRevision = flakeInfo.rev;
-            system.copySystemConfiguration = lib.mkForce false;
-            nixpkgs.overlays = [
-              (import ./pkgs/default.nix)
-              overlays.webkitgtk
-              overlays.displaylinkFix
-              emacs-overlay.overlays.default
-            ];
-            # colmena needs no password
-            security.sudo.wheelNeedsPassword = lib.mkForce false;
           };
           PortableNix = import ./hosts/PortableNix;
           BabyDell = import ./hosts/BabyDell;
