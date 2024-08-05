@@ -161,7 +161,7 @@
             };
           in {
             alejandra = enable_on_commit;
-            flake-checker.enable = true;
+            flake-checker = enable_on_commit;
 
             convco = {
               enable = true;
