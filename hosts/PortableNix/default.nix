@@ -1,11 +1,12 @@
-{
+{overrides ? {}}: {
   config,
   pkgs,
   lib,
   profiles,
   users,
   ...
-}: {
+}:
+{
   # age.secrets."wg-PortableNix.key".file =
   #   ../../secrets/wg-PortableNix.key.age;
   # age.secrets."wg-apu4VPN-preshared.key".file =
@@ -174,3 +175,4 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
+// overrides

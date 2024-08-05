@@ -226,23 +226,23 @@
             nixpkgs = defaultPkgs "x86_64-linux";
             specialArgs = specialArgs;
           };
-          PortableNix =
-            import ./hosts/PortableNix
-            // {
+          PortableNix = import ./hosts/PortableNix {
+            overrides = {
               deployment = {
                 allowLocalDeployment = true;
                 targetHost = "192.168.1.5";
                 targetUser = "matt";
               };
             };
-          BabyDell =
-            import ./hosts/BabyDell
-            // {
+          };
+          BabyDell = import ./hosts/BabyDell {
+            overrides = {
               deployment = {
                 targetHost = "192.168.1.10";
                 targetUser = "matt";
               };
             };
+          };
         };
       };
     });

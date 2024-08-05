@@ -138,7 +138,7 @@ lib.makeExtensible (_self:
               packages = config.packages;
             };
           modules = [
-            path
+            (import path {})
             {nixpkgs.hostPlatform = sys;}
           ];
         };
