@@ -129,7 +129,7 @@
   in
     flake-parts.lib.mkFlake {
       inherit inputs;
-    } {
+    } ({withSystem, ...}: {
       debug = true; # DEBUG
 
       imports = [
@@ -195,7 +195,16 @@
 
         checks.default = pc-hooks;
       };
-      flake = {
+      flake = let
+        specialArgs = {
+          inherit self myLib flakeInfo inputs;
+          profiles = myLib.makeProfiles ./profiles;
+          hmProfiles = myLib.makeProfiles ./users/profiles;
+          overlays = myLib.rakeLeaves ./overlays;
+          users = myLib.rakeLeaves ./users;
+          modules = myLib.rakeLeaves ./modules;
+        };
+      in {
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
@@ -204,21 +213,37 @@
           inherit hm;
         };
 
+        nixosConfigurations = let
+          mkSystem = path: sys:
+            myLib.mkSystem specialArgs path sys;
+        in {
+          PortableNix = mkSystem ./hosts/PortableNix "x86_64-linux";
+          BabyDell = mkSystem ./hosts/BabyDell "x86_64-linux";
+        };
+
         colmena = {
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
-            specialArgs = {
-              inherit self myLib flakeInfo inputs;
-              profiles = myLib.makeProfiles ./profiles;
-              hmProfiles = myLib.makeProfiles ./users/profiles;
-              overlays = myLib.rakeLeaves ./overlays;
-              users = myLib.rakeLeaves ./users;
-              modules = myLib.rakeLeaves ./modules;
-            };
+            specialArgs = specialArgs;
           };
-          PortableNix = import ./hosts/PortableNix;
-          BabyDell = import ./hosts/BabyDell;
+          PortableNix =
+            import ./hosts/PortableNix
+            // {
+              deployment = {
+                allowLocalDeployment = true;
+                targetHost = "192.168.1.5";
+                targetUser = "matt";
+              };
+            };
+          BabyDell =
+            import ./hosts/BabyDell
+            // {
+              deployment = {
+                targetHost = "192.168.1.10";
+                targetUser = "matt";
+              };
+            };
         };
       };
-    };
+    });
 }

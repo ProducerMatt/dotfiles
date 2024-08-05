@@ -11,12 +11,6 @@
   # age.secrets."wg-apu4VPN-preshared.key".file =
   #   ../../secrets/wg-apu4VPN-preshared.key.age;
 
-  deployment = {
-    allowLocalDeployment = true;
-    targetHost = "192.168.1.5";
-    targetUser = "matt";
-  };
-
   users.mutableUsers = true;
 
   imports = with profiles; [

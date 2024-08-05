@@ -130,6 +130,19 @@ lib.makeExtensible (_self:
         (sys: sys inputs)
         (rakeLeaves path);
 
+      mkSystem = specialArgs: path: sys:
+        specialArgs.inputs.nixpkgs.lib.nixosSystem {
+          specialArgs =
+            specialArgs
+            // {
+              packages = config.packages;
+            };
+          modules = [
+            path
+            {nixpkgs.hostPlatform = sys;}
+          ];
+        };
+
       makeProfiles = profileDir: let
         f = path: let
           profile = import path;
@@ -161,5 +174,5 @@ lib.makeExtensible (_self:
           }))
         ];
     in {
-      inherit rakeLeaves rakeLeavesF flattenTree makeSystems makeProfiles getPkgSnippet cleanForFish removeUnwanted;
+      inherit rakeLeaves rakeLeavesF flattenTree makeSystems mkSystem makeProfiles getPkgSnippet cleanForFish removeUnwanted;
     })

@@ -3,11 +3,6 @@
   profiles,
   ...
 }: {
-  deployment = {
-    targetHost = "192.168.1.10";
-    targetUser = "matt";
-  };
-
   imports = with profiles; [
     core
     cachix
