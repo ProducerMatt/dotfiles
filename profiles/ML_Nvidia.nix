@@ -34,9 +34,8 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    # # INFO: power management for PRIME
-    # powerManagement.enable = true;
-    # powerManagement.finegrained = false;
-    # open = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    open = true;
   };
 }
