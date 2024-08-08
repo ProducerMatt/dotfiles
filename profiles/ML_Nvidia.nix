@@ -1,39 +1,25 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   nixpkgs.config = {
     # TODO: whitelist unfree pkgs
-    allowUnfree = true;
-    cudaSupport = true;
+    allowUnfree = lib.mkForce true;
+    cudaSupport = lib.mkForce true;
   };
 
   services.xserver = {
-    enable = true;
+    enable = lib.mkDefault false;
     videoDrivers = ["nvidia"];
   };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
 
-  hardware.nvidia-container-toolkit.enable = true;
-
-  # ensure text mode works
-  boot = {
-    initrd.kernelModules = ["nvidia"];
-    kernelParams = [
-      # intel
-      "module_blacklist=i915"
-      # AMD
-      "module_blacklist=amdgpu"
-    ];
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
-  };
+  hardware.nvidia-container-toolkit.enable = lib.mkForce true;
 
   hardware.nvidia = {
     modesetting.enable = true;
+    # NOTE: one of these three are needed for graphics on PortableNix, further testing needed
     powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = true;
