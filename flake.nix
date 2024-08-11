@@ -81,6 +81,9 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixpkgs-hammering.url = "github:jtojnar/nixpkgs-hammering";
+    nixpkgs-hammering.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -116,6 +119,11 @@
           allowUnfree = true;
           allowMeta = true;
         };
+        overlays = [
+          (final: prev: {
+            nixpkgs-hammering = inputs.nixpkgs-hammering.packages.${system}.default;
+          })
+        ];
       };
     hm = import ./modules/hm.nix;
     flakeInfo = {

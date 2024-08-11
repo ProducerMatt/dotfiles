@@ -6,6 +6,7 @@ with pkgs; [
   #nox
   niv
   nixpkgs-review
+  nixpkgs-hammering
   nix-init
   nix-diff
   nil
