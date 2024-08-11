@@ -136,6 +136,7 @@
             (getSnippet "dev")
             (getSnippet "sysadmin")
             (getSnippet "git")
+            (getSnippet "audiovideo")
             [
               #ripgrep-all # bug
               psmisc
