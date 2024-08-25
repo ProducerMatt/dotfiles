@@ -355,7 +355,8 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixrepl": "nixrepl",
         "nixseparatedebuginfod": "nixseparatedebuginfod",
-        "nur": "nur"
+        "nur": "nur",
+        "templates": "templates"
       }
     },
     "systems": {
@@ -400,6 +401,39 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "templates": {
+      "inputs": {
+        "templates": "templates_2"
+      },
+      "locked": {
+        "lastModified": 1724609960,
+        "narHash": "sha256-EseDjr9uFO4IHeAirBco9YK9POmV9L/JAma2MboFP6U=",
+        "owner": "ProducerMatt",
+        "repo": "nix-templates",
+        "rev": "0d4ccc7b7d5ebc4b83fe127aef4709760821a42f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ProducerMatt",
+        "repo": "nix-templates",
+        "type": "github"
+      }
+    },
+    "templates_2": {
+      "locked": {
+        "lastModified": 1723948529,
+        "narHash": "sha256-ar2d8s2vq2lLHHNbMdig2hoGqIRoSVGOgTyZgy3mSJM=",
+        "owner": "NixOS",
+        "repo": "templates",
+        "rev": "bed78cb79ffe99834e422607a3903611d0a7403d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "templates",
         "type": "github"
       }
     },

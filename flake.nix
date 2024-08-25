@@ -84,6 +84,8 @@
 
     nixpkgs-hammering.url = "github:jtojnar/nixpkgs-hammering";
     nixpkgs-hammering.inputs.nixpkgs.follows = "nixpkgs";
+
+    templates.url = "github:ProducerMatt/nix-templates";
   };
 
   outputs = {
