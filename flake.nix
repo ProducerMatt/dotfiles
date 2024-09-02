@@ -2,6 +2,8 @@
   description = "Description for the project";
 
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     # Track channels with commits tested and built by hydra
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
