@@ -44,23 +44,24 @@ in {
         services.xserver = {
           enable = true;
           autorun = cfg.autoStart;
-          displayManager.autoLogin =
-            if cfg.autoLogin
-            then {
-              enable = true;
-              user = "matt";
-            }
-            else {enable = false;};
         };
 
+        services.displayManager.autoLogin =
+          if cfg.autoLogin
+          then {
+            enable = true;
+            user = "matt";
+          }
+          else {enable = false;};
+
         # Enable the KDE Plasma Desktop Environment.
-        services.xserver.displayManager.sddm.enable = true;
+        services.displayManager.sddm.enable = true;
         services.xserver.desktopManager.plasma5.enable = true;
 
         # Configure keymap in X11
         services.xserver = {
-          layout = "us";
-          xkbVariant = "";
+          xkb.layout = "us";
+          xkb.variant = "";
         };
 
         environment.systemPackages = with pkgs; [
@@ -73,7 +74,7 @@ in {
           libsForQt5.qt5.qttools.bin # qdbus
         ];
         # Enable touchpad support (enabled default in most desktopManager).
-        services.xserver.libinput.enable = true;
+        services.libinput.enable = true;
       })
       (mkIf ((cfg.desktop == "plasma") && cfg.displayLink) {
         boot.extraModulePackages = with config.boot.kernelPackages; [
@@ -119,8 +120,8 @@ in {
         ];
         # Configure keymap in X11
         services.xserver = {
-          layout = "us";
-          xkbVariant = "";
+          xkb.layout = "us";
+          xkb.variant = "";
         };
 
         environment.systemPackages = with pkgs; [
@@ -131,7 +132,7 @@ in {
           libsForQt5.qt5.qttools.bin # qdbus
         ];
         # Enable touchpad support (enabled default in most desktopManager).
-        services.xserver.libinput.enable = true;
+        services.libinput.enable = true;
       })
       (mkIf ((cfg.desktop == "gnome") && cfg.displayLink) {
         boot.extraModulePackages = with config.boot.kernelPackages; [
@@ -187,8 +188,8 @@ in {
         };
         # Configure keymap in X11
         services.xserver = {
-          layout = "us";
-          xkbVariant = "";
+          xkb.layout = "us";
+          xkb.variant = "";
         };
 
         environment.systemPackages = with pkgs; [
@@ -199,7 +200,7 @@ in {
           libsForQt5.qt5.qttools.bin # qdbus
         ];
         # Enable touchpad support (enabled default in most desktopManager).
-        services.xserver.libinput.enable = true;
+        services.libinput.enable = true;
       })
       (mkIf ((cfg.desktop == "pantheon") && cfg.displayLink) {
         boot.extraModulePackages = with config.boot.kernelPackages; [
