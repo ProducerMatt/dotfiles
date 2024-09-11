@@ -9,7 +9,6 @@ with pkgs; [
   nixpkgs-hammering
   nix-init
   nix-diff
-  nil
   alejandra
   stdenv
   gnumake

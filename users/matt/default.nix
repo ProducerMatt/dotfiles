@@ -160,7 +160,6 @@
               # mainly for Emacs
               #clang
               #ccls
-              nil
               # any less than medium isn't guaranteed to work
               #texlive.combined.scheme-full
               # required by +jupyter

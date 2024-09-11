@@ -5,7 +5,7 @@
 }: {
   imports = [./cachix.nix];
   nix = {
-    package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.nix_2_23;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations recursive-nix
       keep-outputs = true

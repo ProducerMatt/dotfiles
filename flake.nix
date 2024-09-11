@@ -192,7 +192,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs;
             [
-              nixVersions.latest
+              nixVersions.nix_2_23
               colmena
               fish
               nixd
