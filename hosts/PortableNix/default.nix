@@ -54,7 +54,7 @@
         printing = false;
         displayLink = false;
         desktop = "plasma";
-        autoStart = false;
+        autoStart = true;
         autoLogin = true;
         remote.enable = true;
       };
