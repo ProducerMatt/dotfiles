@@ -22,6 +22,6 @@
     # NOTE: one of these three are needed for graphics on PortableNix, further testing needed
     powerManagement.enable = true;
     powerManagement.finegrained = false;
-    open = true;
+    open = false;
   };
 }
