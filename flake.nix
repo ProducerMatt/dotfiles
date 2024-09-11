@@ -195,7 +195,7 @@
               nixVersions.latest
               colmena
               fish
-              nil
+              nixd
               alejandra
               statix
               deadnix
