@@ -43,7 +43,7 @@ in {
         # Enable the X11 windowing system.
         services.xserver = {
           enable = true;
-          autorun = cfg.autoStart;
+          autorun = mkForce cfg.autoStart;
         };
 
         services.displayManager.autoLogin =
@@ -56,7 +56,8 @@ in {
 
         # Enable the KDE Plasma Desktop Environment.
         services.displayManager.sddm.enable = true;
-        services.xserver.desktopManager.plasma5.enable = true;
+        services.displayManager.defaultSession = "plasmax11";
+        services.desktopManager.plasma6.enable = true;
 
         # Configure keymap in X11
         services.xserver = {
@@ -97,7 +98,7 @@ in {
             enable = true;
             openFirewall = true;
             port = cfg.remote.port;
-            defaultWindowManager = "${pkgs.libsForQt5.plasma-workspace.out}/bin/startplasma-x11";
+            defaultWindowManager = "startplasma-x11";
           };
         })
       (mkIf (cfg.desktop == "gnome") {
@@ -105,8 +106,9 @@ in {
         services.xserver = {
           enable = true;
           displayManager.gdm.enable = true;
+          displayManager.defaultSession = "";
           desktopManager.gnome.enable = true;
-          autorun = cfg.autoStart;
+          autorun = mkForce cfg.autoStart;
           displayManager.autoLogin =
             if cfg.autoLogin
             then {
@@ -176,8 +178,9 @@ in {
         services.xserver = {
           enable = true;
           displayManager.lightdm.enable = true;
+          displayManager.defaultSession = "";
           desktopManager.pantheon.enable = true;
-          autorun = cfg.autoStart;
+          autorun = mkForce cfg.autoStart;
           displayManager.autoLogin =
             if cfg.autoLogin
             then {
