@@ -18,23 +18,17 @@ in {
     };
     autoStart = mkEnableOption "Start the GUI on boot";
     autoLogin = mkEnableOption "Autologin to the Desktop";
-    remote = mkOption {
-      description = "How to handle remote access";
-      default = {enable = false;};
-      type = types.submodule {
-        options = {
-          enable = mkEnableOption "Enable remote desktop server";
-          type = mkOption {
-            description = "Which type of remote desktop service to use. Currently only RDP";
-            type = with types; strMatching "RDP";
-            default = "RDP";
-          };
-          port = mkOption {
-            description = "Port to listen on.";
-            type = with types; uniq port;
-            default = 3389;
-          };
-        };
+    remote = {
+      enable = mkEnableOption "Enable remote desktop server";
+      type = mkOption {
+        description = "Which type of remote desktop service to use. Currently only RDP";
+        type = with types; strMatching "RDP";
+        default = "RDP";
+      };
+      port = mkOption {
+        description = "Port to listen on.";
+        type = with types; uniq port;
+        default = 3389;
       };
     };
   };
