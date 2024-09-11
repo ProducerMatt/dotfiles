@@ -96,6 +96,7 @@ in {
         {
           services.xrdp = {
             enable = true;
+            audio.enable = true;
             openFirewall = true;
             port = cfg.remote.port;
             defaultWindowManager = "startplasma-x11";
