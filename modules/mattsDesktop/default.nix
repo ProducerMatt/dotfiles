@@ -95,14 +95,12 @@ in {
         ((cfg.desktop == "plasma") && cfg.remote.enable)
         {
           services.xrdp = {
-            # DEBUG: experimenting with builtin plasma rdp
-            enable = false;
+            enable = true;
             audio.enable = true;
             openFirewall = true;
             port = cfg.remote.port;
             defaultWindowManager = "startplasma-x11";
           };
-          networking.firewall.allowedTCPPorts = [cfg.remote.port];
         })
       (mkIf (cfg.desktop == "gnome") {
         # Enable the X11 windowing system.
