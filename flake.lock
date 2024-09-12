@@ -411,11 +411,11 @@
         "templates": "templates_2"
       },
       "locked": {
-        "lastModified": 1725752802,
-        "narHash": "sha256-HoZe44Tp2reVYIgFhCEFC5VFW9x62+IEE4cOQW1Npc0=",
+        "lastModified": 1726105065,
+        "narHash": "sha256-PE8u79pW9yhWBDP/0pEUAh0GgxDGroUdGqXiUigCluE=",
         "owner": "ProducerMatt",
         "repo": "nix-templates",
-        "rev": "fe4ef75e068486e497ce2fa7dc5dda562d986e34",
+        "rev": "3690eee3d40e00160767d2c73973fe20b52fddc7",
         "type": "github"
       },
       "original": {
