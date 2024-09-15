@@ -100,7 +100,7 @@
     #nixpkgs-stable,
     nixpkgs,
     #home-manager-stable,
-    home-manager,
+    #home-manager,
     #nixos-hardware,
     #nur,
     #agenix,
@@ -112,10 +112,10 @@
     #poetry2nix,
     #vscode-server,
     #nix-formatter-pack,
-    emacs-overlay,
+    #emacs-overlay,
     git-hooks,
-    nix-index-database,
-    nix-btm,
+    #nix-index-database,
+    #nix-btm,
     ...
   } @ inputs: let
     utils = import ./utils.nix;
@@ -164,7 +164,7 @@
       ];
       systems = ["x86_64-linux"];
       perSystem = {
-        config,
+        #config,
         pkgs,
         system,
         ...

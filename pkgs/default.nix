@@ -1,4 +1,4 @@
-final: prev: {
+final: _prev: {
   # keep sources this first
   _sources = import ../npins/default.nix;
   # then, call packages with `final.callPackage`
