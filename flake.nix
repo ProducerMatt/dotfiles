@@ -132,14 +132,13 @@
           ];
         };
         overlays = let
-          gimme = name: (_final: _prev: {
-            ${name} = inputs.${name}.packages.${system}.default;
+          gimme = title: name: (_final: _prev: {
+            ${name} = inputs.${name}.packages.${system}.${title};
           });
-        in
-          map gimme [
-            "nixpkgs-hammering"
-            "nix-btm"
-          ];
+        in [
+          (gimme "default" "nixpkgs-hammering")
+          (gimme "nix-btm" "nix-btm")
+        ];
       };
     hm = import ./modules/hm.nix;
     flakeInfo = {
