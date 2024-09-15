@@ -88,6 +88,9 @@
     nixpkgs-hammering.inputs.nixpkgs.follows = "nixpkgs";
 
     templates.url = "github:ProducerMatt/nix-templates";
+
+    nix-btm.url = "github:DieracDelta/nix-btm";
+    nix-btm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -112,6 +115,7 @@
     emacs-overlay,
     git-hooks,
     nix-index-database,
+    nix-btm,
     ...
   } @ inputs: let
     utils = import ./utils.nix;
@@ -127,11 +131,15 @@
             "nix-2.24.5"
           ];
         };
-        overlays = [
-          (final: prev: {
-            nixpkgs-hammering = inputs.nixpkgs-hammering.packages.${system}.default;
-          })
-        ];
+        overlays = let
+          gimme = name: (_final: _prev: {
+            ${name} = inputs.${name}.packages.${system}.default;
+          });
+        in
+          map gimme [
+            "nixpkgs-hammering"
+            "nix-btm"
+          ];
       };
     hm = import ./modules/hm.nix;
     flakeInfo = {

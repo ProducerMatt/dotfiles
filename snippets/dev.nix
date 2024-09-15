@@ -9,7 +9,11 @@ with pkgs; [
   nixpkgs-hammering
   nix-init
   nix-diff
+  nix-output-monitor
+  nix-du
+  nix-melt
   alejandra
+  nix-btm
   stdenv
   gnumake
   resolve-march-native # find appropriate compiler flags for your cpu
