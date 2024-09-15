@@ -69,6 +69,8 @@
           # git
           gs = "git status";
           gcm = "git commit -m";
+          gca = "git commit --amend";
+          gcan = "git commit --amend --no-edit";
         };
       in {
         imports = with hmProfiles;
