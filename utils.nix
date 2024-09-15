@@ -135,7 +135,7 @@ lib.makeExtensible (_self:
           specialArgs =
             specialArgs
             // {
-              packages = config.packages;
+              inherit (config) packages;
             };
           modules = [
             (import path {})

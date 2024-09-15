@@ -10,7 +10,7 @@
 in
   python3Packages.buildPythonApplication rec {
     pname = commonMeta.name;
-    version = commonMeta.version;
+    inherit (commonMeta) version;
     namePrefix = "";
 
     src = python3Packages.fetchPypi {

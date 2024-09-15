@@ -98,7 +98,7 @@ in {
             enable = true;
             audio.enable = true;
             openFirewall = true;
-            port = cfg.remote.port;
+            inherit (cfg.remote) port;
             defaultWindowManager = "startplasma-x11";
           };
         })

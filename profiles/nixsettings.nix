@@ -39,7 +39,7 @@
           id = name;
           type = "indirect";
         };
-        flake = flake;
+        inherit flake;
       })
       inputs;
   };

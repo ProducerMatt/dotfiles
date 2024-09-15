@@ -215,7 +215,7 @@
               npins
             ]
             ++ pc-hooks.enabledPackages;
-          shellHook = pc-hooks.shellHook;
+          inherit (pc-hooks) shellHook;
         };
 
         checks.default = pc-hooks;
@@ -249,7 +249,7 @@
         colmena = {
           meta = {
             nixpkgs = defaultPkgs "x86_64-linux";
-            specialArgs = specialArgs;
+            inherit specialArgs;
           };
           PortableNix = import ./hosts/PortableNix {
             overrides = {
