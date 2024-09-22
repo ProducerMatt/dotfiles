@@ -94,23 +94,23 @@ in {
       (
         mkIf
         ((cfg.desktop == "plasma") && cfg.remote.enable)
-        (
-          if cfg.remote.type == "RDP"
-          then {
-            services.xrdp = {
-              enable = true;
-              audio.enable = true;
-              openFirewall = true;
-              inherit (cfg.remote) port;
-              defaultWindowManager = "startplasma-x11";
-            };
-          }
-          else if cfg.remote.type == "rustdesk"
-          then {
-            services.rustdesk-server.enable = true;
-          }
-          else throw "desktop remote type not programmed"
-        )
+        (mkMerge [
+          (mkIf (cfg.remote.type == "RDP")
+            {
+              services.xrdp = {
+                enable = true;
+                audio.enable = true;
+                openFirewall = true;
+                inherit (cfg.remote) port;
+                defaultWindowManager = "startplasma-x11";
+              };
+            })
+          (mkIf (cfg.remote.type == "rustdesk")
+            {
+              environment.systemPackages = [pkgs.rustdesk];
+              #services.rustdesk-server.enable = true;
+            })
+        ])
       )
       (mkIf (cfg.desktop == "gnome") {
         # Enable the X11 windowing system.
@@ -161,11 +161,6 @@ in {
           displaylink
         ];
       })
-      (
-        mkIf
-        ((cfg.desktop == "gnome") && cfg.remote.enable)
-        (throw "gnome remote not supported")
-      )
       (mkIf (cfg.desktop == "sway") {
         programs.sway = {
           enable = true;
@@ -188,11 +183,6 @@ in {
           displaylink
         ];
       })
-      (
-        mkIf
-        ((cfg.desktop == "sway") && cfg.remote.enable)
-        (throw "sway remote not supported")
-      )
       (mkIf (cfg.desktop == "pantheon") {
         # Enable the X11 windowing system.
         services.xserver = {
@@ -239,11 +229,6 @@ in {
           displaylink
         ];
       })
-      (
-        mkIf
-        ((cfg.desktop == "pantheon") && cfg.remote.enable)
-        (throw "pantheon remote not supported")
-      )
       (mkIf cfg.sound {
         hardware.pulseaudio.enable = false;
         security.rtkit.enable = true;
