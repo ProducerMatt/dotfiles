@@ -56,7 +56,10 @@
         desktop = "plasma";
         autoStart = true;
         autoLogin = true;
-        remote.enable = true;
+        remote = {
+          enable = true;
+          type = "rustdesk";
+        };
       };
 
       # services.mattsNetwork.hostname = "PortableNix";

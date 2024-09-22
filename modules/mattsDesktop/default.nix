@@ -21,12 +21,12 @@ in {
     remote = {
       enable = mkEnableOption "Enable remote desktop server";
       type = mkOption {
-        description = "Which type of remote desktop service to use. Currently only RDP";
-        type = with types; strMatching "RDP";
+        description = "Which type of remote desktop service to use.";
+        type = with types; uniq (enum ["RDP" "rustdesk"]);
         default = "RDP";
       };
       port = mkOption {
-        description = "Port to listen on.";
+        description = "RDP port to listen on.";
         type = with types; uniq port;
         default = 3389;
       };
@@ -91,17 +91,27 @@ in {
           displaylink
         ];
       })
-      (mkIf
+      (
+        mkIf
         ((cfg.desktop == "plasma") && cfg.remote.enable)
-        {
-          services.xrdp = {
-            enable = true;
-            audio.enable = true;
-            openFirewall = true;
-            inherit (cfg.remote) port;
-            defaultWindowManager = "startplasma-x11";
-          };
-        })
+        (
+          if cfg.remote.type == "RDP"
+          then {
+            services.xrdp = {
+              enable = true;
+              audio.enable = true;
+              openFirewall = true;
+              inherit (cfg.remote) port;
+              defaultWindowManager = "startplasma-x11";
+            };
+          }
+          else if cfg.remote.type == "rustdesk"
+          then {
+            services.rustdesk-server.enable = true;
+          }
+          else throw "desktop remote type not programmed"
+        )
+      )
       (mkIf (cfg.desktop == "gnome") {
         # Enable the X11 windowing system.
         services.xserver = {
@@ -151,6 +161,11 @@ in {
           displaylink
         ];
       })
+      (
+        mkIf
+        ((cfg.desktop == "gnome") && cfg.remote.enable)
+        (throw "gnome remote not supported")
+      )
       (mkIf (cfg.desktop == "sway") {
         programs.sway = {
           enable = true;
@@ -173,7 +188,11 @@ in {
           displaylink
         ];
       })
-
+      (
+        mkIf
+        ((cfg.desktop == "sway") && cfg.remote.enable)
+        (throw "sway remote not supported")
+      )
       (mkIf (cfg.desktop == "pantheon") {
         # Enable the X11 windowing system.
         services.xserver = {
@@ -220,7 +239,11 @@ in {
           displaylink
         ];
       })
-
+      (
+        mkIf
+        ((cfg.desktop == "pantheon") && cfg.remote.enable)
+        (throw "pantheon remote not supported")
+      )
       (mkIf cfg.sound {
         hardware.pulseaudio.enable = false;
         security.rtkit.enable = true;
