@@ -208,6 +208,7 @@
               colmena
               fish
               nixd
+              nil
               alejandra
               statix
               deadnix
