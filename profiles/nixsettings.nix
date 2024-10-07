@@ -5,8 +5,7 @@
 }: {
   imports = [./cachix.nix];
   nix = {
-    # TODO: update once 2_24 vulnerability is fixed
-    package = pkgs.nixVersions.nix_2_23;
+    package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations recursive-nix
       keep-outputs = true

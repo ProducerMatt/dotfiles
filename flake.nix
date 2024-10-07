@@ -126,10 +126,6 @@
         config = {
           allowUnfree = true;
           allowMeta = true;
-          # TODO: remove once not needed
-          permittedInsecurePackages = [
-            "nix-2.24.5"
-          ];
         };
         overlays = let
           gimme = title: name: (_final: _prev: {
@@ -203,8 +199,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs;
             [
-              # TODO: update once 2_24 vulnerability is fixed
-              nixVersions.nix_2_23
+              nixVersions.latest
               colmena
               fish
               nixd
