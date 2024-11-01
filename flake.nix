@@ -171,12 +171,12 @@
         # Git pre-push checks
         pc-hooks = git-hooks.lib.${system}.run {
           # only run on push and directly calling `pre-commit` in the shell
-          default_stages = ["manual" "push" "pre-merge-commit"];
+          default_stages = ["manual" "pre-push" "pre-merge-commit"];
           src = ./.;
           hooks = let
             enable_on_commit = {
               enable = true;
-              stages = ["manual" "push" "pre-merge-commit" "pre-commit"];
+              stages = ["manual" "pre-push" "pre-merge-commit" "pre-commit"];
             };
           in {
             alejandra = enable_on_commit;
