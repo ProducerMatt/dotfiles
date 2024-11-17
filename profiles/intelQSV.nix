@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   nixpkgs.config.packageOverrides = pkgs: let
-    ffmpeg_6-full = pkgs.ffmpeg_6-full.override {withMfx = true;};
-    jellyfin-ffmpeg = pkgs.jellyfin-ffmpeg.override {inherit ffmpeg_6-full;};
+    ffmpeg_7-full = pkgs.ffmpeg_7-full.override {withMfx = true;};
+    jellyfin-ffmpeg = pkgs.jellyfin-ffmpeg.override {inherit ffmpeg_7-full;};
   in {
-    inherit ffmpeg_6-full jellyfin-ffmpeg;
+    inherit ffmpeg_7-full jellyfin-ffmpeg;
     vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
     jellyfin = pkgs.jellyfin.override {inherit jellyfin-ffmpeg;};
   };
