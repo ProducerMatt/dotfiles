@@ -97,7 +97,7 @@
     self,
     flake-parts,
     #flake-utils-plus,
-    #nixpkgs-stable,
+    nixpkgs-stable,
     nixpkgs,
     #home-manager-stable,
     #home-manager,
@@ -121,7 +121,7 @@
     utils = import ./utils.nix;
     myLib = utils nixpkgs.lib;
     defaultPkgs = system:
-      import nixpkgs {
+      import nixpkgs-stable {
         inherit system;
         config = {
           allowUnfree = true;

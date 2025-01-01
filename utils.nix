@@ -131,7 +131,7 @@ lib.makeExtensible (_self:
         (rakeLeaves path);
 
       mkSystem = specialArgs: path: sys:
-        specialArgs.inputs.nixpkgs.lib.nixosSystem {
+        specialArgs.inputs.nixpkgs-stable.lib.nixosSystem {
           specialArgs =
             specialArgs
             // {
