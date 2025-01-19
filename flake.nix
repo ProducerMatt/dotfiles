@@ -78,8 +78,6 @@
 
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    #git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
