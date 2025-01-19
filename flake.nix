@@ -84,11 +84,15 @@
 
     nixpkgs-hammering.url = "github:jtojnar/nixpkgs-hammering";
     nixpkgs-hammering.inputs.nixpkgs.follows = "nixpkgs";
+    # nixpkgs-hammering.inputs.flake-utils.follows = "flake-utils";
 
     templates.url = "github:ProducerMatt/nix-templates";
 
     nix-btm.url = "github:DieracDelta/nix-btm";
     nix-btm.inputs.nixpkgs.follows = "nixpkgs";
+    # nix-btm.inputs.flake-utils.follows = "flake-utils";
+    # nix-btm.inputs.rust-overlay.follows = "rust-overlay";
+    # nix-btm.inputs.fenix.follows = "fenix";
   };
 
   outputs = {
