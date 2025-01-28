@@ -19,4 +19,5 @@ with pkgs; [
   #tere
   bind.dnsutils
   lsof # list files and sockets in use
+  fzf
 ]
