@@ -133,19 +133,8 @@
 
       hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-      # Use latest kernel
-      #
-      # 2024/01/28 -- cpupower is broken with 6.13
-      # backport to stable appears to not work
-      # https://github.com/NixOS/nixpkgs/issues/375865
-      # TODO: remove when working again
-      boot.kernelPackages = pkgs.linuxPackages_latest.extend (lpFinal: lpPrev: {
-        cpupower = lpPrev.cpupower.overrideAttrs (old: {
-          nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.which];
-          makeFlags = (old.makeFlags or []) ++ ["INSTALL_NO_TRANSLATIONS=1"];
-        });
-      });
-      # boot.kernelPackages = pkgs.linuxPackages_latest;
+      # Latest kernel
+      boot.kernelPackages = pkgs.linuxPackages_latest;
 
       # Bootloader.
       boot.loader.grub.enable = true;
