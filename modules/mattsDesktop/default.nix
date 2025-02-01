@@ -100,7 +100,6 @@ in {
           (mkIf (cfg.remote.type == "rustdesk")
             {
               environment.systemPackages = [pkgs.rustdesk];
-              #services.rustdesk-server.enable = true;
             })
         ])
       )
