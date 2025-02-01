@@ -53,7 +53,6 @@
         sound = true;
         printing = false;
         displayLink = false;
-        desktop = "plasma";
         autoStart = true;
         autoLogin = true;
         remote = {

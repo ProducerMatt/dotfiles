@@ -34,6 +34,9 @@ in {
         services.xserver = {
           enable = true;
           autorun = mkForce cfg.autoStart;
+
+          # Enable Enlightenment
+          desktopManager.enlightenment.enable = true;
         };
 
         services.displayManager.autoLogin =
@@ -44,11 +47,6 @@ in {
           }
           else {enable = false;};
 
-        # Enable the KDE Plasma Desktop Environment.
-        services.displayManager.sddm.enable = true;
-        services.displayManager.defaultSession = "plasmax11";
-        services.desktopManager.plasma6.enable = true;
-
         # Configure keymap in X11
         services.xserver = {
           xkb.layout = "us";
@@ -56,8 +54,6 @@ in {
         };
 
         environment.systemPackages = with pkgs; [
-          kdeplasma-addons
-
           # graphics debug tools
           xorg.xdpyinfo
           glxinfo
@@ -94,7 +90,8 @@ in {
                 audio.enable = true;
                 openFirewall = true;
                 inherit (cfg.remote) port;
-                defaultWindowManager = "startplasma-x11";
+                # FIXME:
+                # defaultWindowManager = "startplasma-x11";
               };
             })
           (mkIf (cfg.remote.type == "rustdesk")
