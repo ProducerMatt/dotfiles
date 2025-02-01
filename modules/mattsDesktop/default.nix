@@ -44,6 +44,10 @@ in {
         services.xserver = {
           enable = true;
           autorun = mkForce cfg.autoStart;
+          # TODO: match with other configs
+          windowManager.awesome = {
+            enable = true;
+          };
         };
 
         services.displayManager.autoLogin =
