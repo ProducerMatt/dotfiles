@@ -6,6 +6,7 @@
 }: let
   cfg = config.services.mattsDesktop;
 in {
+  imports = [./dc-tec_hyprland.nix];
   options.services.mattsDesktop = with lib; {
     enable = mkEnableOption "Use Matt's Desktop settings";
     sound = mkEnableOption "Enable sound systems";
@@ -34,9 +35,6 @@ in {
         services.xserver = {
           enable = true;
           autorun = mkForce cfg.autoStart;
-
-          # Enable Enlightenment
-          desktopManager.enlightenment.enable = true;
         };
 
         services.displayManager.autoLogin =

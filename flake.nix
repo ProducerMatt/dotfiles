@@ -93,6 +93,15 @@
     # nix-btm.inputs.flake-utils.follows = "flake-utils";
     # nix-btm.inputs.rust-overlay.follows = "rust-overlay";
     # nix-btm.inputs.fenix.follows = "fenix";
+
+    # Hyperland / Wayland related flakes
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hyprlock.url = "github:hyprwm/hyprlock";
+
+    # Catppuccin theming
+    nix-colors.url = "github:misterio77/nix-colors";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = {
