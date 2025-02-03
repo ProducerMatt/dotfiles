@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -31,20 +32,13 @@ in {
   config = with lib;
     mkIf cfg.enable (mkMerge [
       {
-        # Enable the X11 windowing system.
-        services.xserver = {
+        programs.hyprland = {
           enable = true;
-          autorun = mkForce cfg.autoStart;
+          xwayland.enable = true;
+          package = inputs.hyprland.packages.${pkgs.system}.default;
+          portalPackage =
+            inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
         };
-
-        services.displayManager.autoLogin =
-          if cfg.autoLogin
-          then {
-            enable = true;
-            user = "matt";
-          }
-          else {enable = false;};
-
         # Configure keymap in X11
         services.xserver = {
           xkb.layout = "us";
