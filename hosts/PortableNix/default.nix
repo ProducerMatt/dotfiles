@@ -65,6 +65,7 @@
 
       networking = {
         hostName = "PortableNix";
+        useDHCP = false;
         interfaces = {
           "enp112s0" = {
             useDHCP = false;
