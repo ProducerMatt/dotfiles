@@ -7,7 +7,7 @@
 }: let
   cfg = config.services.mattsDesktop;
 in {
-  imports = [./Frost-Pheonix.nix];
+  imports = [./dc-tec_hyprland.nix];
   options.services.mattsDesktop = with lib; {
     enable = mkEnableOption "Use Matt's Desktop settings";
     sound = mkEnableOption "Enable sound systems";
