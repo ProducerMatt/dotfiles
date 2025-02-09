@@ -6,6 +6,14 @@
   ...
 }: {
   config = {
+    programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.default;
+      portalPackage =
+        inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    };
+
     environment.systemPackages = [
       pkgs.wl-clipboard
       pkgs.slurp
@@ -18,9 +26,6 @@
     };
 
     services = {
-      xserver = {
-        videoDrivers = ["nvidia"];
-      };
       displayManager = {
         sddm = {
           enable = true;

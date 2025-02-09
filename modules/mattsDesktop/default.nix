@@ -7,7 +7,7 @@
 }: let
   cfg = config.services.mattsDesktop;
 in {
-  imports = [./dc-tec_hyprland.nix];
+  imports = [./Frost-Pheonix.nix];
   options.services.mattsDesktop = with lib; {
     enable = mkEnableOption "Use Matt's Desktop settings";
     sound = mkEnableOption "Enable sound systems";
@@ -32,13 +32,6 @@ in {
   config = with lib;
     mkIf cfg.enable (mkMerge [
       {
-        programs.hyprland = {
-          enable = true;
-          xwayland.enable = true;
-          package = inputs.hyprland.packages.${pkgs.system}.default;
-          portalPackage =
-            inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-        };
         # Configure keymap in X11
         services.xserver = {
           xkb.layout = "us";
