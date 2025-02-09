@@ -40,10 +40,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "2.2.16",
-      "revision": "03c993507132ffc8088f87d14ae30e30079c8876",
-      "url": "https://api.github.com/repos/jorgebucaran/nvm.fish/tarball/2.2.16",
-      "hash": "0fj4s11p1jyzwdvsv9jypa99pwxyql4ycj1jvw917dwfdw528c8r"
+      "version": "2.2.17",
+      "revision": "abd3002b6d2d578d484a5aea94dd1517dded6d42",
+      "url": "https://api.github.com/repos/jorgebucaran/nvm.fish/tarball/2.2.17",
+      "hash": "15i404nnks9zb75b6avnsg29x0v937mkh4pxnx8fchhbv0zyin84"
     },
     "replay.fish": {
       "type": "GitRelease",
