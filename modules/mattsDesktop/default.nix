@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   lib,
   pkgs,
@@ -7,7 +6,6 @@
 }: let
   cfg = config.services.mattsDesktop;
 in {
-  imports = [./dc-tec_hyprland.nix];
   options.services.mattsDesktop = with lib; {
     enable = mkEnableOption "Use Matt's Desktop settings";
     sound = mkEnableOption "Enable sound systems";
@@ -32,6 +30,24 @@ in {
   config = with lib;
     mkIf cfg.enable (mkMerge [
       {
+        # Enable the X11 windowing system.
+        services.xserver = {
+          enable = true;
+          autorun = mkForce cfg.autoStart;
+
+          # Enable Gnome
+          displayManager.gdm.enable = true;
+          desktopManager.gnome.enable = true;
+        };
+
+        services.displayManager.autoLogin =
+          if cfg.autoLogin
+          then {
+            enable = true;
+            user = "matt";
+          }
+          else {enable = false;};
+
         # Configure keymap in X11
         services.xserver = {
           xkb.layout = "us";
