@@ -30,6 +30,7 @@
     local_llm
     disable_sleep
     modules.mattsDesktop
+    dualsense_fix
   ];
 
   config =
