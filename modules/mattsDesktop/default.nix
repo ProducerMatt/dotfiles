@@ -38,6 +38,7 @@ in {
           # Enable Gnome
           displayManager.gdm.enable = true;
           desktopManager.gnome.enable = true;
+          desktopManager.cde.enable = true;
         };
 
         services.displayManager.autoLogin =
