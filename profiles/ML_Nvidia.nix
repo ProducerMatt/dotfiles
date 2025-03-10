@@ -39,4 +39,5 @@
     settingsSha256 = "sha256-9rtqh64TyhDF5fFAYiWl3oDHzKJqyOW3abpcf2iNRT8=";
     usePersistenced = false;
   };
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 }
