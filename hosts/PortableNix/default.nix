@@ -55,7 +55,7 @@
         printing = false;
         displayLink = false;
         autoStart = true;
-        autoLogin = true;
+        autoLogin = false;
         remote = {
           enable = true;
           type = "rustdesk";
