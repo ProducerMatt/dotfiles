@@ -30,16 +30,16 @@ in {
   config = with lib;
     mkIf cfg.enable (mkMerge [
       {
-        # Enable the X11 windowing system.
-        services.xserver = {
-          enable = true;
-          autorun = mkForce cfg.autoStart;
+        # # Enable the X11 windowing system.
+        # services.xserver = {
+        #   enable = true;
+        #   autorun = mkForce cfg.autoStart;
+        # };
 
-          # Enable Gnome
-          displayManager.gdm.enable = true;
-          desktopManager.gnome.enable = true;
-          desktopManager.cde.enable = true;
-        };
+        # Enable ly & plasma
+        services.displayManager.ly.enable = true;
+        services.desktopManager.plasma6.enable = true;
+        services.xserver.desktopManager.cde.enable = true;
 
         services.displayManager.autoLogin =
           if cfg.autoLogin
