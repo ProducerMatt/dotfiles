@@ -11,6 +11,10 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
       enabled = false,
   },
+  {
+    "prabirshrestha/vim-lsp",
+      enabled = false,
+  },
   -- {
   --   "neovim/nvim-lspconfig",
   --   opts = {
