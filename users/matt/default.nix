@@ -218,6 +218,8 @@
           enable = true;
           enableInstantMode = true;
         };
+
+        home.shell.enableShellIntegration = true;
       };
     in {
       home-manager.users.matt = hm;
