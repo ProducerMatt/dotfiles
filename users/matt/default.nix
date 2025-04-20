@@ -213,6 +213,11 @@
             set debug-file-directory ~/.nix-profile/lib/debug
           '';
         };
+
+        programs.thefuck = {
+          enable = true;
+          enableInstantMode = true;
+        };
       };
     in {
       home-manager.users.matt = hm;
