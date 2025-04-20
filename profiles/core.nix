@@ -9,7 +9,7 @@
   ...
 }: {
   imports = [
-    inputs.home-manager-stable.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     (import ../modules/hm.nix)
     inputs.nix-index-database.nixosModules.nix-index
   ];

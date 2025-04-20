@@ -22,8 +22,8 @@
 
     home-manager-stable.url = "github:nix-community/home-manager/release-24.11";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
-    #home-manager.url = "github:nix-community/home-manager/master";
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     #darwin.url = "github:LnL7/nix-darwin";
     #darwin.inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
@@ -108,7 +108,7 @@
     self,
     flake-parts,
     #flake-utils-plus,
-    nixpkgs-stable,
+    #nixpkgs-stable,
     nixpkgs,
     #home-manager-stable,
     #home-manager,
@@ -132,7 +132,7 @@
     utils = import ./utils.nix;
     myLib = utils nixpkgs.lib;
     defaultPkgs = system:
-      import nixpkgs-stable {
+      import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;

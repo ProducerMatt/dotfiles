@@ -216,14 +216,9 @@
 
         programs.pay-respects = {
           enable = true;
-          enableBashIntegration = true;
-          enableFishIntegration = true;
-          enableNushellIntegration = true;
-          enableZshIntegration = true;
         };
 
-        # NOTE: enable at home-manager 25.04
-        # home.shell.enableShellIntegration = true;
+        home.shell.enableShellIntegration = true;
       };
     in {
       home-manager.users.matt = hm;
