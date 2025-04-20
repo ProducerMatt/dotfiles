@@ -178,6 +178,8 @@
       system.stateVersion = "22.05"; # Did you read the comment?
 
       services.x2goserver.enable = true;
+
+      programs.virt-manager.enable = true;
     }
     // overrides;
 }
