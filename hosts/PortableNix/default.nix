@@ -177,8 +177,7 @@
       # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
       system.stateVersion = "22.05"; # Did you read the comment?
 
-      # BUG: x2go broken
-      # services.x2goserver.enable = true;
+      services.x2goserver.enable = true;
 
       programs.virt-manager.enable = true;
     }
