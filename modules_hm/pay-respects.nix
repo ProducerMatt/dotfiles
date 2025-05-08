@@ -42,7 +42,7 @@ in {
         eval "$(${payRespectsCmd} bash ${cfgOptions})"
       '';
 
-      zsh.initContent = lib.mkIf cfg.enableZshIntegration ''
+      zsh.initExtra = lib.mkIf cfg.enableZshIntegration ''
         eval "$(${payRespectsCmd} zsh ${cfgOptions})"
       '';
 
