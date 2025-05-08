@@ -219,6 +219,7 @@
               statix
               deadnix
               npins
+              nvd
             ]
             ++ pc-hooks.enabledPackages;
           inherit (pc-hooks) shellHook;
