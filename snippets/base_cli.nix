@@ -20,4 +20,5 @@ with pkgs; [
   bind.dnsutils
   lsof # list files and sockets in use
   fzf
+  dua # disk space usage analyser
 ]
