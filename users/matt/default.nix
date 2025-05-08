@@ -9,9 +9,6 @@
   modules-hm,
   ...
 }: {
-  imports = [
-    modules-hm.pay-respects
-  ];
   config = lib.mkIf enable (
     let
       hm = let
@@ -85,6 +82,7 @@
             git
             direnv
             inputs.nix-index-database.hmModules.nix-index
+            modules-hm.pay-respects
           ];
         programs.nix-index-database.comma.enable = true;
         #suites.graphical;
