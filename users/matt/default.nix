@@ -6,8 +6,12 @@
   flakeInfo,
   hmProfiles,
   inputs,
+  modules-hm,
   ...
 }: {
+  imports = [
+    modules-hm.pay-respects
+  ];
   config = lib.mkIf enable (
     let
       hm = let
