@@ -220,6 +220,8 @@
               deadnix
               npins
               nvd
+              git
+              git-crypt
             ]
             ++ pc-hooks.enabledPackages;
           inherit (pc-hooks) shellHook;
