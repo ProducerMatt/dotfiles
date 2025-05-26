@@ -1,14 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./cachix.nix
     inputs.determinate.nixosModules.default
   ];
   nix = {
-    package = pkgs.nix-detsys;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations recursive-nix
       keep-outputs = true
