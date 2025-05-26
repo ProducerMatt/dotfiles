@@ -34,6 +34,7 @@
       trusted-public-keys = [
         "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
       ];
+      lazy-trees = true; # Determinate Systems Nix required
     };
     registry =
       builtins.mapAttrs (name: flake: {
