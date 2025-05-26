@@ -102,6 +102,10 @@
     # # Catppuccin theming
     # nix-colors.url = "github:misterio77/nix-colors";
     # catppuccin.url = "github:catppuccin/nix";
+
+    # DeterminateSystems nix branch with extra features
+    nix-detsys.url = "https://flakehub.com/f/DeterminateSystems/nix-src/*";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs = {
@@ -127,6 +131,8 @@
     git-hooks,
     #nix-index-database,
     #nix-btm,
+    #nix-detsys,
+    #determinate
     ...
   } @ inputs: let
     utils = import ./utils.nix;
@@ -145,6 +151,8 @@
         in [
           (gimme "default" "nixpkgs-hammering")
           (gimme "nix-btm" "nix-btm")
+          # inputs.nix-detsys.overlays.default
+          (gimme "nix" "nix-detsys")
         ];
       };
     hm = import ./modules/hm.nix;
@@ -210,7 +218,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs;
             [
-              nixVersions.latest
+              nix-detsys
               colmena
               fish
               nixd
