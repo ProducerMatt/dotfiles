@@ -71,7 +71,7 @@
           gs = "git status";
           gcm = "git commit -m";
           gca = "git commit --amend";
-          gcan = "git commit --amend --no-edit";
+          gcan = "git diff-index --quiet HEAD -- && git commit --amend --no-edit || begin; echo \"Error: Repository has uncommitted changes\"; false; end;";
         };
       in {
         imports = with hmProfiles;
