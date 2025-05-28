@@ -1,6 +1,7 @@
 {
   fetchFromGitHub,
   rsync,
+  autoconf,
 }: let
   version = "ed6c77370ebd6e2bbd986606757146941ada6857";
 in
@@ -18,4 +19,8 @@ in
     };
 
     patches = [./fix-gettimeofday-error.patch];
+
+    buildInputs = [
+      autoconf
+    ];
   })
