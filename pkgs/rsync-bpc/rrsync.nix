@@ -2,20 +2,17 @@
 {
   rrsync,
   rsync-bpc,
-  python3,
 }:
 rrsync.overrideAttrs (finalAttrs: prevAttrs: {
-  pname = "rrsync";
+  pname = prevAttrs.pname + "-bpc";
+
   inherit (rsync-bpc) version src;
 
-  buildInputs = [
-    rsync-bpc
-    (python3.withPackages (pythonPackages: with pythonPackages; [braceexpand]))
-  ];
-  # Skip configure and build phases.
-  # We just want something from the support directory
-  dontConfigure = true;
-  dontBuild = true;
+  buildInputs =
+    prevAttrs.buildInputs
+    ++ [
+      rsync-bpc
+    ];
 
   patches = rsync-bpc.patches ++ [./bpc.patch];
 
@@ -33,5 +30,6 @@ rrsync.overrideAttrs (finalAttrs: prevAttrs: {
     rsync-bpc.meta
     // {
       description = "A helper to run rsync-only environments from ssh-logins";
+      mainProgram = "rrsync";
     };
 })
