@@ -18,8 +18,6 @@ in
       sha256 = "sha256-mSYaE5ldYw6Ckv+/ABEGzhuhxK+WM7BHc7hOWGfdNJc=";
     };
 
-    patches = [./fix-gettimeofday-error.patch];
-
     buildInputs = [
       autoconf
     ];
