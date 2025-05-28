@@ -16,4 +16,6 @@ in
       fetchSubmodules = false;
       sha256 = "sha256-CXGeSWZF0OOhwo+yndkd0ppYILHELBiZIDhHN7BqVYc=";
     };
+
+    patches = [./fix-gettimeofday-error.patch];
   })
