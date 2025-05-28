@@ -87,7 +87,7 @@
         #suites.graphical;
         home.username = "matt";
         home.homeDirectory = "/home/matt";
-        home.stateVersion = "24.11";
+        home.stateVersion = "23.11";
 
         programs.fish = {
           enable = true;
