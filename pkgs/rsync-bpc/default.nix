@@ -18,7 +18,9 @@ in
       sha256 = "sha256-mSYaE5ldYw6Ckv+/ABEGzhuhxK+WM7BHc7hOWGfdNJc=";
     };
 
-    buildInputs = [
-      autoconf
-    ];
+    buildInputs =
+      prevAttrs.buildInputs
+      ++ [
+        autoconf
+      ];
   })
