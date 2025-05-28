@@ -1,14 +1,15 @@
+# WARN: not tested recently
 {
-  stdenv,
+  rrsync,
+  rsync-bpc,
   python3,
-  rsync,
 }:
-stdenv.mkDerivation {
+rrsync.overrideAttrs (finalAttrs: prevAttrs: {
   pname = "rrsync";
-  inherit (rsync) version src;
+  inherit (rsync-bpc) version src;
 
   buildInputs = [
-    rsync
+    rsync-bpc
     (python3.withPackages (pythonPackages: with pythonPackages; [braceexpand]))
   ];
   # Skip configure and build phases.
@@ -16,10 +17,10 @@ stdenv.mkDerivation {
   dontConfigure = true;
   dontBuild = true;
 
-  patches = rsync.patches ++ [./bpc.patch];
+  patches = rsync-bpc.patches ++ [./bpc.patch];
 
   postPatch = ''
-    substituteInPlace support/rrsync --replace /usr/bin/rsync ${rsync}/bin/rsync
+    substituteInPlace support/rrsync --replace /usr/bin/rsync ${rsync-bpc}/bin/rsync
   '';
 
   installPhase = ''
@@ -29,8 +30,8 @@ stdenv.mkDerivation {
   '';
 
   meta =
-    rsync.meta
+    rsync-bpc.meta
     // {
       description = "A helper to run rsync-only environments from ssh-logins";
     };
-}
+})
