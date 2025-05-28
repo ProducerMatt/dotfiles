@@ -18,6 +18,13 @@ in
       sha256 = "sha256-mSYaE5ldYw6Ckv+/ABEGzhuhxK+WM7BHc7hOWGfdNJc=";
     };
 
+    # FIXME: Python commonmark dependency not being found. Give up on docs
+    configureFlags =
+      prevAttrs.configureFlags
+      ++ [
+        "--disable-md2man"
+      ];
+
     buildInputs =
       prevAttrs.buildInputs
       ++ [
