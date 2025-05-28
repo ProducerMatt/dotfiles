@@ -3,6 +3,10 @@
     ./cachix.nix
     inputs.determinate.nixosModules.default
   ];
+
+  # https://github.com/DeterminateSystems/determinate/pull/88
+  environment.etc."nix/nix.conf".target = "nix/nix.custom.conf";
+
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations recursive-nix
