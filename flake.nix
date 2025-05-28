@@ -245,7 +245,7 @@
           overlays = myLib.rakeLeaves ./overlays;
           users = myLib.rakeLeaves ./users;
           modules = myLib.rakeLeaves ./modules;
-          modules-hm = myLib.rakeLeaves ./modules_hm;
+          # modules-hm = myLib.rakeLeaves ./modules_hm;
         };
       in {
         # The usual flake attributes can be defined here, including system-
