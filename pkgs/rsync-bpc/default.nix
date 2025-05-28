@@ -15,7 +15,7 @@ in
       repo = "rsync-bpc";
       rev = version;
       fetchSubmodules = false;
-      sha256 = "sha256-CXGeSWZF0OOhwo+yndkd0ppYILHELBiZIDhHN7BqVYc=";
+      sha256 = "sha256-mSYaE5ldYw6Ckv+/ABEGzhuhxK+WM7BHc7hOWGfdNJc=";
     };
 
     patches = [./fix-gettimeofday-error.patch];
