@@ -31,6 +31,7 @@
     disable_sleep
     modules.mattsDesktop
     dualsense_fix
+    zfs
   ];
 
   config =
