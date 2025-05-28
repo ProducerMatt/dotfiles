@@ -27,7 +27,7 @@
     #profiles.sicp
     #profiles.virtualbox
     #profiles.fonts
-    local_llm
+    #local_llm
     disable_sleep
     modules.mattsDesktop
     dualsense_fix
