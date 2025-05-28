@@ -6,7 +6,7 @@
 
     # Track channels with commits tested and built by hydra
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-    nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2411";
+    nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2505";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
     # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -20,7 +20,7 @@
 
     #flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
-    home-manager-stable.url = "https://flakehub.com/f/nix-community/home-manager/0.2411";
+    home-manager-stable.url = "https://flakehub.com/f/nix-community/home-manager/0.2505";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
     #home-manager.url = "https://flakehub.com/f/nix-community/home-manager/*";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
