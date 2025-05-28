@@ -14,8 +14,6 @@ rrsync.overrideAttrs (finalAttrs: prevAttrs: {
       rsync-bpc
     ];
 
-  patches = rsync-bpc.patches ++ [./bpc.patch];
-
   postPatch = ''
     substituteInPlace support/rrsync --replace /usr/bin/rsync ${rsync-bpc}/bin/rsync
   '';
