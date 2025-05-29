@@ -28,6 +28,10 @@
       "https://pre-commit-hooks.cachix.org"
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ]
+    [
+      "https://colmena.cachix.org/"
+      "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+    ]
   ];
 in
   with builtins;
