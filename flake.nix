@@ -106,6 +106,9 @@
     # DeterminateSystems nix branch with extra features
     nix-detsys.url = "https://flakehub.com/f/DeterminateSystems/nix-src/*";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
+    nil.url = "github:oxalica/nil";
+    nixd.url = "github:nix-community/nixd";
   };
 
   outputs = {
@@ -151,8 +154,10 @@
         in [
           (gimme "default" "nixpkgs-hammering")
           (gimme "nix-btm" "nix-btm")
-          # inputs.nix-detsys.overlays.default
+          inputs.nix-detsys.overlays.default
           (gimme "nix" "nix-detsys")
+          (gimme "nil" "nil")
+          (gimme "nixd" "nixd")
         ];
       };
     hm = import ./modules/hm.nix;
