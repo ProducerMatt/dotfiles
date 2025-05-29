@@ -241,6 +241,8 @@
         };
 
         checks.default = pc-hooks;
+
+        packages = import ./pkgs/default.nix pkgs;
       };
       flake = let
         specialArgs = {

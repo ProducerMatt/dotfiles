@@ -37,7 +37,7 @@
   system.configurationRevision = flakeInfo.rev;
   system.copySystemConfiguration = lib.mkForce false;
   nixpkgs.overlays = [
-    (import ../pkgs/default.nix)
+    (final: prev: (import ../pkgs/default.nix) final)
     overlays.webkitgtk
     overlays.displaylinkFix
     inputs.emacs-overlay.overlays.default
