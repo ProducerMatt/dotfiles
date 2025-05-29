@@ -196,7 +196,7 @@
         pc-hooks = git-hooks.lib.${system}.run {
           # only run on push and directly calling `pre-commit` in the shell
           default_stages = ["manual" "pre-push" "pre-merge-commit"];
-          src = ./.;
+          src = builtins.path {path = ./.;};
           hooks = let
             enable_on_commit = {
               enable = true;
