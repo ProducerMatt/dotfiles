@@ -14,7 +14,7 @@
       # for gen12 and up, use intel-compute-runtime
       # https://discourse.nixos.org/t/trouble-getting-quicksync-to-work-with-jellyfin/42275
       # https://github.com/NixOS/nixpkgs/issues/356535
-      onevpl-intel-gpu
+      vpl-gpu-rt
     ];
   };
 
