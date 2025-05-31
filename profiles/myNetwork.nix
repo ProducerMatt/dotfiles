@@ -8,6 +8,7 @@
     hosts = {
       "192.168.1.3" = ["PherigoNAS.local"];
       "192.168.1.5" = ["PortableNix.local"];
+      "192.168.1.10" = ["BabyDell.local"];
     };
   };
   fileSystems = {

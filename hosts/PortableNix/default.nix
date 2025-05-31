@@ -23,11 +23,6 @@
     users.nixremote
     qemu
     myNetwork
-    #profiles.guix
-    #profiles.sicp
-    #profiles.virtualbox
-    #profiles.fonts
-    #local_llm
     disable_sleep
     modules.mattsDesktop
     dualsense_fix
@@ -36,19 +31,9 @@
 
   config =
     {
-      # age.secrets."wg-PortableNix.key".file =
-      #   ../../secrets/wg-PortableNix.key.age;
-      # age.secrets."wg-apu4VPN-preshared.key".file =
-      #   ../../secrets/wg-apu4VPN-preshared.key.age;
-
       users.mutableUsers = true;
 
       nix.settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-      # nixpkgs.localSystem = {
-      #   #  gcc.arch = "skylake";
-      #   #  gcc.tune = "skylake";
-      #   system = "x86_64-linux";
-      # };
 
       services.mattsDesktop = {
         enable = true;
@@ -62,8 +47,6 @@
           type = "rustdesk";
         };
       };
-
-      # services.mattsNetwork.hostname = "PortableNix";
 
       networking = {
         hostName = "PortableNix";
@@ -79,36 +62,7 @@
             ];
           };
         };
-        hosts = {
-          "192.168.1.3" = ["PherigoNAS.local"];
-        };
       };
-
-      fileSystems = {
-        "/mnt/PublicNAS" = {
-          device = "PherigoNAS.local:/mnt/PherigoRAID/Public";
-          fsType = "nfs";
-          options = [
-            "nfsvers=4"
-            "noatime"
-            "noexec"
-          ];
-        };
-        "/mnt/MattNAS" = {
-          device = "PherigoNAS.local:/mnt/PherigoRAID/Matt";
-          fsType = "nfs";
-          options = [
-            "nfsvers=4"
-            "noatime"
-            "noexec"
-          ];
-        };
-      };
-
-      # programs.apeLoader = {
-      #   enable = false;
-      #   mode = "workaround";
-      # };
 
       boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "uas" "usb_storage" "sd_mod"];
       boot.initrd.kernelModules = [];
@@ -152,16 +106,6 @@
       boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".device = "/dev/disk/by-uuid/90dc3598-b566-4723-8c36-ba6110d2bd98";
       boot.initrd.luks.devices."luks-90dc3598-b566-4723-8c36-ba6110d2bd98".keyFile = "/crypto_keyfile.bin";
 
-      # networking = {
-      #   wireguard.interfaces =
-      #     import ../../secrets/wg-PortableNix.nix {
-      #       privateKeyPath =
-      #         config.age.secrets."wg-PortableNix.key".path;
-      #       apuKeyPath =
-      #         config.age.secrets."wg-apu4VPN-preshared.key".path;
-      #     };
-      # };
-
       # Set your time zone.
       time.timeZone = "America/Chicago";
 
@@ -192,7 +136,7 @@
 
       # services.x2goserver.enable = true;
 
-      programs.virt-manager.enable = true;
+      # programs.virt-manager.enable = true;
     }
     // overrides;
 }

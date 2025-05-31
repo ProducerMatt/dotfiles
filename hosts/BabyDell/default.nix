@@ -15,29 +15,18 @@
     intelQSV
     mysyncthing
     myNetwork
+    portablenix_builder
+    myNetwork
   ];
 
-  nix = {
-    buildMachines = [
-      {
-        hostName = "PortableNix.local";
-        system = "x86_64-linux";
-        protocol = "ssh-ng";
-        sshUser = "nixremote";
-        sshKey = "/home/matt/.ssh/id_nixremote_ed25519";
-        maxJobs = 16;
-        speedFactor = 8;
-        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-      }
-    ];
-    distributedBuilds = true;
-    #sshServe = {
-    #  enable = "true";
-    #  write = true;
-    #  keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHR4G/Vse74jiFwpKYagAEMlfqYs/HdXzSkXgd/6cIKk" ];
-    #  protocol = "ssh-ng";
-    #};
-  };
+  #nix = {
+  #  sshServe = {
+  #    enable = "true";
+  #    write = true;
+  #    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHR4G/Vse74jiFwpKYagAEMlfqYs/HdXzSkXgd/6cIKk" ];
+  #    protocol = "ssh-ng";
+  #  };
+  #};
 
   networking = {
     hostName = "BabyDell";
@@ -51,31 +40,6 @@
           }
         ];
       };
-    };
-    hosts = {
-      "192.168.1.3" = ["PherigoNAS.local"];
-      "192.168.1.5" = ["PortableNix.local"];
-    };
-  };
-
-  fileSystems = {
-    "/mnt/PublicNAS" = {
-      device = "PherigoNAS.local:/mnt/PherigoRAID/Public";
-      fsType = "nfs";
-      options = [
-        "nfsvers=4"
-        "noatime"
-        "noexec"
-      ];
-    };
-    "/mnt/MattNAS" = {
-      device = "PherigoNAS.local:/mnt/PherigoRAID/Matt";
-      fsType = "nfs";
-      options = [
-        "nfsvers=4"
-        "noatime"
-        "noexec"
-      ];
     };
   };
 
