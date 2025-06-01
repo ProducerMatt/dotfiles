@@ -235,6 +235,7 @@
               nvd
               git
               git-crypt
+              nix-inspect
             ]
             ++ pc-hooks.enabledPackages;
           inherit (pc-hooks) shellHook;

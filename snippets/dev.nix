@@ -14,6 +14,9 @@ with pkgs; [
   nix-melt
   alejandra
   nix-btm
+  nix-inspect
+  nh
+
   stdenv
   gnumake
   resolve-march-native # find appropriate compiler flags for your cpu
