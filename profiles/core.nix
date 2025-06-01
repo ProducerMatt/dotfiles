@@ -35,7 +35,7 @@
     Flake commit ${flakeInfo.shortRev}
   '';
   system.configurationRevision = flakeInfo.rev;
-  system.copySystemConfiguration = lib.mkForce false;
+  system.copySystemConfiguration = true;
   nixpkgs.overlays = [
     (final: prev: (import ../pkgs/default.nix) final)
     overlays.webkitgtk
