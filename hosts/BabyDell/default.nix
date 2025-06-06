@@ -17,7 +17,6 @@
     mysyncthing
     myNetwork
     portablenix_builder
-    myNetwork
   ];
 
   #nix = {
