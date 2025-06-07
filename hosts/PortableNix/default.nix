@@ -33,6 +33,8 @@
     {
       users.mutableUsers = true;
 
+      matt.hm.primaryMachine = true;
+
       services.mattsDesktop = {
         enable = true;
         sound = true;

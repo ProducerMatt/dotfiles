@@ -21,6 +21,7 @@ in {
         ];
         type = with lib.types; listOf (enum ["matt"]);
       };
+      primaryMachine = lib.mkEnableOption "lots of packages";
       #branch = lib.mkOption {
       #  type = with lib.types; uniq (enum ["stable" "latest"]);
       #};

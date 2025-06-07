@@ -11,13 +11,14 @@
     nixsettings
     openssh
     earlyOOM
-    adminAccess
     jellyfin
     intelQSV
     mysyncthing
     myNetwork
     portablenix_builder
   ];
+
+  matt.hm.primaryMachine = false;
 
   #nix = {
   #  sshServe = {
