@@ -7,7 +7,6 @@
   hmProfiles,
   inputs,
   modules-hm,
-  osConfig,
   ...
 }: {
   config = lib.mkIf enable (
@@ -137,22 +136,11 @@
         home.packages = with pkgs;
           builtins.concatLists [
             (getSnippet "base_cli")
-            (getSnippet "git")
             (getSnippet "dev")
-            (
-              builtins.seq
-              (lib.assertOneOf "primaryMachine" osConfig.matt.hm.primaryMachine [true false])
-              (
-                if osConfig.matt.hm.primaryMachine
-                then
-                  (builtins.concatLists [
-                    (getSnippet "sysadmin")
-                    (getSnippet "audiovideo")
-                    (getSnippet "emulators")
-                  ])
-                else []
-              )
-            )
+            (getSnippet "sysadmin")
+            (getSnippet "git")
+            (getSnippet "audiovideo")
+            (getSnippet "emulators")
             [
               #ripgrep-all # bug
               psmisc
