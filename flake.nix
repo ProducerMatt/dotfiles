@@ -5,7 +5,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     # Track channels with commits tested and built by hydra
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*";
     nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2505";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
