@@ -12,7 +12,7 @@
     };
   };
   fileSystems = {
-    "/mnt/PublicNAS" = {
+    "/media/PublicNAS" = {
       device = "PherigoNAS.local:/mnt/PherigoRAID/Public";
       fsType = "nfs";
       options = [
@@ -21,7 +21,7 @@
         "noexec"
       ];
     };
-    "/mnt/MattNAS" = {
+    "/media/MattNAS" = {
       device = "PherigoNAS.local:/mnt/PherigoRAID/Matt";
       fsType = "nfs";
       options = [
