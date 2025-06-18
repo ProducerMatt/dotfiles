@@ -9,7 +9,7 @@
   cfg = config.matt.hm;
 in {
   imports = [
-    (import ../users/matt {enable = builtins.elem "matt" cfg.users;})
+    (lib.modules.importApply ../users/matt {enable = builtins.elem "matt" cfg.users;})
   ];
   options = {
     matt.hm = {

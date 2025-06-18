@@ -10,7 +10,7 @@
 }: {
   imports = [
     inputs.home-manager-stable.nixosModules.home-manager
-    (import ../modules/hm.nix)
+    ../modules/hm.nix
     inputs.nix-index-database.nixosModules.nix-index
   ];
   environment.systemPackages =
