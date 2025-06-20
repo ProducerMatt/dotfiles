@@ -62,6 +62,9 @@
         };
       };
 
+      # For dual-booting Windows
+      time.hardwareClockInLocalTime = true;
+
       services.xserver.videoDrivers = ["nvidia"];
 
       # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
