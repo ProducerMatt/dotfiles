@@ -146,7 +146,8 @@
         inherit system;
         config = {
           allowUnfree = true;
-          allowMeta = true;
+          checkMeta = true;
+          warnUndeclaredOptions = true;
         };
         overlays = let
           gimme = title: name: (_final: _prev: {
