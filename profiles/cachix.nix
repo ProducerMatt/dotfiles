@@ -1,9 +1,10 @@
 let
   sources = import ../snippets/substitutors.nix;
-in
-  with builtins; {
-    nix.settings = {
-      extra-substituters = map (elemAt 0) sources;
-      extra-trusted-public-keys = map (elemAt 1) sources;
-    };
-  }
+  first = x: builtins.elemAt x 0;
+  second = x: builtins.elemAt x 1;
+in {
+  nix.settings = {
+    extra-substituters = map first sources;
+    extra-trusted-public-keys = map second sources;
+  };
+}
