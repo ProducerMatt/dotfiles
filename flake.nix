@@ -106,6 +106,7 @@
     # DeterminateSystems nix branch with extra features
     nix-detsys.url = "https://flakehub.com/f/DeterminateSystems/nix-src/*";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    determinate.inputs.nix.follows = "nix-detsys";
 
     nil.url = "github:oxalica/nil";
     nixd.url = "github:nix-community/nixd";
