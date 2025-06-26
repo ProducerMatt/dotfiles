@@ -30,9 +30,9 @@
       # slows performance of writes, let weekly optimize get it
       auto-optimise-store = false;
       trusted-users = ["root" "matt" "nixremote"];
-      trusted-public-keys = [
-        "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
-      ];
+      # extra-trusted-public-keys = [
+      #   "cache.PherigoNAS.local-1:an8uYbjcJQKUvSdBEe/hlAbbHGDFH+sZZK6PpAQlSn8="
+      # ];
       lazy-trees = true; # Determinate Systems Nix required
     };
     registry =
