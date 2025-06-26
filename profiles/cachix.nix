@@ -5,6 +5,7 @@ let
 in {
   nix.settings = {
     extra-substituters = map first sources;
+    extra-trusted-substituters = map first sources;
     extra-trusted-public-keys = map second sources;
   };
 }
