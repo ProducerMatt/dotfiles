@@ -15,6 +15,15 @@ return {
     "prabirshrestha/vim-lsp",
       enabled = false,
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function()
+      -- both contribute
+      vim.lsp.enable('nixd')
+      -- already enables itself
+      -- vim.lsp.enable('nil_ls')
+    end,
+  },
   -- {
   --   "neovim/nvim-lspconfig",
   --   opts = {
