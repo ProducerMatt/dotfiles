@@ -123,6 +123,9 @@
           KEYID = "E6EA80E5CB3E1F9C";
           TERM = "xterm-direct";
           COLORTERM = "truecolor";
+          # NOTE: Nixd generates a large amount of logs (in ~/.local/state/nvim/lsp.log).
+          # tone down the log level with an env var:
+          NIXD_FLAGS = "-log=error";
 
           EDITOR = start_emacs;
           VISUAL = start_emacs;
