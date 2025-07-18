@@ -225,7 +225,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs;
             [
-              nix-detsys
+              # nix-detsys only needed when bootstrapping a new sys
               colmena
               fish
               nixd
