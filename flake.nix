@@ -228,11 +228,11 @@
               # nix-detsys only needed when bootstrapping a new sys
               colmena
               fish
-              nixd
-              nil
+              #nixd
+              #nil
               alejandra
-              statix
-              deadnix
+              #statix
+              #deadnix
               npins
               nvd
               git
