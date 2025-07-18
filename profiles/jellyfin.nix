@@ -26,4 +26,7 @@
     enable = true;
     openFirewall = true;
   };
+
+  # Always prioritise Jellyfin IO
+  systemd.services.jellyfin.serviceConfig.IOSchedulingPriority = 0;
 }
