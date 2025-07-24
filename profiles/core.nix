@@ -40,7 +40,6 @@
     (final: prev: (import ../pkgs/default.nix) final)
     overlays.webkitgtk
     overlays.displaylinkFix
-    inputs.emacs-overlay.overlays.default
   ];
   # colmena needs no password
   security.sudo.wheelNeedsPassword = lib.mkForce false;

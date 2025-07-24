@@ -72,10 +72,6 @@
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    emacs-overlay.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-
     git-hooks.url = "https://flakehub.com/f/cachix/git-hooks.nix/*";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -131,7 +127,6 @@
     #poetry2nix,
     #vscode-server,
     #nix-formatter-pack,
-    #emacs-overlay,
     git-hooks,
     #nix-index-database,
     #nix-btm,

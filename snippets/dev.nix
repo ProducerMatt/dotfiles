@@ -1,7 +1,7 @@
 pkgs:
 with pkgs; [
   neovim
-  emacs-unstable
+  helix
   nixos-generators
   #nox
   niv

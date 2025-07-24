@@ -63,29 +63,6 @@
         "url": "https://install.determinate.systems/determinate-nixd/tag/v3.8.4/x86_64-linux"
       }
     },
-    "emacs-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs-stable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1753324065,
-        "narHash": "sha256-wMjFvmq3bw0zHjAuZ9lgnjJHdB0XqeI+ErfevgFux5w=",
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "rev": "7e4ef911d11f1201cef6e48143eba991e087bce9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -742,7 +719,6 @@
     "root": {
       "inputs": {
         "determinate": "determinate",
-        "emacs-overlay": "emacs-overlay",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
         "home-manager-stable": "home-manager-stable",

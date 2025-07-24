@@ -13,13 +13,10 @@
     let
       hm = let
         getSnippet = myLib.getPkgSnippet pkgs;
-        start_emacs = "emacsclient -c -a 'emacs'";
         myAliases = {
           l = "eza";
           ll = "eza -la";
           la = "eza -a";
-          e = start_emacs;
-          er = "systemctl --user restart emacs.service";
           v = "nvim";
 
           # quick cd
@@ -126,9 +123,6 @@
           # NOTE: Nixd generates a large amount of logs (in ~/.local/state/nvim/lsp.log).
           # tone down the log level with an env var:
           NIXD_FLAGS = "-log=error";
-
-          EDITOR = start_emacs;
-          VISUAL = start_emacs;
         };
 
         programs.git = {
@@ -198,10 +192,7 @@
               #cpplint
             ]
           ];
-        services.emacs = {
-          enable = true;
-          package = pkgs.emacs-unstable;
-        };
+
         programs.vim.package = pkgs.vim;
 
         home.file = {
