@@ -265,7 +265,7 @@
           mkSystem = path: sys:
             myLib.mkSystem specialArgs path sys;
         in {
-          PortableNix = mkSystem ./hosts/PortableNix "x86_64-linux";
+          #PortableNix = mkSystem ./hosts/PortableNix "x86_64-linux";
           BabyDell = mkSystem ./hosts/BabyDell "x86_64-linux";
         };
 
