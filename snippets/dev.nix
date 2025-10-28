@@ -13,7 +13,6 @@ with pkgs; [
   nix-du
   nix-melt
   alejandra
-  nix-btm
   nix-inspect
   nh
 

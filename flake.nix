@@ -84,12 +84,6 @@
 
     templates.url = "github:ProducerMatt/nix-templates";
 
-    nix-btm.url = "github:DieracDelta/nix-btm";
-    nix-btm.inputs.nixpkgs.follows = "nixpkgs";
-    # nix-btm.inputs.flake-utils.follows = "flake-utils";
-    # nix-btm.inputs.rust-overlay.follows = "rust-overlay";
-    # nix-btm.inputs.fenix.follows = "fenix";
-
     # # Hyperland / Wayland related flakes
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # hyprpaper.url = "github:hyprwm/hyprpaper";
@@ -129,7 +123,6 @@
     #nix-formatter-pack,
     git-hooks,
     #nix-index-database,
-    #nix-btm,
     #nix-detsys,
     #determinate
     ...
@@ -150,7 +143,6 @@
           });
         in [
           (gimme "default" "nixpkgs-hammering")
-          (gimme "nix-btm" "nix-btm")
           inputs.nix-detsys.overlays.default
           (gimme "nix" "nix-detsys")
           (gimme "nil" "nil")
