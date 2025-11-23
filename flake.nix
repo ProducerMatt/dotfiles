@@ -2,11 +2,13 @@
   description = "Description for the project";
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    parent.url = "git+file:/home/matt/src/new_flake";
+
+    flake-parts.follows = "parent/flake-parts";
 
     # Track channels with commits tested and built by hydra
-    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*";
-    nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2505";
+    nixpkgs.follows = "parent/nixpkgs";
+    nixpkgs-stable.follows = "parent/nixpkgs-stable";
     nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
     # For darwin hosts: it can be helpful to track this darwin-specific stable
     # channel equivalent to the `nixos-*` channels for NixOS. For one, these
@@ -20,8 +22,8 @@
 
     #flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/?ref=refs/pull/134/head";
 
-    home-manager-stable.url = "https://flakehub.com/f/nix-community/home-manager/0.2505";
-    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
+    home-manager-stable.follows = "parent/home-manager-stable";
+    #home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
     #home-manager.url = "https://flakehub.com/f/nix-community/home-manager/*";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -72,11 +74,9 @@
     #  inputs.flake-utils.follows = "flake-utils-plus";
     #};
 
-    git-hooks.url = "https://flakehub.com/f/cachix/git-hooks.nix/*";
-    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks.follows = "parent/git-hooks-nix";
 
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.follows = "parent/nix-index-database";
 
     nixpkgs-hammering.url = "github:jtojnar/nixpkgs-hammering";
     nixpkgs-hammering.inputs.nixpkgs.follows = "nixpkgs";
@@ -94,12 +94,11 @@
     # catppuccin.url = "github:catppuccin/nix";
 
     # DeterminateSystems nix branch with extra features
-    nix-detsys.url = "https://flakehub.com/f/DeterminateSystems/nix-src/*";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    determinate.inputs.nix.follows = "nix-detsys";
+    nix-detsys.follows = "parent/nix-detsys";
+    determinate.follows = "parent/determinate";
 
-    nil.url = "github:oxalica/nil";
-    nixd.url = "github:nix-community/nixd";
+    nil.follows = "parent/nil";
+    nixd.follows = "parent/nixd";
   };
 
   outputs = {
