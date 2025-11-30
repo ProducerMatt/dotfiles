@@ -7,7 +7,7 @@ with pkgs; [
   niv
   nixpkgs-review
   nixpkgs-hammering
-  nix-init
+  #nix-init
   nix-diff
   nix-output-monitor
   nix-du
