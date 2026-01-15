@@ -66,5 +66,18 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "balanced";
   hardware.cpu.intel.updateMicrocode = false;
+
+  services.flood = {
+    enable = true;
+    port = 3000;
+    openFirewall = true;
+    host = "192.168.1.10";
+    extraArgs = [
+      "--trurl='http://192.168.1.3:30096/transmission/rpc'"
+      "--truser='matt'"
+      "--trpass='pass'"
+      "--auth=none"
+    ];
+  };
 }
 // overrides
