@@ -27,10 +27,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v10.3",
-      "revision": "8920367cf85eee5218cc25a11e209d46e2591e7a",
-      "url": "https://api.github.com/repos/PatrickF1/fzf.fish/tarball/v10.3",
-      "hash": "1hqqppna8iwjnm8135qdjbd093583qd2kbq8pj507zpb1wn9ihjg"
+      "version": "v11.0",
+      "revision": "0069dbbe06cc05482bfb13063b4b4eac26318992",
+      "url": "https://api.github.com/repos/PatrickF1/fzf.fish/tarball/v11.0",
+      "hash": "1fzzknr7j6w3xqp8nhzq54l4077smjs9x8k4ldbyb4m87xhy1c8z"
     },
     "nvm.fish": {
       "type": "GitRelease",
